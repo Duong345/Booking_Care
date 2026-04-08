@@ -1,0 +1,119 @@
+/* Loading overlay wrapper adjustments */
+div._loading_overlay_wrapper {
+  position: unset;
+  ._loading_overlay_overlay {
+    z-index: 1000000;
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.manage-schedule-container {
+  max-width: 1100px;
+  margin: 28px auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(20, 40, 80, 0.08);
+  overflow: hidden;
+
+  .m-s-title {
+    font-size: 18px;
+    margin: 18px 0 0 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #2b2b2b;
+    font-weight: 700;
+    padding-top: 18px;
+  }
+
+  .container {
+    padding: 18px 22px 26px 22px;
+
+    .form-group label {
+      font-weight: 600;
+      color: #4a4a4a;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .pick-hour-container {
+      margin-top: 14px;
+      width: 100%;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      .btn-schedule {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        min-width: 90px;
+        border-radius: 6px;
+        border: 1px solid #e6e9ef;
+        background: #fff;
+        color: #333;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(16, 56, 88, 0.04);
+        transition: transform 0.12s ease, filter 0.12s ease;
+      }
+
+      .btn-schedule:hover {
+        transform: translateY(-2px);
+        filter: brightness(0.98);
+      }
+
+      .btn-schedule.active {
+        background: linear-gradient(90deg, #ff8a00, #ff5e3a);
+        color: #fff;
+        border: none;
+        box-shadow: 0 4px 14px rgba(255, 138, 0, 0.12);
+      }
+    }
+
+    .btn-save-schedule {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #28a745, #20c997);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(16, 56, 88, 0.08);
+      margin-top: 20px;
+    }
+
+    .no-schedule {
+      padding: 24px;
+      text-align: center;
+      color: #8a8a8a;
+    }
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .manage-schedule-container {
+    margin: 14px;
+
+    .container {
+      padding: 12px;
+    }
+
+    .m-s-title {
+      font-size: 16px;
+    }
+
+    .pick-hour-container .btn-schedule {
+      padding: 6px 10px;
+      min-width: 68px;
+    }
+
+    .btn-save-schedule {
+      padding: 6px 10px;
+    }
+  }
+}

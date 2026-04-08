@@ -1,0 +1,75 @@
+.day-schedule-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.day-schedule-modal {
+  background: white;
+  border-radius: 8px;
+  width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.day-schedule-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.day-schedule-modal-header .left {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.day-schedule-modal-header .right {
+  cursor: pointer;
+  font-size: 24px;
+  color: #666;
+}
+
+.day-schedule-modal-body {
+  padding: 16px;
+}
+
+.schedule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.schedule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.schedule-item:hover {
+  background-color: #f5f5f5;
+}
+
+.schedule-item .time {
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.schedule-item .patient-name {
+  color: #333;
+}

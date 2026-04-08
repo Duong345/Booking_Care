@@ -1,0 +1,11 @@
+{
+  "name": "duong-frontend-server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+      html,body{height:100%;}
+      body {
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        background: linear-gradient(135deg,#2ad1c1 0%, #9ad36e 50%, #f4c54b 100%);
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+      }
+      .card {
+        border-radius: 14px;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0 12px 30px rgba(16,24,40,0.08);
+        padding: 22px;
+      }
+      .card-title {
+        font-weight:700;
+        font-size:1.6rem;
+        color:#222;
+      }
+      .form-control {
+        border-radius:8px;
+        border: 1px solid #e6eef7;
+        padding: .75rem 1rem;
+        box-shadow: none;
+      }
+      .form-control:focus {
+        border-color: rgba(0,123,255,0.4);
+        box-shadow: 0 6px 18px rgba(2,132,199,0.08);
+        outline: none;
+      }
+      .btn-primary {
+        background: linear-gradient(90deg,#24c6dc,#f2b94b);
+        border: none;
+        border-radius: 30px;
+        padding: .6rem 1rem;
+        font-weight:600;
+      }
+      .btn-primary:hover { opacity:0.97; transform: translateY(-1px); }
+      .social-btn { width:46px;height:46px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0 6px;color:#fff;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,0.08); }
+      .social-btn.google{background:#db4437}
+      .social-btn.fb{background:#3b5998}
+      .toggle-password{ position:absolute; right:16px; top:38px; color:#6b7280; cursor:pointer; }
+      .small-note{ color:#4b5563; }
+      @media (max-width:576px){ .col-md-7{ max-width: 95%; } }
+          </style>
+
+    </link>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center mt-5">
+        <div class="col-md-7">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h3 class="card-title text-center mb-4">Create your account</h3>
+              <form action="/post-crud" method="POST">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      placeholder="you@example.com"
+                      required
+                    />
+                  </div>
+                  <div class="form-group col-md-6 position-relative">
+                    <label>Password</label>
+                    <input
+                      type="password"
+                      class="form-control pr-5"
+                      name="password"
+                      placeholder="Create a strong password"
+                      required
+                    />
+                    <i class="fa fa-eye toggle-password" data-target='input[name="password"]'></i>
+                  </div> 
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>First name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="firstName"
+                      placeholder="First name"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Last name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="lastName"
+                      placeholder="Last name"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="address"
+                    placeholder="Street, city, country"
+                  />
+                </div>
+
+                <div class="form-group">
+                 
+                    <label>Phone</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="phonenumber"
+                      placeholder="+84..."
+                    />
+                  
+                  
+                </div>
+
+                <div class="form-row align-items-center">
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary btn-block">
+                      Sign up
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <div class="text-center mt-3">
+                <span class="small-note d-block mb-2">Or sign up with</span>
+                <a class="social-btn google" href="#" aria-label="Google"><i class="fab fa-google"></i></a>
+                <a class="social-btn fb" href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              </div>
+
+              <div class="text-center mt-3">
+                <small
+                  >Already have an account?
+                  <a href="http://localhost:3000/login">Sign in</a></small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+  </body>
+</html>
