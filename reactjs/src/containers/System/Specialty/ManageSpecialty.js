@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
-import "./ManageSpecialty.scss";
-import MarkdownIt from "markdown-it";
-import MdEditor from "react-markdown-editor-lite";
-import { CommonUtils } from "../../../utils";
-import { createNewSpecialty } from "../../../services/userService";
-import { toast } from "react-toastify";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+import './ManageSpecialty.scss';
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+import { CommonUtils } from '../../../utils';
+import { createNewSpecialty } from '../../../services/userService';
+import { toast } from 'react-toastify';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 class ManageSpecialty extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      imageBase64: "",
-      descriptionHTML: "",
-      descriptionMarkdown: "",
+      name: '',
+      imageBase64: '',
+      descriptionHTML: '',
+      descriptionMarkdown: '',
     };
   }
   async componentDidMount() {}
@@ -49,15 +49,15 @@ class ManageSpecialty extends Component {
   handleSaveNewSpecialty = async () => {
     let res = await createNewSpecialty(this.state);
     if (res && res.errCode === 0) {
-      toast.success("Add new specialty succeed!");
+      toast.success('Add new specialty succeed!');
       this.setState({
-        name: "",
-        imageBase64: "",
-        descriptionHTML: "",
-        descriptionMarkdown: "",
+        name: '',
+        imageBase64: '',
+        descriptionHTML: '',
+        descriptionMarkdown: '',
       });
     } else {
-      toast.error("Something wrongs...");
+      toast.error('Something wrongs...');
     }
   };
   render() {
@@ -71,7 +71,7 @@ class ManageSpecialty extends Component {
               className="form-control"
               type="text"
               value={this.state.name}
-              onChange={(event) => this.handleOnChangeInput(event, "name")}
+              onChange={(event) => this.handleOnChangeInput(event, 'name')}
             />
           </div>
           <div className="col-6 form-group">
@@ -84,7 +84,7 @@ class ManageSpecialty extends Component {
           </div>
           <div className="col-12 mt-3">
             <MdEditor
-              style={{ height: "300px" }}
+              style={{ height: '300px' }}
               renderHTML={(text) => mdParser.render(text)}
               onChange={this.handleEditorChange}
               value={this.state.descriptionMarkdown}

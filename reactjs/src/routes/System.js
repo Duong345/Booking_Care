@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import UserManage from '../containers/System/UserManage';
 import UserRedux from '../containers/System/Admin/UserRedux';
 import Header from '../containers/Header/Header';
 import ManageDoctor from '../containers/System/Admin/ManageDoctor';
@@ -16,13 +15,12 @@ class System extends Component {
         <div className="system-container">
           <div className="system-list">
             <Routes>
-              <Route index element={<Navigate to="user-manage" replace />} />
-              <Route path="user-manage" element={<UserManage />} />
+              <Route index element={<Navigate to="user-redux" replace />} />
               <Route path="user-redux" element={<UserRedux />} />
               <Route path="manage-doctor" element={<ManageDoctor />} />
               <Route path="manage-specialty" element={<ManageSpecialty />} />
               <Route path="manage-clinic" element={<ManageClinic />} />
-              <Route path="*" element={<Navigate to="user-manage" replace />} />
+              <Route path="*" element={<Navigate to="user-redux" replace />} />
             </Routes>
           </div>
         </div>

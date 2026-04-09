@@ -1,13 +1,17 @@
 import type { PropsWithChildren } from 'react';
 import { IntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
-
+// @ts-ignore
 import '@formatjs/intl-pluralrules/polyfill.js';
+// @ts-ignore
 import '@formatjs/intl-pluralrules/locale-data/en';
+// @ts-ignore
 import '@formatjs/intl-pluralrules/locale-data/vi';
-
+// @ts-ignore
 import '@formatjs/intl-relativetimeformat/polyfill.js';
+// @ts-ignore
 import '@formatjs/intl-relativetimeformat/locale-data/en';
+// @ts-ignore
 import '@formatjs/intl-relativetimeformat/locale-data/vi';
 
 import { LanguageUtils } from '../utils';
