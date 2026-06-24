@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 // @ts-ignore
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -11,7 +10,7 @@ import {
   type IApiResponse,
 } from '../../../services/userService';
 
-interface Specialty {
+interface SpecialtyItem {
   id: string | number;
   name: string;
   image: string;
@@ -21,26 +20,17 @@ interface SliderSettings {
   [key: string]: any;
 }
 
-interface RootState {
-  app: {
-    language: string;
-  };
-  user: {
-    isLoggedIn: boolean;
-  };
-}
-
 interface Props {
   settings?: SliderSettings;
 }
 
 const Specialty = ({ settings = {} }: Props) => {
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
 
-  const [dataSpecialty, setDataSpecialty] = useState<Specialty[]>([]);
+  const [dataSpecialty, setDataSpecialty] = useState<SpecialtyItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +39,7 @@ const Specialty = ({ settings = {} }: Props) => {
         setError(null);
 
         const response = (await getAllSpecialty()) as unknown as IApiResponse<
-          Specialty[]
+          SpecialtyItem[]
         >;
 
         if (response?.errCode === 0 && response?.data) {
@@ -69,16 +59,76 @@ const Specialty = ({ settings = {} }: Props) => {
     fetchData();
   }, []);
 
-  const handleViewDetailSpecialty = (specialty: Specialty) => {
+  const handleViewDetailSpecialty = (specialty: SpecialtyItem) => {
     navigate(`/detail-specialty/${specialty.id}`);
   };
+
+  const visibleSpecialties = useMemo(() => {
+    return dataSpecialty.slice(0, 10);
+  }, [dataSpecialty]);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const originalOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleCloseModal();
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isModalOpen, handleCloseModal]);
+
+  const renderSpecialtyCard = (specialty: SpecialtyItem) => (
+    <div
+      key={specialty.id}
+      className="section-customize specialty-child"
+      onClick={() => handleViewDetailSpecialty(specialty)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleViewDetailSpecialty(specialty);
+        }
+      }}
+    >
+      <div
+        className="bg-image section-specialty"
+        style={{ backgroundImage: `url(${specialty.image})` }}
+        aria-label={specialty.name}
+      />
+      <div className="specialty-name">{specialty.name}</div>
+    </div>
+  );
 
   return (
     <section className="section-share section-specialty">
       <div className="section-container">
         <div className="section-header">
           <span className="title-section">Chuyên khoa phổ biến</span>
-          <button className="btn-section">Xem thêm</button>
+          <button
+            className="btn-section"
+            onClick={handleOpenModal}
+            disabled={loading || dataSpecialty.length === 0}
+          >
+            Xem thêm
+          </button>
         </div>
 
         <div className="section-body">
@@ -86,35 +136,55 @@ const Specialty = ({ settings = {} }: Props) => {
             <div className="loading-state">Đang tải...</div>
           ) : error ? (
             <div className="error-state">{error}</div>
-          ) : dataSpecialty.length > 0 ? (
+          ) : visibleSpecialties.length > 0 ? (
             <Slider {...settings}>
-              {dataSpecialty.map((specialty) => (
-                <div
-                  key={specialty.id}
-                  className="section-customize specialty-child"
-                  onClick={() => handleViewDetailSpecialty(specialty)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      handleViewDetailSpecialty(specialty);
-                    }
-                  }}
-                >
-                  <div
-                    className="bg-image section-specialty"
-                    style={{ backgroundImage: `url(${specialty.image})` }}
-                    aria-label={specialty.name}
-                  />
-                  <div className="specialty-name">{specialty.name}</div>
-                </div>
-              ))}
+              {visibleSpecialties.map((specialty) =>
+                renderSpecialtyCard(specialty)
+              )}
             </Slider>
           ) : (
             <div className="empty-state">Không có chuyên khoa nào</div>
           )}
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="home-section-modal-overlay" onClick={handleCloseModal}>
+          <div
+            className="home-section-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="specialty-modal-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="home-section-modal-header">
+              <div>
+                <h2 id="specialty-modal-title">Tất cả chuyên khoa</h2>
+                <span>{dataSpecialty.length} chuyên khoa</span>
+              </div>
+              <button
+                className="home-section-modal-close"
+                onClick={handleCloseModal}
+                aria-label="Đóng"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="home-section-modal-body">
+              {dataSpecialty.length === 0 ? (
+                <div className="empty-state">Không có chuyên khoa nào</div>
+              ) : (
+                <div className="home-section-modal-grid">
+                  {dataSpecialty.map((specialty) =>
+                    renderSpecialtyCard(specialty)
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

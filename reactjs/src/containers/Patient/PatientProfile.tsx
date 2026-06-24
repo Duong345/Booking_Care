@@ -8,6 +8,7 @@ import 'react-image-lightbox/style.css';
 
 import { LANGUAGES, CommonUtils } from '../../utils';
 import * as actions from '../../store/actions';
+import DatePicker from '../../components/Input/DatePicker';
 import './PatientProfile.scss';
 
 interface Gender {
@@ -24,6 +25,7 @@ interface UserInfo {
   phonenumber?: string;
   address?: string;
   gender?: string;
+  birthday?: string;
   image?: string;
 }
 
@@ -31,6 +33,7 @@ interface ProfileFormData {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  birthday: string;
   address: string;
   gender: string;
   avatar: string;
@@ -64,6 +67,7 @@ const PatientProfile = () => {
     firstName: '',
     lastName: '',
     phoneNumber: '',
+    birthday: '',
     address: '',
     gender: '',
     avatar: '',
@@ -86,6 +90,7 @@ const PatientProfile = () => {
         firstName: userInfo.firstName || '',
         lastName: userInfo.lastName || '',
         phoneNumber: userInfo.phonenumber || '',
+        birthday: userInfo.birthday || '',
         address: userInfo.address || '',
         gender: userInfo.gender || '',
         avatar: userInfo.image || '',
@@ -102,6 +107,7 @@ const PatientProfile = () => {
               lastName: profileData.lastName || userInfo.lastName || '',
               phoneNumber:
                 profileData.phoneNumber || userInfo.phonenumber || '',
+              birthday: profileData.birthday || userInfo.birthday || '',
               address: profileData.address || userInfo.address || '',
               gender: profileData.gender || userInfo.gender || '',
               avatar: profileData.avatar || userInfo.image || '',
@@ -126,7 +132,15 @@ const PatientProfile = () => {
         gender: genderRedux[0].keyMap,
       }));
     }
-  }, [genderRedux]);
+  }, [genderRedux, formData.gender]);
+
+  const handleBirthdayChange = useCallback((date: Date[]) => {
+    setFormData((prev) => ({
+      ...prev,
+      birthday: date[0] ? date[0].toISOString() : '',
+    }));
+    setError(null);
+  }, []);
 
   // Handle image upload
   const handleImageChange = useCallback(
@@ -172,7 +186,9 @@ const PatientProfile = () => {
       { name: 'firstName', label: 'Tên' },
       { name: 'lastName', label: 'Họ' },
       { name: 'phoneNumber', label: 'Số điện thoại' },
+      { name: 'birthday', label: 'Ngày sinh' },
       { name: 'address', label: 'Địa chỉ' },
+      { name: 'gender', label: 'Giới tính' },
     ];
 
     for (const field of fields) {
@@ -218,6 +234,7 @@ const PatientProfile = () => {
       firstName: formData.firstName,
       lastName: formData.lastName,
       phoneNumber: formData.phoneNumber,
+      birthday: formData.birthday,
       address: formData.address,
       gender: formData.gender,
       avatar: formData.avatar,
@@ -376,6 +393,25 @@ const PatientProfile = () => {
                   />
                 </div>
               </div>
+              <div className="col-6">
+                <div className="form-group">
+                  <label htmlFor="birthday">
+                    <FormattedMessage id="patient.booking-modal.birthday" />
+                  </label>
+                  <DatePicker
+                    id="birthday"
+                    className="form-control"
+                    value={
+                      formData.birthday ? new Date(formData.birthday) : undefined
+                    }
+                    onChange={handleBirthdayChange}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Gender */}
+            <div className="row">
               <div className="col-6">
                 <div className="form-group">
                   <label htmlFor="gender">

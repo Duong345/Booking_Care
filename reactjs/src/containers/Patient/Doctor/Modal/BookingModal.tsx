@@ -66,6 +66,12 @@ interface RootState {
   user: {
     userInfo?: {
       email?: string;
+      firstName?: string;
+      lastName?: string;
+      phonenumber?: string;
+      address?: string;
+      gender?: string;
+      birthday?: string;
     };
   };
 }
@@ -115,45 +121,67 @@ const BookingModal = ({
     return result;
   }, [gendersData, language]);
 
-  // Initialize data on mount
+  const getGenderOption = useCallback(
+    (genderValue?: string) => {
+      if (!genderValue) return null;
+
+      return (
+        genderOptions.find((item) => item.value === genderValue) || {
+          value: genderValue,
+          label: genderValue,
+        }
+      );
+    },
+    [genderOptions]
+  );
+
+  // Initialize gender data on mount
   useEffect(() => {
     dispatch(fetchGenderStart() as any);
+  }, [dispatch]);
 
+  // Load patient profile every time the booking modal opens
+  useEffect(() => {
+    if (!isOpenModal) return;
+
+    let profileData: any = {};
     // Load patient profile from localStorage
     const savedProfile = localStorage.getItem('patientProfile');
     if (savedProfile) {
       try {
-        const profileData = JSON.parse(savedProfile);
-        const genderValue = profileData.gender
-          ? { value: profileData.gender, label: '' }
-          : null;
-
-        setFormData((prev) => ({
-          ...prev,
-          fullName: `${profileData.firstName} ${profileData.lastName}`.trim(),
-          phoneNumber: profileData.phoneNumber || '',
-          address: profileData.address || '',
-          selectedGender: genderValue,
-        }));
+        const parsedProfile = JSON.parse(savedProfile);
+        if (!userInfo?.email || parsedProfile.email === userInfo.email) {
+          profileData = parsedProfile;
+        }
       } catch (e) {}
     }
 
-    // Load email from userInfo if available
-    if (userInfo?.email) {
-      setFormData((prev) => ({
-        ...prev,
-        email: userInfo.email || '',
-      }));
-    }
-  }, [dispatch, userInfo]);
+    const firstName = profileData.firstName || userInfo?.firstName || '';
+    const lastName = profileData.lastName || userInfo?.lastName || '';
+    const fullName = `${firstName} ${lastName}`.trim();
+    const genderValue = profileData.gender || userInfo?.gender || '';
+
+    setFormData((prev) => ({
+      ...prev,
+      fullName: fullName || prev.fullName,
+      phoneNumber:
+        profileData.phoneNumber || userInfo?.phonenumber || prev.phoneNumber,
+      email: userInfo?.email || profileData.email || prev.email,
+      address: profileData.address || userInfo?.address || prev.address,
+      birthday: profileData.birthday || userInfo?.birthday || prev.birthday,
+      selectedGender: getGenderOption(genderValue) || prev.selectedGender,
+    }));
+  }, [getGenderOption, isOpenModal, userInfo]);
 
   // Update genders when language changes
   useEffect(() => {
     setFormData((prev) => ({
       ...prev,
       genders: genderOptions,
+      selectedGender:
+        getGenderOption(prev.selectedGender?.value) || prev.selectedGender,
     }));
-  }, [genderOptions]);
+  }, [genderOptions, getGenderOption]);
 
   // Update doctorId and timeType when dataTime changes
   useEffect(() => {
@@ -231,13 +259,24 @@ const BookingModal = ({
       return;
     }
 
-    if (!formData.fullName || !formData.phoneNumber || !formData.email) {
+    if (
+      !formData.fullName ||
+      !formData.phoneNumber ||
+      !formData.email ||
+      !formData.address ||
+      !formData.birthday
+    ) {
       toast.error('Please fill in all required fields');
       return;
     }
 
     try {
       const date = new Date(formData.birthday).getTime();
+      if (!Number.isFinite(date)) {
+        toast.error('Please select valid birthday');
+        return;
+      }
+
       const timeString = timeBookingString();
       const doctorName = doctorNameString();
 
@@ -255,7 +294,7 @@ const BookingModal = ({
         language,
         timeString,
         doctorName,
-      })) as unknown as { errCode: number };
+      })) as unknown as { errCode: number; errMessage?: string };
 
       if (res?.errCode === 0) {
         toast.success('Booking a new appointment succeed');
@@ -264,7 +303,7 @@ const BookingModal = ({
           onBookingSuccess(dataTime);
         }
       } else {
-        toast.error('Booking a new appointment error');
+        toast.error(res?.errMessage || 'Booking a new appointment error');
       }
     } catch (error) {
       console.log('Booking error:', error);
@@ -286,6 +325,18 @@ const BookingModal = ({
     }
     return '';
   }, [dataTime]);
+
+  const isProfileFieldReadonly = useMemo(
+    () => ({
+      fullName: Boolean(formData.fullName),
+      phoneNumber: Boolean(formData.phoneNumber),
+      email: Boolean(formData.email),
+      address: Boolean(formData.address),
+      birthday: Boolean(formData.birthday),
+      gender: Boolean(formData.selectedGender?.value),
+    }),
+    [formData]
+  );
 
   return (
     <Modal
@@ -327,6 +378,7 @@ const BookingModal = ({
                 className="form-control"
                 value={formData.fullName}
                 onChange={(e) => handleInputChange(e, 'fullName')}
+                readOnly={isProfileFieldReadonly.fullName}
               />
             </div>
 
@@ -339,6 +391,7 @@ const BookingModal = ({
                 className="form-control"
                 value={formData.phoneNumber}
                 onChange={(e) => handleInputChange(e, 'phoneNumber')}
+                readOnly={isProfileFieldReadonly.phoneNumber}
               />
             </div>
 
@@ -351,6 +404,7 @@ const BookingModal = ({
                 className="form-control"
                 value={formData.email}
                 onChange={(e) => handleInputChange(e, 'email')}
+                readOnly={isProfileFieldReadonly.email}
               />
             </div>
 
@@ -363,6 +417,7 @@ const BookingModal = ({
                 className="form-control"
                 value={formData.address}
                 onChange={(e) => handleInputChange(e, 'address')}
+                readOnly={isProfileFieldReadonly.address}
               />
             </div>
 
@@ -385,8 +440,11 @@ const BookingModal = ({
               </label>
               <DatePicker
                 className="form-control"
-                value={formData.birthday}
+                value={
+                  formData.birthday ? new Date(formData.birthday) : undefined
+                }
                 onChange={handleDateChange}
+                disabled={isProfileFieldReadonly.birthday}
               />
             </div>
 
@@ -399,6 +457,7 @@ const BookingModal = ({
                 value={formData.selectedGender}
                 onChange={handleGenderChange}
                 options={formData.genders}
+                isDisabled={isProfileFieldReadonly.gender}
               />
             </div>
           </div>

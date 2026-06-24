@@ -1,0 +1,158 @@
+[
+  {
+    "uploadMode": "json",
+    "payload": "{\n  \"hospital\": {\n    \"id\": \"HOSP001\",\n    \"name\": \"Bệnh viện Đa khoa Minh Tâm\",\n    \"address\": \"123 Trần Đại Nghĩa, Hai Bà Trưng, Hà Nội\",\n    \"phone\": \"024-3825-8899\",\n    \"email\": \"contact@minhtamhospital.vn\",\n    \"established_year\": 2010,\n    \"departments\": [\n      \"Khoa Nội\",\n      \"Khoa Ngoại\",\n      \"Khoa Nhi\",\n      \"Khoa Tim mạch\",\n      \"Khoa Chẩn đoán hình ảnh\",\n      \"Khoa Xét nghiệm\"\n    ],\n    \"total_beds\": 250,\n    \"director\": \"TS. Nguyễn Văn Hưng\"\n  }\n}",
+    "source": "upload-json",
+    "createdAt": "2026-04-14T13:14:42.410Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "Bệnh viện Đa khoa Minh Tâm có mã bệnh viện là HOSP001.\nĐịa chỉ: 123 Trần Đại Nghĩa, Hai Bà Trưng, Hà Nội.\nSố điện thoại liên hệ: 024-3825-8899.\nEmail: contact@minhtamhospital.vn\n.\nBệnh viện được thành lập vào năm 2010.\n\nBệnh viện bao gồm các khoa:\n\nKhoa Nội\nKhoa Ngoại\nKhoa Nhi\nKhoa Tim mạch\nKhoa Chẩn đoán hình ảnh\nKhoa Xét nghiệm\n\nTổng số giường bệnh: 250.\nGiám đốc bệnh viện: TS. Nguyễn Văn Hưng.",
+    "source": "widget",
+    "createdAt": "2026-04-14T13:26:26.688Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "Chuyên khoa Cơ xương khớp có Tiến sĩ Lê Thắng và Phó Giáo sư Lương Tùng. Đây là chuyên khoa chuyên điều trị các bệnh lý liên quan đến xương, khớp và cơ.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:07:23.895Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "Chuyên khoa Thần kinh hiện có Phó Giáo sư Văn Sinh. Chuyên khoa này tập trung vào các bệnh lý liên quan đến hệ thần kinh như đau đầu, đột quỵ và các rối loạn thần kinh.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:07:56.683Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "Chuyên khoa Tiêu hóa có Giáo sư Phạm Hoàng và Phó Giáo sư Duy Hưng. Chuyên khoa này chuyên khám và điều trị các bệnh về dạ dày, ruột và hệ tiêu hóa.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:08:05.859Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "Chuyên khoa Tim mạch có Thạc sĩ Đức Quyền và Phó Giáo sư Hoàng Tuấn. Đây là chuyên khoa điều trị các bệnh liên quan đến tim và mạch máu như tăng huyết áp và bệnh tim.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:08:11.874Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "Chuyên khoa Tai mũi họng có Phó Giáo sư Bảo Ngân. Chuyên khoa này điều trị các bệnh về tai, mũi, họng và các vấn đề liên quan đến hô hấp trên.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:08:18.757Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "Chuyên khoa Cột sống có Giáo sư Minh Đức. Đây là chuyên khoa chuyên điều trị các bệnh lý về cột sống như thoát vị đĩa đệm và đau lưng.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:08:25.083Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "1. Chuyên khoa Cơ xương khớp\n\nNếu người bệnh mô tả các triệu chứng sau thì nên ưu tiên chuyên khoa cơ xương khớp:\n\nĐau khớp, nhức khớp, ê khớp, đau đầu gối, đau khuỷu tay, đau cổ tay, đau vai, đau khớp khi vận động, đau khi leo cầu thang, đau khi mang vác.\n\nCứng khớp, đặc biệt là cứng khớp buổi sáng, khớp bị đơ, khó cử động sau khi ngủ dậy.\n\nKhớp sưng, nóng, đỏ, đau.\n\nKhớp phát ra tiếng kêu lục cục, lạo xạo khi cử động.\n\nĐau tăng khi thay đổi thời tiết, trời lạnh hoặc ẩm.\n\nBiến dạng khớp, khớp to bất thường, cong vẹo ngón tay.\n\nĐau cơ, mỏi cơ, căng cơ, đau sau vận động.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:10:44.908Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "2. Chuyên khoa Cột sống\n\nNếu người bệnh có các biểu hiện liên quan đến lưng hoặc lan dây thần kinh:\n\nĐau lưng, đau thắt lưng, đau cột sống.\n\nĐau lan từ lưng xuống mông, đùi hoặc chân.\n\nĐau kiểu điện giật, đau lan theo đường dây thần kinh.\n\nTê chân, yếu chân kèm đau lưng.\n\nĐau khi ngồi lâu, đứng lâu hoặc cúi người.\n\nKhó cúi, khó xoay người.\n\nNghi thoát vị đĩa đệm, đau thần kinh tọa.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:10:53.742Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "3. Chuyên khoa Thần kinh\n\nNếu triệu chứng thiên về dây thần kinh:\n\nTê tay, tê chân, tê như kiến bò, châm chích.\n\nMất cảm giác, giảm cảm giác.\n\nYếu tay, yếu chân, mất lực.\n\nRun tay chân.\n\nĐau đầu, chóng mặt, hoa mắt.\n\nĐau lan nhưng không rõ nguyên nhân cơ học.\n\nMất ngủ liên quan đau nhức hoặc thần kinh.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:11:01.882Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "4. Chuyên khoa Tim mạch\n\nNếu có dấu hiệu liên quan đến tim và tuần hoàn:\n\nĐau ngực, tức ngực, cảm giác bị đè nặng ở ngực.\n\nKhó thở, hụt hơi.\n\nTim đập nhanh, hồi hộp, đánh trống ngực.\n\nChóng mặt, choáng váng, gần ngất.\n\nPhù chân (sưng chân do tim).\n\nMệt khi vận động nhẹ.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:11:10.632Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "5. Chuyên khoa Tiêu hóa\n\nNếu người bệnh mô tả:\n\nĐau bụng, đau vùng thượng vị (trên rốn).\n\nĐầy bụng, khó tiêu, chướng bụng.\n\nỢ hơi, ợ chua, nóng rát dạ dày.\n\nBuồn nôn, nôn.\n\nTiêu chảy hoặc táo bón.\n\nĐi ngoài ra máu hoặc phân bất thường.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:11:18.970Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "6. Chuyên khoa Tai mũi họng\n\nNếu triệu chứng liên quan đến vùng tai – mũi – họng:\n\nĐau họng, rát họng.\n\nHo, ho kéo dài.\n\nNghẹt mũi, sổ mũi.\n\nÙ tai, đau tai, nghe kém.\n\nViêm xoang, đau vùng mặt.\n\nKhàn tiếng, mất tiếng.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:11:27.133Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "7. Chuyên khoa Hô hấp\n\nHo khan, ho có đờm, ho lâu ngày.\n\nKhó thở, thở khò khè, thở rít.\n\nĐau ngực khi ho hoặc hít sâu.\n\nSốt kèm ho.\n\nHo ra máu.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:52:37.905Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "8. Chuyên khoa Da liễu\n\nNgứa da, nổi mẩn, phát ban.\n\nDa đỏ, sưng, viêm.\n\nMụn, mụn viêm, mụn bọc.\n\nDa bong tróc, khô, nứt nẻ.\n\nNổi mề đay.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:52:37.960Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "8. Chuyên khoa Da liễu\n\nNgứa da, nổi mẩn, phát ban.\n\nDa đỏ, sưng, viêm.\n\nMụn, mụn viêm, mụn bọc.\n\nDa bong tróc, khô, nứt nẻ.\n\nNổi mề đay.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:52:38.003Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "9. Chuyên khoa Nội tiết\n\nMệt mỏi kéo dài, tăng cân hoặc sụt cân bất thường.\n\nKhát nước nhiều, tiểu nhiều.\n\nRun tay, tim đập nhanh (liên quan tuyến giáp).\n\nRụng tóc, da khô.\n\nRối loạn kinh nguyệt.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:52:47.987Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "10. Chuyên khoa Tiết niệu\n\nTiểu buốt, tiểu rắt, tiểu nhiều lần.\n\nTiểu ra máu.\n\nĐau vùng bụng dưới, đau lưng dưới.\n\nNước tiểu đục, có mùi lạ.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:52:55.649Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "11. Chuyên khoa Sinh sản (Nam / Nữ)\n\nĐau bụng dưới.\n\nRối loạn kinh nguyệt, trễ kinh.\n\nKhí hư bất thường.\n\nĐau khi quan hệ.\n\nNam giới: đau tinh hoàn, yếu sinh lý.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:53:02.606Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "12. Chuyên khoa Mắt\n\nMờ mắt, nhìn không rõ.\n\nĐau mắt, đỏ mắt.\n\nChảy nước mắt.\n\nNhạy cảm ánh sáng.\n\nNhìn thấy chấm đen, ruồi bay.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:53:09.432Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "14. Chuyên khoa Tâm lý – Tâm thần\n\nLo âu, căng thẳng.\n\nMất ngủ, ngủ không sâu.\n\nTrầm cảm, buồn chán kéo dài.\n\nKhó tập trung.\n\nHoảng loạn, tim đập nhanh do lo âu.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:53:16.871Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "15. Chuyên khoa Ung bướu\n\nSụt cân không rõ nguyên nhân.\n\nMệt mỏi kéo dài.\n\nNổi hạch.\n\nĐau kéo dài không rõ nguyên nhân.\n\nChảy máu bất thường.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:53:25.941Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "16. Chuyên khoa Cấp cứu (triệu chứng nguy hiểm 🚨)\n\nĐau ngực dữ dội.\n\nKhó thở nghiêm trọng.\n\nMất ý thức.\n\nLiệt nửa người.\n\nChảy máu nhiều.\n\nĐau đầu dữ dội đột ngột.",
+    "source": "widget",
+    "createdAt": "2026-04-15T15:53:34.317Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "1. Chuyên khoa Cơ xương khớp\n\nĐau khớp, nhức khớp, ê ẩm, đau đầu gối, đau vai, đau cổ tay, đau khi vận động, đau khi leo cầu thang, đau khi mang đồ nặng.\n\nCứng khớp buổi sáng, khớp bị đơ, khó cử động sau khi ngủ dậy.\n\nKhớp sưng, nóng, đỏ, đau.\n\nKhớp kêu lục cục, lạo xạo khi cử động.\n\nĐau cơ, mỏi cơ, căng cơ, đau sau vận động.\n\nBiến dạng khớp, cong vẹo, khớp to bất thường.",
+    "source": "widget",
+    "createdAt": "2026-04-16T03:02:15.113Z"
+  },
+  {
+    "uploadMode": "text",
+    "payload": "Anh Hiệp là middle ở công ty monstarlab",
+    "source": "widget",
+    "createdAt": "2026-04-16T08:40:45.627Z"
+  }
+]

@@ -4,8 +4,12 @@ import './DoctorSchedule.scss';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
 import { LANGUAGES } from '../../../utils';
-import { getScheduleDoctorByDate } from '../../../services/userService';
+import {
+  getScheduleDoctorByDate,
+  postPatientRebookCanceledAppointment,
+} from '../../../services/userService';
 import { FormattedMessage } from 'react-intl';
+import { toast } from 'react-toastify';
 import BookingModal from './Modal/BookingModal';
 
 const DoctorSchedule = ({ doctorIdFromParent }) => {
@@ -17,6 +21,8 @@ const DoctorSchedule = ({ doctorIdFromParent }) => {
   const [isOpenModalBooking, setIsOpenModalBooking] = useState(false);
   const [dataScheduleTimeModal, setDataScheduleTimeModal] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
+  const [pendingRebook, setPendingRebook] = useState(null);
+  const [isRebooking, setIsRebooking] = useState(false);
 
   // Capitalize first letter utility
   const capitalizeFirstLetter = useCallback((string) => {
@@ -99,6 +105,90 @@ const DoctorSchedule = ({ doctorIdFromParent }) => {
     setSelectedDate(days[0].value);
   }, [language, getArrDays]);
 
+  const loadPendingRebook = useCallback(() => {
+    try {
+      const rawRebook = sessionStorage.getItem('pendingRebookAppointment');
+      if (!rawRebook) {
+        setPendingRebook(null);
+        return;
+      }
+
+      const parsedRebook = JSON.parse(rawRebook);
+      if (
+        parsedRebook?.bookingId &&
+        String(parsedRebook.doctorId) === String(doctorIdFromParent)
+      ) {
+        setPendingRebook(parsedRebook);
+      } else {
+        setPendingRebook(null);
+      }
+    } catch {
+      sessionStorage.removeItem('pendingRebookAppointment');
+      setPendingRebook(null);
+    }
+  }, [doctorIdFromParent]);
+
+  useEffect(() => {
+    loadPendingRebook();
+
+    const handlePendingRebookChanged = () => {
+      loadPendingRebook();
+    };
+
+    window.addEventListener(
+      'pendingRebookAppointmentChanged',
+      handlePendingRebookChanged
+    );
+
+    return () => {
+      window.removeEventListener(
+        'pendingRebookAppointmentChanged',
+        handlePendingRebookChanged
+      );
+    };
+  }, [loadPendingRebook]);
+
+  useEffect(() => {
+    const handlePatientBookingChanged = (event) => {
+      const detail = event.detail || {};
+      if (
+        detail.action !== 'cancel' ||
+        String(detail.doctorId) !== String(doctorIdFromParent) ||
+        String(detail.date) !== String(selectedDate)
+      ) {
+        return;
+      }
+
+      setAllAvailableTime((prev) =>
+        prev.map((item) => {
+          if (item.timeType !== detail.timeType) return item;
+
+          const bookedCount = Math.max(
+            (item.bookedCount || item.currentNumber || 1) - 1,
+            0
+          );
+
+          return {
+            ...item,
+            bookedCount,
+            currentNumber: bookedCount,
+            isBooked: bookedCount > 0,
+            isFull: bookedCount >= (item.maxNumber || 1),
+          };
+        })
+      );
+    };
+
+    window.addEventListener('patientBookingChanged', handlePatientBookingChanged);
+
+    return () => {
+      window.removeEventListener(
+        'patientBookingChanged',
+        handlePatientBookingChanged
+      );
+    };
+  }, [doctorIdFromParent, selectedDate]);
+
   // Fetch schedule when doctor ID or selected date changes
   useEffect(() => {
     let isMounted = true;
@@ -137,18 +227,99 @@ const DoctorSchedule = ({ doctorIdFromParent }) => {
     setSelectedDate(newDate);
   }, []);
 
-  // Handle booking time click
-  const handleClickScheduleTime = useCallback((time) => {
-    setDataScheduleTimeModal(time);
-    setIsOpenModalBooking(true);
-  }, []);
-
   // Handle booking success
   const handleBookingSuccess = useCallback((bookedTime) => {
     setAllAvailableTime((prev) =>
-      prev.filter((item) => item.timeType !== bookedTime.timeType)
+      prev.map((item) => {
+        if (item.timeType !== bookedTime.timeType) return item;
+
+        const bookedCount = (item.bookedCount || item.currentNumber || 0) + 1;
+        return {
+          ...item,
+          bookedCount,
+          currentNumber: bookedCount,
+          isBooked: true,
+          isFull: true,
+        };
+      })
     );
   }, []);
+
+  const buildTimeString = useCallback(
+    (time) => {
+      const timeText =
+        language === LANGUAGES.VI
+          ? time.timeTypeData.valueVi
+          : time.timeTypeData.valueEn;
+      const dateText =
+        language === LANGUAGES.VI
+          ? moment.unix(+time.date / 1000).format('dddd - DD/MM/YYYY')
+          : moment.unix(+time.date / 1000).locale('en').format('ddd - MM/DD/YYYY');
+
+      return `${timeText} - ${dateText}`;
+    },
+    [language]
+  );
+
+  const buildDoctorName = useCallback(
+    (time) => {
+      if (!time?.doctorData) return '';
+
+      return language === LANGUAGES.VI
+        ? `${time.doctorData.lastName} ${time.doctorData.firstName}`.trim()
+        : `${time.doctorData.firstName} ${time.doctorData.lastName}`.trim();
+    },
+    [language]
+  );
+
+  // Handle booking time click
+  const handleClickScheduleTime = useCallback(
+    async (time) => {
+      if (time?.isBooked || time?.isFull || isRebooking) return;
+
+      if (pendingRebook?.bookingId) {
+        setIsRebooking(true);
+        try {
+          const res = await postPatientRebookCanceledAppointment({
+            bookingId: pendingRebook.bookingId,
+            patientId: pendingRebook.patientId,
+            email: pendingRebook.email,
+            doctorId: time.doctorId,
+            date: time.date,
+            timeType: time.timeType,
+            language,
+            timeString: buildTimeString(time),
+            doctorName: buildDoctorName(time),
+          });
+
+          if (res && res.errCode === 0) {
+            sessionStorage.removeItem('pendingRebookAppointment');
+            setPendingRebook(null);
+            handleBookingSuccess(time);
+            toast.success('Đã gửi email xác nhận lịch mới');
+          } else {
+            toast.error(res?.errMessage || 'Không thể đặt lại lịch');
+          }
+        } catch {
+          toast.error('Không thể đặt lại lịch');
+        } finally {
+          setIsRebooking(false);
+        }
+        return;
+      }
+
+      setDataScheduleTimeModal(time);
+      setIsOpenModalBooking(true);
+    },
+    [
+      buildDoctorName,
+      buildTimeString,
+      handleBookingSuccess,
+      isRebooking,
+      language,
+      pendingRebook,
+    ]
+  );
 
   // Close booking modal
   const closeBookingModal = useCallback(() => {
@@ -184,25 +355,39 @@ const DoctorSchedule = ({ doctorIdFromParent }) => {
                       language === LANGUAGES.VI
                         ? item.timeTypeData.valueVi
                         : item.timeTypeData.valueEn;
+                    const isDisabled = item.isBooked || item.isFull || isRebooking;
                     return (
                       <button
                         key={index}
-                        className={
-                          language === LANGUAGES.VI ? 'btn-vie' : 'btn-en'
-                        }
+                        className={`${language === LANGUAGES.VI ? 'btn-vie' : 'btn-en'} ${
+                          isDisabled ? 'btn-booked' : ''
+                        }`}
+                        disabled={isDisabled}
                         onClick={() => handleClickScheduleTime(item)}
+                        title={
+                          item.isBooked || item.isFull
+                            ? 'Khung giờ này đã được đặt'
+                            : ''
+                        }
                       >
-                        {timeDisplay}
+                        {isRebooking ? 'Đang xử lý...' : timeDisplay}
                       </button>
                     );
                   })}
                 </div>
                 <div className="book-free">
-                  <span>
-                    <FormattedMessage id="patient.detail-doctor.choose" />
-                    <i className="far fa-hand-point-up"></i>
-                    <FormattedMessage id="patient.detail-doctor.book-free" />
-                  </span>
+                  {pendingRebook ? (
+                    <span className="rebook-hint">
+                      <i className="far fa-calendar-check"></i>
+                      Chọn khung giờ mới để gửi email xác nhận đặt lại lịch
+                    </span>
+                  ) : (
+                    <span>
+                      <FormattedMessage id="patient.detail-doctor.choose" />
+                      <i className="far fa-hand-point-up"></i>
+                      <FormattedMessage id="patient.detail-doctor.book-free" />
+                    </span>
+                  )}
                 </div>
               </>
             ) : (

@@ -1,23 +1,65 @@
-#TableManageUser {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
+.table-manage-user,
+.user-redux-container .col-12.mb-5 {
   width: 100%;
+  overflow-x: auto;
 }
-#TableManageUser td,
-#TableManageUser th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-#TableManageUser tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-#TableManageUser tr:hover {
-  background-color: #ddd;
-}
-#TableManageUser th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04aa6d;
-  color: white;
+
+#TableManageUser {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: #1f2937;
+  font-size: 14px;
+  background: #ffffff;
+  border: 1px solid #e4edf2;
+  border-radius: 10px;
+  overflow: hidden;
+
+  th,
+  td {
+    border: none;
+    padding: 13px 16px;
+    vertical-align: middle;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #f3f8fa;
+    color: #465a69;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    border-bottom: 1px solid #dde8ee;
+  }
+
+  td {
+    border-bottom: 1px solid #edf3f6;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr {
+    transition: background 0.18s ease;
+
+    &:nth-child(even) {
+      background: #fbfdfe;
+    }
+
+    &:hover {
+      background: #eef8f7;
+    }
+  }
+
+  td:last-child,
+  th:last-child {
+    width: 130px;
+    text-align: center;
+    white-space: nowrap;
+  }
 }

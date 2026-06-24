@@ -18,6 +18,7 @@ import VerifyEmail from './Patient/VerifyEmail';
 import DetailSpecialty from './Patient/Specialty/DetailSpecialty';
 import DetailClinic from './Patient/Clinic/DetailClinic';
 import PatientProfile from './Patient/PatientProfile';
+import ChatbotWidget from '../components/ChatbotWidget/ChatbotWidget';
 import type { Persistor } from 'redux-persist';
 
 interface AppProps {
@@ -97,6 +98,7 @@ const App = ({ persistor, onBeforeLift }: AppProps) => {
           pauseOnHover
         />
       </div>
+      <ChatbotWidget />
     </BrowserRouter>
   );
 };

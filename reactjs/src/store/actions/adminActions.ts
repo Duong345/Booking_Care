@@ -210,11 +210,11 @@ export const editUserFailed = () => ({
   type: actionTypes.EDIT_USER_FAILED,
 });
 
-export const fetchTopDoctor = (): AppThunk => {
+export const fetchTopDoctor = (limit: number | 'ALL' = 10): AppThunk => {
   return async (dispatch) => {
     try {
       const res = (await getTopDoctorHomeService(
-        10
+        limit
       )) as unknown as IApiResponse;
       if (res && res.errCode === 0) {
         dispatch({

@@ -43,17 +43,20 @@ const DetailDoctor = () => {
   const language = useSelector((state: RootState) => state.app.language);
 
   const [detailDoctor, setDetailDoctor] = useState<DoctorDetail>({});
-  const [currentDoctorId, setCurrentDoctorId] = useState<string | number>(-1);
+  const currentDoctorId = useMemo(() => {
+    if (!id) return null;
+
+    const parsedId = Number(id);
+    return Number.isFinite(parsedId) && parsedId > 0 ? parsedId : null;
+  }, [id]);
 
   // Fetch doctor details
   useEffect(() => {
     const fetchData = async () => {
-      if (id) {
-        setCurrentDoctorId(id);
+      if (currentDoctorId) {
         try {
-          const doctorId = parseInt(id, 10);
           const res = (await getDetailInforDoctor(
-            doctorId
+            currentDoctorId
           )) as unknown as ApiResponse<DoctorDetail>;
           if (res?.errCode === 0 && res?.data) {
             setDetailDoctor(res.data);
@@ -64,7 +67,7 @@ const DetailDoctor = () => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [currentDoctorId]);
 
   // Memoize doctor name based on language
   const doctorName = useMemo(() => {
@@ -101,10 +104,14 @@ const DetailDoctor = () => {
         {/* Schedule and Extra Info */}
         <div className="schedule-doctor">
           <div className="content-left">
-            <DoctorSchedule doctorIdFromParent={currentDoctorId} />
+            {currentDoctorId && (
+              <DoctorSchedule doctorIdFromParent={currentDoctorId} />
+            )}
           </div>
           <div className="content-right">
-            <DoctorExtraInfor doctorIdFromParent={currentDoctorId} />
+            {currentDoctorId && (
+              <DoctorExtraInfor doctorIdFromParent={currentDoctorId} />
+            )}
           </div>
         </div>
 

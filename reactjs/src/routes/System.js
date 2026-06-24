@@ -10,13 +10,14 @@ class System extends Component {
   render() {
     const { systemMenuPath, isLoggedIn } = this.props;
     return (
-      <React.Fragment>
+      <>
         {isLoggedIn && <Header />}
         <div className="system-container">
           <div className="system-list">
             <Routes>
               <Route index element={<Navigate to="user-redux" replace />} />
               <Route path="user-redux" element={<UserRedux />} />
+              <Route path="users" element={<UserRedux />} />
               <Route path="manage-doctor" element={<ManageDoctor />} />
               <Route path="manage-specialty" element={<ManageSpecialty />} />
               <Route path="manage-clinic" element={<ManageClinic />} />
@@ -24,7 +25,7 @@ class System extends Component {
             </Routes>
           </div>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

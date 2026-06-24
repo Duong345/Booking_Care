@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import './TableManageUser.scss';
 import * as actions from '../../../store/actions';
 
-// ===== Types =====
 interface User {
   id: string | number;
   email: string;
@@ -27,7 +26,6 @@ interface TableManageUserProps {
   handleEditUserFromParentKey?: (user: User) => void;
 }
 
-// ===== Component =====
 const TableManageUser: React.FC<TableManageUserProps> = ({
   handleEditUserFromParentKey,
 }) => {
@@ -39,12 +37,10 @@ const TableManageUser: React.FC<TableManageUserProps> = ({
     dispatch(actions.fetchAllUsersStart() as any);
   }, [dispatch]);
 
-  // Handle delete
   const handleDeleteUser = (userId: string | number) => {
     dispatch(actions.deleteAUser(userId) as any);
   };
 
-  // Handle edit
   const handleEditUser = (user: User) => {
     handleEditUserFromParentKey?.(user);
   };

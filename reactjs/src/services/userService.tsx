@@ -52,9 +52,9 @@ const userService = {
     );
   },
 
-  getTopDoctorHomeService(limit: number) {
+  getTopDoctorHomeService(limit: number | 'ALL' = 10) {
     return axios.get<IApiResponse>(
-      `/api/top-doctor-home?limit=${Number(limit)}`
+      `/api/top-doctor-home?limit=${encodeURIComponent(String(limit))}`
     );
   },
 
@@ -103,6 +103,41 @@ const userService = {
     return axios.post<IApiResponse>('/api/verify-book-appointment', data);
   },
 
+  getBookingHistoryForPatient(data: { patientId?: number; email?: string }) {
+    const params = new URLSearchParams();
+    if (data.patientId) params.append('patientId', String(data.patientId));
+    if (data.email) params.append('email', data.email);
+
+    return axios.get<IApiResponse>(
+      `/api/get-booking-history-for-patient?${params.toString()}`
+    );
+  },
+
+  postPatientCancelBooking(data: {
+    bookingId: number | string;
+    patientId?: number;
+    email?: string;
+  }) {
+    return axios.post<IApiResponse>('/api/patient-cancel-booking', data);
+  },
+
+  postPatientRebookCanceledAppointment(data: {
+    bookingId: number | string;
+    patientId?: number | string;
+    email?: string;
+    doctorId: number | string;
+    date: number | string;
+    timeType: string;
+    language?: string;
+    timeString?: string;
+    doctorName?: string;
+  }) {
+    return axios.post<IApiResponse>(
+      '/api/patient-rebook-canceled-appointment',
+      data
+    );
+  },
+
   createNewSpecialty(data: unknown) {
     return axios.post<IApiResponse>('/api/create-new-specialty', data);
   },
@@ -111,9 +146,21 @@ const userService = {
     return axios.get<IApiResponse>('/api/get-specialty');
   },
 
-  getAllDetailSpecialtyById(data: { id: number; location?: string }) {
+  updateSpecialty(data: unknown) {
+    return axios.put<IApiResponse>('/api/update-specialty', data);
+  },
+
+  deleteSpecialty(id: number | string) {
+    return axios.delete<IApiResponse>(`/api/delete-specialty?id=${Number(id)}`);
+  },
+
+  getAllDetailSpecialtyById(data: {
+    id: number;
+    location?: string;
+    timeType?: string;
+  }) {
     return axios.get<IApiResponse>(
-      `/api/get-detail-specialty-by-id?id=${Number(data.id)}&location=${encodeURIComponent(data.location ?? '')}`
+      `/api/get-detail-specialty-by-id?id=${Number(data.id)}&location=${encodeURIComponent(data.location ?? '')}&timeType=${encodeURIComponent(data.timeType ?? '')}`
     );
   },
 
@@ -123,6 +170,14 @@ const userService = {
 
   getAllClinic() {
     return axios.get<IApiResponse>('/api/get-clinic');
+  },
+
+  updateClinic(data: unknown) {
+    return axios.put<IApiResponse>('/api/update-clinic', data);
+  },
+
+  deleteClinic(id: number | string) {
+    return axios.delete<IApiResponse>(`/api/delete-clinic?id=${Number(id)}`);
   },
 
   getAllDetailClinicById(data: { id: number }) {
@@ -170,11 +225,18 @@ export const {
   getProfileDoctorById,
   postPatientBookAppointment,
   postVerifyBookAppointment,
+  getBookingHistoryForPatient,
+  postPatientCancelBooking,
+  postPatientRebookCanceledAppointment,
   createNewSpecialty,
   getAllSpecialty,
+  updateSpecialty,
+  deleteSpecialty,
   getAllDetailSpecialtyById,
   createNewClinic,
   getAllClinic,
+  updateClinic,
+  deleteClinic,
   getAllDetailClinicById,
   getAllPatientForDoctor,
   postSendRemedy,

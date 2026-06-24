@@ -18,7 +18,7 @@ class Home extends Component {
       }
       // Admin and other roles
       else {
-        linkToRedirect = '/system/user-manage';
+        linkToRedirect = '/system/user-redux';
       }
     }
 

@@ -215,6 +215,7 @@ const ManagePatient: React.FC = () => {
           doctorId: item.doctorId,
           patientId: item.patientId,
           timeType: item.timeType,
+          date: item.date,
           language,
           patientName: (
             (item.patientData?.firstName || '') +

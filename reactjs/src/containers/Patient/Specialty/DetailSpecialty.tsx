@@ -35,6 +35,14 @@ interface Province {
   valueVi: string;
 }
 
+interface TimeSlot {
+  createdAt: string | null;
+  keyMap: string;
+  type: string;
+  valueEn: string;
+  valueVi: string;
+}
+
 interface RootState {
   app: {
     language: string;
@@ -49,9 +57,53 @@ const DetailSpecialty = () => {
   const [dataDetailSpecialty, setDataDetailSpecialty] =
     useState<Specialty | null>(null);
   const [listProvince, setListProvince] = useState<Province[]>([]);
+  const [listTime, setListTime] = useState<TimeSlot[]>([]);
   const [selectedLocation, setSelectedLocation] = useState('ALL');
+  const [selectedTimeType, setSelectedTimeType] = useState('ALL');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const updateDoctorsFromSpecialty = (specialtyData: Specialty) => {
+    const doctorIds: (string | number)[] = [];
+    if (
+      specialtyData.doctorSpecialty &&
+      Array.isArray(specialtyData.doctorSpecialty)
+    ) {
+      specialtyData.doctorSpecialty.forEach((item) => {
+        doctorIds.push(item.doctorId);
+      });
+    }
+    setArrDoctorId(doctorIds);
+  };
+
+  const fetchSpecialtyWithFilters = async (
+    location: string,
+    timeType: string,
+    errorMessage: string
+  ) => {
+    if (!id) return;
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = (await getAllDetailSpecialtyById({
+        id: Number(id),
+        location,
+        timeType,
+      })) as unknown as IApiResponse<Specialty>;
+
+      if (response?.errCode === 0 && response?.data) {
+        setDataDetailSpecialty(response.data);
+        updateDoctorsFromSpecialty(response.data);
+      }
+    } catch (err) {
+      setError(errorMessage);
+      setArrDoctorId([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Fetch initial data
   useEffect(() => {
@@ -62,35 +114,28 @@ const DetailSpecialty = () => {
         setLoading(true);
         setError(null);
 
-        const [specialtyRes, provinceRes] = await Promise.all([
+        const [specialtyRes, provinceRes, timeRes] = await Promise.all([
           getAllDetailSpecialtyById({
             id: Number(id),
             location: 'ALL',
+            timeType: 'ALL',
           }) as Promise<unknown>,
           getAllCodeService('PROVINCE') as Promise<unknown>,
+          getAllCodeService('TIME') as Promise<unknown>,
         ]);
 
         const specialtyData =
           specialtyRes as unknown as IApiResponse<Specialty>;
         const provinceData = provinceRes as unknown as IApiResponse<Province[]>;
+        const timeData = timeRes as unknown as IApiResponse<TimeSlot[]>;
 
         if (specialtyData?.errCode === 0 && specialtyData?.data) {
           setDataDetailSpecialty(specialtyData.data);
-
-          const doctorIds: (string | number)[] = [];
-          if (
-            specialtyData.data.doctorSpecialty &&
-            Array.isArray(specialtyData.data.doctorSpecialty)
-          ) {
-            specialtyData.data.doctorSpecialty.forEach((item) => {
-              doctorIds.push(item.doctorId);
-            });
-          }
-          setArrDoctorId(doctorIds);
+          updateDoctorsFromSpecialty(specialtyData.data);
         }
 
         if (provinceData?.errCode === 0 && provinceData?.data) {
-          let provinces = provinceData.data;
+          let provinces = [...provinceData.data];
           if (Array.isArray(provinces)) {
             provinces.unshift({
               createdAt: null,
@@ -100,6 +145,20 @@ const DetailSpecialty = () => {
               valueVi: 'Toàn quốc',
             });
             setListProvince(provinces);
+          }
+        }
+
+        if (timeData?.errCode === 0 && timeData?.data) {
+          let times = [...timeData.data];
+          if (Array.isArray(times)) {
+            times.unshift({
+              createdAt: null,
+              keyMap: 'ALL',
+              type: 'TIME',
+              valueEn: 'All time slots',
+              valueVi: 'Tất cả khung giờ',
+            });
+            setListTime(times);
           }
         }
       } catch (err) {
@@ -115,40 +174,28 @@ const DetailSpecialty = () => {
   }, [id]);
 
   // Handle location filter change
-  const handleOnChangeSelect = async (
+  const handleOnChangeLocation = async (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    if (!id) return;
+    const location = event.target.value;
+    setSelectedLocation(location);
+    await fetchSpecialtyWithFilters(
+      location,
+      selectedTimeType,
+      'Không thể tải dữ liệu theo địa điểm'
+    );
+  };
 
-    try {
-      setLoading(true);
-      const location = event.target.value;
-      setSelectedLocation(location);
-
-      const response = (await getAllDetailSpecialtyById({
-        id: Number(id),
-        location: location,
-      })) as unknown as IApiResponse<Specialty>;
-
-      if (response?.errCode === 0 && response?.data) {
-        setDataDetailSpecialty(response.data);
-
-        const doctorIds: (string | number)[] = [];
-        if (
-          response.data.doctorSpecialty &&
-          Array.isArray(response.data.doctorSpecialty)
-        ) {
-          response.data.doctorSpecialty.forEach((item) => {
-            doctorIds.push(item.doctorId);
-          });
-        }
-        setArrDoctorId(doctorIds);
-      }
-    } catch (err) {
-      setError('Không thể tải dữ liệu theo địa điểm');
-    } finally {
-      setLoading(false);
-    }
+  const handleOnChangeTimeType = async (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const timeType = event.target.value;
+    setSelectedTimeType(timeType);
+    await fetchSpecialtyWithFilters(
+      selectedLocation,
+      timeType,
+      'Không thể tải dữ liệu theo khung giờ'
+    );
   };
 
   if (loading && !dataDetailSpecialty) {
@@ -196,17 +243,40 @@ const DetailSpecialty = () => {
           </div>
 
           <div className="search-sp-doctor">
-            <select value={selectedLocation} onChange={handleOnChangeSelect}>
-              {listProvince.length > 0 ? (
-                listProvince.map((item) => (
-                  <option key={item.keyMap} value={item.keyMap}>
-                    {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
-                  </option>
-                ))
-              ) : (
-                <option value="ALL">Đang tải...</option>
-              )}
-            </select>
+            <div className="filter-control">
+              <label>Tỉnh thành</label>
+              <select
+                value={selectedLocation}
+                onChange={handleOnChangeLocation}
+              >
+                {listProvince.length > 0 ? (
+                  listProvince.map((item) => (
+                    <option key={item.keyMap} value={item.keyMap}>
+                      {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                    </option>
+                  ))
+                ) : (
+                  <option value="ALL">Đang tải...</option>
+                )}
+              </select>
+            </div>
+            <div className="filter-control">
+              <label>Khung giờ</label>
+              <select
+                value={selectedTimeType}
+                onChange={handleOnChangeTimeType}
+              >
+                {listTime.length > 0 ? (
+                  listTime.map((item) => (
+                    <option key={item.keyMap} value={item.keyMap}>
+                      {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                    </option>
+                  ))
+                ) : (
+                  <option value="ALL">Đang tải...</option>
+                )}
+              </select>
+            </div>
           </div>
 
           {arrDoctorId.length > 0 ? (

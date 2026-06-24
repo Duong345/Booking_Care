@@ -12,6 +12,7 @@ import {
   getAllClinic,
   getAllDoctors,
 } from '../../services/userService';
+import BookingHistoryModal from '../Patient/BookingHistoryModal';
 import './HomeHeader.scss';
 
 interface SearchResult {
@@ -65,12 +66,14 @@ const HomeHeader = ({ isShowBanner = true }: Props) => {
 
   // Redux state
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+  const userInfo = useSelector((state: RootState) => state.user.userInfo);
   const language = useSelector((state: RootState) => state.app.language);
 
   // Local state
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [isBookingHistoryOpen, setIsBookingHistoryOpen] = useState(false);
 
   // Handle language change
   const changeLanguage = useCallback(
@@ -266,6 +269,14 @@ const HomeHeader = ({ isShowBanner = true }: Props) => {
 
           {/* Right Content */}
           <div className="right-content">
+            <div
+              className="btn btn-appointments"
+              onClick={() => setIsBookingHistoryOpen(true)}
+            >
+              <i className="far fa-calendar-check"></i>
+              Lịch khám
+            </div>
+
             {/* Auth Buttons */}
             {!isLoggedIn ? (
               <>
@@ -431,6 +442,13 @@ const HomeHeader = ({ isShowBanner = true }: Props) => {
           </div>
         </div>
       )}
+
+      <BookingHistoryModal
+        isOpen={isBookingHistoryOpen}
+        onClose={() => setIsBookingHistoryOpen(false)}
+        patientId={userInfo?.roleId === 'R3' ? userInfo?.id : undefined}
+        patientEmail={userInfo?.roleId === 'R3' ? userInfo?.email : undefined}
+      />
     </>
   );
 };

@@ -32,7 +32,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
       const token = searchParams.get('token');
       const doctorId = searchParams.get('doctorId');
-
+      
       if (!token || !doctorId) {
         setStatusVerify(true);
         setErrCode(-1);

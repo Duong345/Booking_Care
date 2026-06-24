@@ -18,6 +18,14 @@
     .booking-modal-body {
       padding: 15px;
       height: 100%;
+
+      .form-control[readonly],
+      .form-control:disabled,
+      .react-select__control--is-disabled {
+        background-color: #f5f7fa;
+        color: #5f6b7a;
+        cursor: not-allowed;
+      }
     }
     .booking-modal-footer {
       border-top: 1px solid #ccc;

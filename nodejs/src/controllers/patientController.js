@@ -21,7 +21,43 @@ let postVerifyBookAppointment = async (req, res) => {
     });
   }
 };
+let getBookingHistoryForPatient = async (req, res) => {
+  try {
+    let infor = await patientService.getBookingHistoryForPatient(req.query);
+    return res.status(200).json(infor);
+  } catch (e) {
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+let cancelBookingByPatient = async (req, res) => {
+  try {
+    let infor = await patientService.cancelBookingByPatient(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+let rebookCanceledAppointment = async (req, res) => {
+  try {
+    let infor = await patientService.rebookCanceledAppointment(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
 module.exports = {
   postBookAppointment: postBookAppointment,
   postVerifyBookAppointment: postVerifyBookAppointment,
+  getBookingHistoryForPatient: getBookingHistoryForPatient,
+  cancelBookingByPatient: cancelBookingByPatient,
+  rebookCanceledAppointment: rebookCanceledAppointment,
 };

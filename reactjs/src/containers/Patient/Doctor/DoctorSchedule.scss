@@ -44,6 +44,21 @@
             background-color: #45c3d2;
             color: white;
           }
+
+          &.btn-booked,
+          &:disabled {
+            background-color: #e5e7eb;
+            color: #7a8491;
+            border: 1px solid #d1d5db;
+            cursor: not-allowed;
+            opacity: 1;
+            box-shadow: none;
+
+            &:hover {
+              background-color: #e5e7eb;
+              color: #7a8491;
+            }
+          }
         }
         .btn-vie {
           min-width: 120px;
@@ -58,6 +73,22 @@
       }
       .book-free {
         margin-top: 10px;
+
+        .rebook-hint {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          padding: 8px 10px;
+          border-radius: 8px;
+          background: #e8f6f6;
+          color: #007a7a;
+          font-weight: 700;
+          line-height: 1.35;
+
+          i {
+            color: #0f8c8c;
+          }
+        }
       }
     }
   }

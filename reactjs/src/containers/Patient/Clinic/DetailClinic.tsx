@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // @ts-ignore
 import Slider from 'react-slick';
@@ -10,12 +10,18 @@ import DoctorExtraInfor from '../Doctor/DoctorExtraInfor';
 import ProfileDoctor from '../Doctor/ProfileDoctor';
 import {
   getAllDetailClinicById,
+  getAllSpecialty,
   type IApiResponse,
 } from '../../../services/userService';
 import './DetailClinic.scss';
 
 interface DoctorClinic {
   doctorId: string | number;
+}
+
+interface SpecialtyItem {
+  id: string | number;
+  name: string;
 }
 
 interface Clinic {
@@ -37,8 +43,10 @@ const DetailClinic = () => {
 
   const [arrDoctorId, setArrDoctorId] = useState<(string | number)[]>([]);
   const [dataDetailClinic, setDataDetailClinic] = useState<Clinic | null>(null);
+  const [specialties, setSpecialties] = useState<SpecialtyItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +85,24 @@ const DetailClinic = () => {
 
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    const loadSpecialties = async () => {
+      try {
+        const response = (await getAllSpecialty()) as unknown as IApiResponse<
+          SpecialtyItem[]
+        >;
+        if (response?.errCode === 0 && response?.data) {
+          setSpecialties(response.data);
+        }
+      } catch (err) {
+        console.error('Failed to load specialties', err);
+        setSpecialties([]);
+      }
+    };
+
+    void loadSpecialties();
+  }, []);
 
   if (loading) {
     return (
@@ -124,6 +150,31 @@ const DetailClinic = () => {
               <p>Không có dữ liệu phòng khám</p>
             )}
           </div>
+
+          {specialties.length > 0 && (
+            <div className="search-sp-doctor">
+              <label htmlFor="specialty-select">Chọn chuyên khoa:</label>
+              <select
+                id="specialty-select"
+                onChange={(event) => {
+                  const selectedId = event.target.value;
+                  if (selectedId) {
+                    navigate(`/detail-specialty/${selectedId}`);
+                  }
+                }}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Chọn chuyên khoa
+                </option>
+                {specialties.map((specialty) => (
+                  <option key={specialty.id} value={specialty.id}>
+                    {specialty.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           {arrDoctorId.length > 0 ? (
             arrDoctorId.map((doctorId) => (

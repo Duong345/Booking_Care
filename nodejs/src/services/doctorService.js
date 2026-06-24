@@ -3,11 +3,39 @@ require("dotenv").config();
 import _ from "lodash";
 import emailService from "../services/emailService";
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
+const getDefaultMaxNumberSchedule = () => {
+  const maxNumber = parseInt(MAX_NUMBER_SCHEDULE, 10);
+  return Number.isInteger(maxNumber) && maxNumber > 0 ? maxNumber : 1;
+};
+const getActiveBookingWhere = (doctorId, date, timeType) => {
+  const Op = db.Sequelize ? db.Sequelize.Op : require("sequelize").Op;
+  return {
+    doctorId,
+    date,
+    timeType,
+    statusId: { [Op.ne]: "S4" },
+  };
+};
+const syncScheduleCurrentNumber = async (doctorId, date, timeType) => {
+  const currentNumber = await db.Booking.count({
+    where: getActiveBookingWhere(doctorId, date, timeType),
+  });
+  await db.Schedule.update(
+    { currentNumber },
+    {
+      where: {
+        doctorId,
+        date,
+        timeType,
+      },
+    }
+  );
+  return currentNumber;
+};
 let getTopDoctorHome = (limitInput) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let users = await db.User.findAll({
-        limit: limitInput,
+      const queryOptions = {
         where: { roleId: "R2" },
         order: [["createdAt", "DESC"]],
         attributes: {
@@ -28,7 +56,13 @@ let getTopDoctorHome = (limitInput) => {
         distinct: true,
         raw: false,
         nest: true,
-      });
+      };
+
+      if (limitInput) {
+        queryOptions.limit = limitInput;
+      }
+
+      let users = await db.User.findAll(queryOptions);
       if (users && users.length > 0) {
         users = _.uniqBy(users, "id");
         // ensure each record's image field is a usable string (data URI)
@@ -253,7 +287,8 @@ let bulkCreateSchedule = (data) => {
         let schedule = data.arrSchedule;
         if (schedule && schedule.length > 0) {
           schedule = schedule.map((item) => {
-            item.maxNumber = MAX_NUMBER_SCHEDULE;
+            item.maxNumber = getDefaultMaxNumberSchedule();
+            item.currentNumber = item.currentNumber || 0;
             return item;
           });
         }
@@ -353,6 +388,33 @@ let getScheduleByDate = (doctorId, date) => {
           nest: true,
         });
         if (!dataSchedule) dataSchedule = [];
+        const Op = db.Sequelize ? db.Sequelize.Op : require("sequelize").Op;
+        dataSchedule = await Promise.all(
+          dataSchedule.map(async (schedule) => {
+            const plainSchedule = schedule.get
+              ? schedule.get({ plain: true })
+              : schedule;
+            const bookedCount = await db.Booking.count({
+              where: {
+                doctorId: doctorId,
+                date: date,
+                timeType: plainSchedule.timeType,
+                statusId: { [Op.ne]: "S4" },
+              },
+            });
+            const maxNumber =
+              parseInt(plainSchedule.maxNumber, 10) ||
+              getDefaultMaxNumberSchedule();
+            return {
+              ...plainSchedule,
+              currentNumber: bookedCount,
+              bookedCount: bookedCount,
+              maxNumber: maxNumber,
+              isBooked: bookedCount > 0,
+              isFull: bookedCount >= maxNumber,
+            };
+          })
+        );
         resolve({
           errCode: 0,
           data: dataSchedule,
@@ -636,6 +698,11 @@ let sendCancel = (data) => {
         if (appointment) {
           appointment.statusId = "S4"; // Cancel
           await appointment.save();
+          await syncScheduleCurrentNumber(
+            data.doctorId,
+            data.date,
+            data.timeType
+          );
           // If appointment has time info, use it
           if (appointment.timeType) timeText = appointment.timeType;
         }
