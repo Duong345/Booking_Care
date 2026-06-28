@@ -1,0 +1,2781 @@
+
+
+===== PAGE 1 =====
+ĐẠI HỌC BÁCH KHOA HÀ NỘI
+ĐỒ ÁN TỐT NGHIỆP
+Hệ thống đặt lịch khám bệnh trực tuyến và quản lý
+lịch, hồ sơ bệnh nhân
+Hoàng Thái Dương
+Duong.ht225821@sis.hust.edu.vn
+Chương trình đào tạo: Công nghệ thông tin Việt-Nhật
+Giảng viên hướng dẫn:ThS. Trần Hải Anh
+Khoa:Công nghệ thông tin Việt-Nhật
+Trường:Công nghệ thông tin và Truyền thông
+HÀ NỘI, 06/2026
+
+
+===== PAGE 2 =====
+ĐẠI HỌC BÁCH KHOA HÀ NỘI
+ĐỒ ÁN TỐT NGHIỆP
+Hệ thống đặt lịch khám bệnh trực tuyến và quản lý
+lịch, hồ sơ bệnh nhân
+Hoàng Thái Dương
+Duong.ht225821@sis.hust.edu.vn
+Chương trình đào tạo: Công nghệ thông tin Việt-Nhật
+Giảng viên hướng dẫn:ThS. Trần Hải Anh
+Chữ kí GVHD
+Khoa:Công nghệ thông tin Việt - Nhật
+Trường:Công nghệ Thông tin và Truyền thông
+HÀ NỘI, 06/2026
+
+
+===== PAGE 3 =====
+LỜI CẢM ƠN
+Em xin gửi lời cảm ơn chân thành tới gia đình, những người luôn quan tâm, động
+viên và tạo điều kiện để em yên tâm học tập trong suốt thời gian thực hiện đồ án
+tốt nghiệp. Em cũng cảm ơn bạn bè đã đồng hành, chia sẻ và hỗ trợ em khi gặp
+khó khăn. Đặc biệt, em xin cảm ơn các thầy cô đã tận tình giảng dạy, hướng dẫn
+và góp ý để em có thể hoàn thiện đồ án một cách tốt nhất. Bên cạnh đó, em cũng
+muốn cảm ơn chính bản thân mình vì đã cố gắng, kiên trì và không bỏ cuộc trong
+quá trình thực hiện. Đây là một trải nghiệm quan trọng giúp em học hỏi thêm nhiều
+kiến thức và trưởng thành hơn.
+
+
+===== PAGE 4 =====
+TÓM TẮT NỘI DUNG ĐỒ ÁN
+Trong bối cảnh nhu cầu khám chữa bệnh ngày càng tăng, việc đặt lịch khám theo
+cách truyền thống như gọi điện, đến trực tiếp cơ sở y tế hoặc trao đổi thủ công với
+nhân viên thường gây mất thời gian, dễ trùng lịch và khó theo dõi trạng thái lịch
+hẹn. Hiện nay đã có một số hướng tiếp cận như sử dụng nền tảng đặt lịch bên thứ
+ba, quản lý lịch bằng bảng tính, hoặc xây dựng hệ thống riêng cho từng cơ sở y
+tế. Tuy nhiên, các giải pháp này có thể thiếu tính tùy biến, chưa gắn chặt với quy
+trình quản lý bác sĩ, bệnh nhân, chuyên khoa, cơ sở y tế, hoặc chưa xử lý tốt các
+tình huống như xác nhận qua email, hủy lịch, đặt lại lịch và chống đặt trùng khung
+giờ. Vì vậy, đồ án lựa chọn hướng xây dựng một hệ thống web đặt lịch khám bệnh
+và quản lý y tế tập trung, nhằm phù hợp với nghiệp vụ thực tế và dễ mở rộng. Hệ
+thống được phát triển với giao diện ReactJS, backend NodeJS/Express và cơ sở dữ
+liệu quan hệ, hỗ trợ phân quyền người dùng gồm quản trị viên, bác sĩ và bệnh nhân.
+Giải pháp cho phép quản lý người dùng, bác sĩ, chuyên khoa, cơ sở y tế, lịch làm
+việc, đặt lịch khám, xác nhận lịch qua email, xem lịch sử đặt khám, hủy lịch và
+đặt lại lịch sau khi hủy. Ngoài ra, hệ thống còn hỗ trợ lọc bác sĩ theo chuyên khoa,
+cơ sở y tế, tỉnh thành và khung giờ, giúp bệnh nhân tìm lịch khám phù hợp nhanh
+hơn. Đóng góp chính của đồ án là xây dựng được một hệ thống đặt lịch khám tương
+đối hoàn chỉnh, có luồng nghiệp vụ rõ ràng, hạn chế đặt trùng lịch, cải thiện trải
+nghiệm người dùng và hỗ trợ bác sĩ quản lý bệnh nhân hiệu quả hơn.
+Sinh viên thực hiện
+(Ký và ghi rõ họ tên)
+
+
+===== PAGE 5 =====
+ABSTRACT
+In the context of an increasing demand for healthcare services, traditional appoint-
+ment scheduling methods—such as making phone calls, visiting medical facili-
+ties in person, or manually coordinating with medical staff—often lead to time-
+consuming processes, scheduling conflicts, and difficulties in tracking appoint-
+ment statuses. Current approaches, including utilizing third-party scheduling plat-
+forms, managing calendars via spreadsheets, or developing standalone systems for
+individual clinics, frequently suffer from a lack of customization. Furthermore,
+these solutions are often not deeply integrated with the comprehensive manage-
+ment of doctors, patients, medical specialties, and healthcare facilities, or they fail
+to efficiently handle critical workflows such as email confirmations, cancellations,
+rescheduling, and time-slot conflict resolution.
+To address these limitations, this thesis presents the design and implementation
+of a centralized medical appointment scheduling and healthcare management web
+system tailored to practical workflows and scalability. The system is developed us-
+ing ReactJS for the user interface, NodeJS/Express for the backend architecture,
+and a relational database system, supporting role-based access control for admin-
+istrators, doctors, and patients. The implemented solution enables comprehensive
+management of users, medical practitioners, specialties, clinics, and work sched-
+ules, alongside features for booking appointments, verifying bookings via email,
+tracking medical appointment histories, canceling appointments, and rescheduling
+after cancellation. Additionally, the platform provides robust filtering capabilities,
+allowing patients to locate suitable appointment slots quickly based on medical
+specialties, healthcare facilities, provinces, and specific time frames.
+The primary contribution of this thesis is the successful development of a com-
+prehensive and integrated appointment scheduling system with well-defined busi-
+ness logic, effective double-booking prevention, an enhanced user experience, and
+a streamlined administrative workflow to help doctors manage their patients more
+efficiently.
+
+
+===== PAGE 6 =====
+MỤC LỤC
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI ......................................................... 1
+1.1 Đặt vấn đề............................................................................................ 1
+1.2 Mục tiêu và phạm vi đề tài..................................................................... 2
+1.3 Định hướng giải pháp............................................................................ 4
+1.4 Bố cục đồ án ........................................................................................ 5
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU............................. 7
+2.1 Khảo sát hiện trạng ............................................................................... 7
+2.2 Tổng quan chức năng ............................................................................ 8
+2.2.1 Biểu đồ use case tổng quát .......................................................... 8
+2.2.2 Biểu đồ use case phân rã và mô tả chức năng ................................ 9
+2.2.3 Quy trình nghiệp vụ ................................................................... 11
+2.3 Đặc tả chức năng .................................................................................. 14
+2.3.1 Đặc tả use case Đặt lịch khám ..................................................... 14
+2.3.2 Đặc tả use case Xác nhận lịch khám............................................. 15
+2.3.3 Đặc tả use case Quản lý lịch hẹn cá nhân...................................... 15
+2.3.4 Đặc tả use case Quản lý bệnh nhân đặt lịch................................... 16
+2.3.5 Đặc tả use case Quản lý dữ liệu hệ thống...................................... 16
+2.4 Y êu cầu phi chức năng .......................................................................... 16
+2.4.1 Kết chương ................................................................................ 17
+CHƯƠNG 3. NỀN TẢNG LÝ THUYẾT V À CÔNG NGHỆ SỬ DỤNG..... 18
+3.1 Kiến trúc tổng thể Client-Server và Cơ chế RESTful API ......................... 18
+3.2 Nền tảng phát triển giao diện Client: ReactJS và các thư viện hỗ trợ .......... 19
+3.3 Nền tảng máy chủ Server: NodeJS và Framework ExpressJS .................... 19
+3.4 Tầng dữ liệu: Hệ quản trị MySQL và công cụ Sequelize ORM.................. 20
+
+
+===== PAGE 7 =====
+3.5 Cơ chế bảo mật, phân quyền và dịch vụ tương tác Nodemailer .................. 20
+3.6 Tổng hợp lựa chọn công nghệ ................................................................ 21
+3.7 Kết chương........................................................................................... 22
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ
+HỆ THỐNG ............................................................................................. 23
+4.1 Thiết kế kiến trúc.................................................................................. 23
+4.1.1 Lựa chọn kiến trúc phần mềm ..................................................... 23
+4.1.2 Thiết kế tổng quan...................................................................... 24
+4.1.3 Thiết kế chi tiết gói .................................................................... 24
+4.1.4 Thiết kế giao diện ...................................................................... 26
+4.1.5 Thiết kế lớp ............................................................................... 29
+4.1.6 Thiết kế cơ sở dữ liệu ................................................................. 33
+4.2 Xây dựng ứng dụng............................................................................... 38
+4.2.1 Thư viện và công cụ sử dụng....................................................... 38
+4.2.2 Kết quả đạt được ........................................................................ 40
+4.2.3 Minh họa các chức năng chính .................................................... 43
+4.3 Kiểm thử.............................................................................................. 45
+4.3.1 Kiểm thử chức năng đặt lịch khám............................................... 46
+4.3.2 Kiểm thử chức năng quản lý lịch hẹn của bệnh nhân...................... 47
+4.3.3 Kiểm thử chức năng bác sĩ quản lý bệnh nhân đặt lịch ................... 47
+4.3.4 Tổng kết kiểm thử ...................................................................... 48
+4.4 Triển khai ............................................................................................ 49
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT...................... 52
+5.1 Cơ chế chống đặt lịch trùng và kiểm soát sức chứa khung giờ ................... 52
+5.1.1 Bài toán đặt ra ........................................................................... 52
+5.1.2 Giải pháp .................................................................................. 52
+ii
+
+
+===== PAGE 8 =====
+5.1.3 Kết quả đạt được ........................................................................ 53
+5.2 Cơ chế xác thực lịch hẹn bằng Token qua Email ...................................... 53
+5.2.1 Bài toán đặt ra ........................................................................... 53
+5.2.2 Giải pháp .................................................................................. 53
+5.2.3 Kết quả đạt được ........................................................................ 54
+5.3 Mô hình quản lý vòng đời trạng thái lịch hẹn........................................... 54
+5.3.1 Bài toán đặt ra ........................................................................... 54
+5.3.2 Giải pháp .................................................................................. 54
+5.3.3 Kết quả đạt được ........................................................................ 55
+5.4 Cơ chế đặt lại lịch sau khi hủy ............................................................... 55
+5.4.1 Bài toán đặt ra ........................................................................... 55
+5.4.2 Giải pháp .................................................................................. 55
+5.4.3 Kết quả đạt được ........................................................................ 56
+5.5 Tổ chức dữ liệu danh mục dùng chung bằng Allcode................................ 56
+5.5.1 Bài toán đặt ra ........................................................................... 56
+5.5.2 Giải pháp .................................................................................. 56
+5.5.3 Kết quả đạt được ........................................................................ 56
+5.6 Tối ưu trải nghiệm đặt lịch cho bệnh nhân ............................................... 57
+5.6.1 Bài toán đặt ra ........................................................................... 57
+5.6.2 Giải pháp .................................................................................. 57
+5.6.3 Kết quả đạt được ........................................................................ 57
+5.7 Đảm bảo an toàn dữ liệu trong môi trường triển khai cục bộ ..................... 57
+5.7.1 Bài toán đặt ra ........................................................................... 57
+5.7.2 Giải pháp .................................................................................. 58
+5.7.3 Kết quả đạt được ........................................................................ 58
+iii
+
+
+===== PAGE 9 =====
+5.8 Bài toán tích hợp chatbot hỗ trợ hỏi đáp theo dữ liệu nạp.......................... 59
+5.8.1 Bài toán đặt ra ........................................................................... 59
+5.8.2 Giải pháp .................................................................................. 59
+5.8.3 Kết quả đạt được ........................................................................ 60
+5.9 Kiểm soát dữ liệu nhạy cảm khi tích hợp chatbot ..................................... 60
+5.9.1 Bài toán đặt ra ........................................................................... 60
+5.9.2 Giải pháp .................................................................................. 60
+5.9.3 Kết quả đạt được ........................................................................ 61
+5.10 Đánh giá chung các đóng góp............................................................... 61
+5.11 Kết chương......................................................................................... 61
+CHƯƠNG 6. KẾT LUẬN V À HƯỚNG PHÁT TRIỂN ............................. 63
+6.1 Kết luận ............................................................................................... 63
+6.2 Hướng phát triển................................................................................... 65
+TÀI LIỆU THAM KHẢO......................................................................... 68
+
+
+===== PAGE 10 =====
+DANH MỤC HÌNH VẼ
+Hình 2.1 Biểu đồ use case tổng quát của hệ thống . . . . . . . . . . . . 9
+Hình 2.2 Biểu đồ use case phân rã Tra cứu thông tin khám bệnh . . . . 10
+Hình 2.3 Biểu đồ use case phân rã Đặt lịch khám . . . . . . . . . . . . . 10
+Hình 2.4 Biểu đồ hoạt động quy trình đặt lịch khám bệnh . . . . . . . . 12
+Hình 2.5 Biểu đồ hoạt động quy trình hủy và đặt lại lịch khám . . . . . 13
+Hình 2.6 Biểu đồ hoạt động quy trình quản trị dữ liệu khám bệnh . . . . 14
+Hình 4.1 Biểu đồ package tổng quan của hệ thống . . . . . . . . . . . . 24
+Hình 4.2 Biểu đồ thiết kế chi tiết nhóm package backend . . . . . . . . 25
+Hình 4.3 Biểu đồ thiết kế chi tiết nhóm package frontend . . . . . . . . 26
+Hình 4.4 Thiết kế giao diện trang chủ và nút đặt lịch nổi . . . . . . . . . 28
+Hình 4.5 Thiết kế modal đặt lịch khám . . . . . . . . . . . . . . . . . . . 29
+Hình 4.6 Biểu đồ lớp thiết kế chính của hệ thống . . . . . . . . . . . . . 30
+Hình 4.7 Biểu đồ trình tự use case Đặt lịch khám . . . . . . . . . . . . . 32
+Hình 4.8 Biểu đồ trình tự use case Xác nhận lịch khám . . . . . . . . . 33
+Hình 4.9 Biểu đồ thực thể liên kết cơ sở dữ liệu của hệ thống . . . . . . 34
+Hình 4.10 Giao diện trang chủ và chức năng đặt lịch nhanh . . . . . . . . 43
+Hình 4.11 Giao diện chi tiết bác sĩ và lịch khám . . . . . . . . . . . . . . 44
+Hình 4.12 Modal đặt lịch khám . . . . . . . . . . . . . . . . . . . . . . . 44
+Hình 4.13 Giao diện lịch hẹn cá nhân của bệnh nhân . . . . . . . . . . . . 45
+Hình 4.14 Giao diện bác sĩ quản lý bệnh nhân đặt lịch . . . . . . . . . . . 45
+Hình 4.15 Mô hình triển khai thử nghiệm hệ thống . . . . . . . . . . . . . 49
+v
+
+
+===== PAGE 11 =====
+DANH MỤC BẢNG BIỂU
+Bảng 2.1 Bảng so sánh hệ thống đề xuất với các giải pháp hiện trạng . . 8
+Bảng 3.1 Tổng hợp công nghệ sử dụng trong hệ thống . . . . . . . . . . 22
+Bảng 4.1 Đặc tả màn hình mục tiêu của hệ thống . . . . . . . . . . . . . 27
+Bảng 4.2 Quy ước thiết kế giao diện . . . . . . . . . . . . . . . . . . . . 28
+Bảng 4.3 Thiết kế lớp User . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Bảng 4.4 Thiết kế lớp Booking . . . . . . . . . . . . . . . . . . . . . . . 31
+Bảng 4.5 Thiết kế lớp Schedule . . . . . . . . . . . . . . . . . . . . . . . 31
+Bảng 4.6 Thiết kế lớp PatientService . . . . . . . . . . . . . . . . . . . . 31
+Bảng 4.7 Thiết kế các bảng dữ liệu chính . . . . . . . . . . . . . . . . . 36
+Bảng 4.8 Mô tả quan hệ giữa các bảng dữ liệu . . . . . . . . . . . . . . 37
+Bảng 4.9 Danh sách thư viện và công cụ sử dụng . . . . . . . . . . . . . 38
+Bảng 4.10 Thống kê tổng quan mã nguồn hệ thống . . . . . . . . . . . . 41
+Bảng 4.11 Thống kê theo nhóm thư mục chính . . . . . . . . . . . . . . . 42
+Bảng 4.12 Thống kê module và package chính . . . . . . . . . . . . . . . 42
+Bảng 4.13 Các trường hợp kiểm thử chức năng đặt lịch khám . . . . . . . 46
+Bảng 4.14 Các trường hợp kiểm thử chức năng quản lý lịch hẹn cá nhân . 47
+Bảng 4.15 Các trường hợp kiểm thử chức năng bác sĩ quản lý bệnh nhân . 48
+Bảng 4.16 Tổng hợp kết quả kiểm thử . . . . . . . . . . . . . . . . . . . . 48
+Bảng 4.17 Cấu hình triển khai thử nghiệm . . . . . . . . . . . . . . . . . 50
+Bảng 4.18 Các bước triển khai thử nghiệm . . . . . . . . . . . . . . . . . 50
+Bảng 4.19 Kết quả triển khai thử nghiệm . . . . . . . . . . . . . . . . . . 51
+vi
+
+
+===== PAGE 12 =====
+DANH MỤC THUẬT NGỮ V À TỪ VIẾT TẮT
+Thuật ngữ Ý nghĩa
+API Giao diện lập trình ứng dụng
+(Application Programming Interface)
+EUD Phát triển ứng dụng người dùng
+cuối(End-User Development)
+GWT Công cụ lập trình Javascript bằng Java
+của Google (Google Web Toolkit)
+HTML Ngôn ngữ đánh dấu siêu văn bản
+(HyperText Markup Language)
+IaaS Dịch vụ hạ tầng
+vii
+
+
+===== PAGE 13 =====
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI
+Lưu ý:Trước khi viết ĐATN, sinh viên cần đọc kỹ hướng dẫn và quy định
+chi tiếtvề cách viết ĐATN trong Phụ lục A. Sinh viên tuân theo mẫu tài liệu này
+để viết báo cáo đồ án tốt nghiệp, vì tài liệu này đã được căn chỉnh, chỉnh sửa theo
+đúng chuẩn báo cáo kỹ thuật đồ án tốt nghiệp (ISO 7144:1986). Sinh viên viết trực
+tiếp vào file này, chỉ chỉnh sửa nội dung, và không viết trên file mới.
+Khi đóng quyển ĐATN, sinh viên cần lưu ý tuân thủ hướng dẫn ở phụ lục A.9
+SV cần đặc biệt lưu ý cách hành văn. Mỗi đoạn văn không được quá dài và
+cần có ý tứ rõ ràng, bao gồm duy nhất một ý chính và các ý phân tích bổ trợ để làm
+rõ hơn ý chính. Các câu văn trong đoạn phải đầy đủ chủ ngữ vị ngữ, cùng hướng
+đến chủ đề chung. Câu sau phải liên kết với câu trước, đoạn sau liên kết với đoạn
+trước. Trong văn phong khoa học, sinh viên không được dùng từ trong văn nói,
+không dùng các từ phóng đại, thái quá, các từ thiếu khách quan, thiên về cảm xúc,
+về quan điểm cá nhân như “tuyệt vời”, “cực hay”, “cực kỳ hữu ích”, v.v. Các câu
+văn cần được tối ưu hóa, đảm bảo rất khó để thể thêm hoặc bớt đi được dù chỉ một
+từ. Cách diễn đạt cần ngắn gọn, súc tích, không dài dòng.
+Mẫu ĐATN này được thiết kế phù hợp nhất với đa số các đề tài xây dựng phần
+mềm ứng dụng. Với các dạng đề tài khác (giải pháp, nghiên cứu, phần mềm đặc
+thù, v.v.), sinh viên dựa trên cấu trúc và hướng dẫn của báo cáo này để đề xuất và
+trao đổi với giáo viên hướng dẫn để thiết kế khung báo cáo đồ án cho phù hợp. Sinh
+viên lưu ýtrong mọi trường hợp, SV luôn phải sử dụng định dạng báo cáo này,
+và phải đọc kỹ toàn bộ các hướng dẫn từ đầu tới cuối.Các hướng dẫn không
+chỉ áp dụng riêng cho đề tài ứng dụng, mà còn phù hợp với các dạng đề tài khác.
+Ngoài ra, trong mẫu ĐATN này đã được tích hợp một số hướng dẫn dành riêng cho
+đề tài nghiên cứu.
+Chương 1 có độ dài từ 3 đến 6 trang với các nội dung sau đây
+1.1 Đặt vấn đề
+Trong những năm gần đây, cùng với sự phát triển của nền kinh tế và ý thức về
+sức khỏe cộng đồng, nhu cầu tiếp cận các dịch vụ y tế và chăm sóc sức khỏe của
+người dân tại Việt Nam đang gia tăng một cách mạnh mẽ. Sự gia tăng này tạo ra áp
+lực rất lớn lên hạ tầng vận hành của các cơ sở y tế, từ các bệnh viện công tuyến đầu
+cho đến các phòng khám tư nhân. Tuy nhiên, quy trình tiếp đón và quản lý người
+bệnh tại nhiều cơ sở hiện nay vẫn mang nặng tính truyền thống và thủ công. Người
+bệnh thường phải trải qua các bước như gọi điện đặt lịch hẹn qua điện thoại, đến
+1
+
+
+===== PAGE 14 =====
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI
+trực tiếp cơ sở y tế từ sớm để xếp hàng lấy số, hoặc thực hiện trao đổi trực tiếp với
+nhân viên điều phối tại quầy. Thực trạng này dẫn đến hiện tượng quá tải cục bộ tại
+khu vực tiếp đón vào các khung giờ cao điểm, trực tiếp kéo dài thời gian chờ đợi
+mệt mỏi của người bệnh và gây lãng phí nguồn lực xã hội.
+Việc duy trì các phương thức điều phối lịch hẹn thủ công hoặc lưu trữ phân tán
+bằng sổ sách, bảng tính đơn giản làm nảy sinh nhiều bất cập mang tính hệ thống.
+Do không có sự đồng bộ dữ liệu theo thời gian thực, các cơ sở y tế thường xuyên
+phải đối mặt với tình trạng phân bổ bệnh nhân không đồng đều giữa các ngày làm
+việc hoặc giữa các bác sĩ trong cùng một chuyên khoa. Sai sót trong quá trình ghi
+nhận thông tin thủ công của nhân viên điều phối rất dễ dẫn đến hiện tượng trùng
+lịch khám trên cùng một khung giờ của một bác sĩ, gây ra sự bối rối cho cả cán bộ
+y tế lẫn người bệnh. Bên cạnh đó, việc thiếu một cơ chế liên lạc tự động để xác
+nhận hoặc cập nhật trạng thái lịch hẹn khiến tỷ lệ bệnh nhân tự ý bỏ lịch mà không
+thông báo trước duy trì ở mức cao. Điều này khiến các bác sĩ hoàn toàn bị động
+trong việc sắp xếp thời gian làm việc, đồng thời làm lãng phí các khung giờ khám
+quý giá mà đáng lẽ các bệnh nhân khác có nhu cầu cấp thiết hơn có thể tiếp cận.
+Nếu bài toán quản lý và tự động hóa quy trình đặt lịch hẹn được giải quyết một
+cách triệt để, những lợi ích mang lại cho toàn bộ hệ thống y tế là vô cùng to lớn.
+Đối với bệnh nhân, họ sẽ có một công cụ trực quan để chủ động tra cứu thông tin
+chuyên khoa, lựa chọn bác sĩ phù hợp, theo dõi các khung giờ còn trống để đăng
+ký và chủ động kiểm soát trạng thái lịch hẹn từ xa. Quy trình này loại bỏ hoàn toàn
+thời gian xếp hàng chờ đợi không cần thiết, giảm thiểu rủi ro lây nhiễm chéo tại
+bệnh viện và nâng cao trải nghiệm chăm sóc sức khỏe. Đối với đội ngũ y bác sĩ
+và nhân viên y tế, một cơ chế quản lý lịch hẹn tự động, tập trung sẽ giúp họ nắm
+bắt chính xác danh sách bệnh nhân theo ngày, chủ động chuẩn bị hồ sơ bệnh án
+trước ca khám và tối ưu hóa thời gian làm việc chuyên môn. Ban quản lý cơ sở y
+tế cũng có thể dựa trên dữ liệu luồng bệnh nhân để điều phối nhân sự, giảm tải cho
+bộ phận hành chính và nâng cao hiệu suất vận hành tổng thể. Ngoài lĩnh vực y tế,
+mô hình cốt lõi của bài toán điều phối, chống đặt trùng lịch hẹn theo thời gian thực
+và tự động xác thực qua môi trường số còn sở hữu tiềm năng ứng dụng rộng rãi
+sang nhiều ngành dịch vụ có đặc thù tương tự như quản lý hệ thống lưu trú, đặt chỗ
+ngành vận tải, hoặc điều phối nhân lực trong các trung tâm dịch vụ khách hàng.
+1.2 Mục tiêu và phạm vi đề tài
+Trong bối cảnh nhu cầu đặt lịch khám trực tuyến ngày một tăng cao, trên thị
+trường hiện nay đã xuất hiện một số giải pháp công nghệ nhằm giải quyết bài toán
+này, tiêu biểu là các nền tảng y tế trung gian kết nối đa bệnh viện, các hệ thống
+2
+
+
+===== PAGE 15 =====
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI
+đăng ký nội bộ của riêng từng bệnh viện lớn, hoặc giải pháp thủ công hóa bằng các
+biểu mẫu trực tuyến công cộng. Khi tiến hành so sánh và đánh giá tổng quan, các
+hệ thống trung gian của bên thứ ba tuy có độ phủ rộng nhưng lại thiếu khả năng
+tùy biến sâu, không thể can thiệp hoặc gắn kết chặt chẽ vào quy trình điều phối
+nhân lực và quản lý lịch trình đặc thù của từng phòng khám nội bộ. Mặt khác, các
+phần mềm tự phát triển của những bệnh viện lớn đòi hỏi chi phí vận hành, bảo trì
+rất cao và thường được thiết kế đóng kín, khó khả thi để áp dụng cho các cơ sở y tế
+quy mô vừa và nhỏ. Ngoài ra, việc lạm dụng các công cụ bảng tính hoặc biểu mẫu
+trực tuyến tự chế tuy tiết kiệm chi phí nhưng lại bộc lộ lỗ hổng lớn về bảo mật dữ
+liệu bệnh nhân, không có khả năng cập nhật trạng thái lịch làm việc theo thời gian
+thực và hoàn toàn thất bại trong việc xử lý các tình huống nghiệp vụ tự động như
+xác thực danh tính qua email, tự động khóa khung giờ khi có người đăng ký, hoặc
+cung cấp luồng hủy lịch và đặt lại lịch khám một cách linh hoạt.
+Từ các phân tích và đánh giá tổng quan về các giải pháp hiện tại, đồ án khái
+quát lại những hạn chế cốt lõi cần phải khắc phục bao gồm sự thiếu đồng bộ trong
+quản lý lịch trình bác sĩ, lỗ hổng đặt trùng lịch do cập nhật thủ công, và trải nghiệm
+người dùng chưa được tối ưu hóa trong suốt luồng đặt khám. Trên cơ sở đó, mục
+tiêu cụ thể của đồ án là hướng tới xây dựng một hệ thống web đặt lịch khám bệnh
+và quản lý y tế tập trung, có luồng nghiệp vụ rõ ràng, khả năng mở rộng tốt và phù
+hợp với quy trình vận hành thực tế của các cơ sở y tế. Hệ thống được phát triển
+với cấu trúc phân quyền người dùng chặt chẽ nhằm giải quyết triệt để các bài toán
+chống đặt trùng khung giờ, tự động hóa tương tác qua email và tối ưu hóa bộ lọc
+tìm kiếm thông minh, từ đó tạo nên đột phá trong việc cải thiện trải nghiệm số của
+bệnh nhân và nâng cao hiệu suất hành chính cho đội ngũ y bác sĩ.
+Phạm vi của đề tài tập trung vào việc nghiên cứu và hiện thực hóa các chức năng
+cốt lõi cho ba phân hệ người dùng chính bao gồm quản trị viên, bác sĩ và bệnh nhân
+trên nền tảng ứng dụng web. Đối với hệ thống quản trị, phần mềm cho phép quản
+lý toàn diện thông tin người dùng, hồ sơ chuyên sâu của bác sĩ, danh mục chuyên
+khoa và cơ sở y tế trực thuộc. Đối với phân hệ dành cho bác sĩ, hệ thống cung cấp
+công cụ chủ động thiết lập và theo dõi lịch làm việc theo ngày, quản lý danh sách
+bệnh nhân đã xác nhận và thực hiện xác nhận hoàn thành ca khám đính kèm hóa
+đơn hoặc đơn thuốc điện tử. Đối với phân hệ bệnh nhân, ứng dụng hỗ trợ chức năng
+tìm kiếm và lọc bác sĩ linh hoạt theo chuyên khoa, cơ sở y tế, tỉnh thành hoặc khung
+giờ, đồng thời thực hiện toàn bộ luồng nghiệp vụ từ đặt lịch khám, nhận email chứa
+mã token xác thực tự động, xem lịch sử đặt khám cho đến các thao tác hủy lịch và
+đặt lại lịch sau khi hủy.
+3
+
+
+===== PAGE 16 =====
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI
+1.3 Định hướng giải pháp
+Để hiện thực hóa các mục tiêu đã đề ra và khắc phục triệt để những hạn chế của
+các phương pháp quản lý lịch hẹn truyền thống, đồ án lựa chọn hướng xây dựng
+một hệ thống ứng dụng web dựa trên cấu trúc phân tách độc lập giữa Client và
+Server (Decoupled Architecture). Phía máy trạm (Frontend) được định hướng phát
+triển bằng thư viện ReactJS kết hợp cùng bộ quản lý trạng thái tập trung Redux và
+công cụ đa ngôn ngữ react-intl, nhằm xây dựng một giao diện người dùng động, tối
+ưu hóa tốc độ tải trang và mang lại trải nghiệm tương tác mượt mà trên cả hai ngôn
+ngữ Anh và Việt. Phía máy chủ (Backend) được thiết kế dựa trên nền tảng NodeJS
+phối hợp với framework Express để xây dựng hệ thống các giao diện lập trình ứng
+dụng (RESTful API) gọn nhẹ, có tính thực thi cao và dễ dàng mở rộng. Đối với
+tầng lưu trữ dữ liệu, hệ quản trị cơ sở dữ liệu quan hệ MySQL kết hợp với công cụ
+ánh xạ đối tượng Sequelize ORM được lựa chọn nhằm đảm bảo tính toàn vẹn thực
+thể, tối ưu hóa các câu lệnh truy vấn và xử lý chặt chẽ các mối quan hệ ràng buộc
+dữ liệu phức tạp. Việc lựa chọn hệ sinh thái JavaScript đồng bộ từ Frontend đến
+Backend giúp tăng tốc độ phản hồi của hệ thống thông qua cơ chế xử lý bất đồng
+bộ, đồng thời giúp tối ưu hóa cấu trúc mã nguồn tổng thể của dự án.
+Mô tả một cách ngắn gọn, giải pháp được triển khai là một hệ thống web đặt
+lịch khám bệnh trực tuyến tập trung, vận hành dựa trên mô hình ba phân hệ người
+dùng tương tác khép kín. Khi bệnh nhân thực hiện thao tác chọn khung giờ khám
+công khai của một bác sĩ thông qua giao diện ReactJS, yêu cầu đặt lịch sẽ được gửi
+tới máy chủ NodeJS để kiểm tra tính hợp lệ và ghi nhận vào cơ sở dữ liệu MySQL
+dưới trạng thái chờ xác nhận. Ngay lập tức, hệ thống kích hoạt dịch vụ gửi mail tự
+động (emailService) để chuyển tới hòm thư của bệnh nhân một liên kết xác thực
+chứa chuỗi mã hóa định danh duy nhất (Token). Quy trình xử lý này đòi hỏi người
+dùng phải tương tác trực tiếp với liên kết để chuyển trạng thái lịch hẹn sang đã xác
+nhận, đồng thời hệ thống sẽ tự động khóa khung giờ làm việc tương ứng của bác sĩ
+trên bảng lịch trình (Schedules) để ngăn chặn hoàn toàn các yêu cầu đăng ký khác
+trên cùng một thời điểm. Sau khi ca khám kết thúc, hệ thống cho phép bác sĩ cập
+nhật trạng thái hoàn thành và gửi trực tiếp hóa đơn kèm đơn thuốc điện tử dạng
+hình ảnh đến email của bệnh nhân, khép kín toàn bộ luồng nghiệp vụ y tế trên môi
+trường số.
+Đóng góp chính của đồ án bao gồm ba kết quả thực tiễn quan trọng đã đạt được
+sau quá trình nghiên cứu và triển khai. Thứ nhất, đồ án đã hiện thực hóa thành công
+một hệ thống đặt lịch khám bệnh trực tuyến tương đối hoàn chỉnh, chuẩn hóa toàn
+bộ các danh mục cấu hình y tế tập trung và có luồng nghiệp vụ phân quyền rõ ràng
+giữa quản trị viên, bác sĩ và bệnh nhân. Thứ hai, giải pháp đã xử lý triệt để bài toán
+4
+
+
+===== PAGE 17 =====
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI
+chống đặt trùng khung giờ bằng cơ chế xác thực Token tự động qua email, giúp
+giảm thiểu sai sót hành chính và tối ưu hóa hiệu suất điều phối lịch trình theo thời
+gian thực. Sau cùng, ứng dụng đã cải thiện đáng kể trải nghiệm người dùng thông
+qua bộ lọc tìm kiếm bác sĩ thông minh theo chuyên khoa, phòng khám, tỉnh thành
+và hỗ trợ các tính năng linh hoạt như xem lại lịch sử khám bệnh, hủy lịch hoặc
+chủ động đặt lại lịch mới sau khi hủy, tạo tiền đề vững chắc cho việc mở rộng các
+module hỗ trợ y tế chuyên sâu trong tương lai.
+1.4 Bố cục đồ án
+Phần còn lại của báo cáo đồ án tốt nghiệp này được tổ chức và trình bày theo
+cấu trúc hệ thống bao gồm năm chương nội dung tiếp theo.
+Chương 2 tập trung vào công tác khảo sát hiện trạng và phân tích chi tiết các
+yêu cầu kỹ thuật của bài toán đặt lịch khám bệnh trực tuyến. Nội dung chương bắt
+đầu bằng việc đánh giá ưu nhược điểm của các giải pháp công nghệ hiện hành, từ
+đó khái quát hóa các chức năng mức cao của hệ thống thông qua hệ thống biểu đồ
+use case tổng quát và các biểu đồ use case phân rã cho từng phân hệ người dùng.
+Đồng thời, chương này cũng mô tả trực quan quy trình nghiệp vụ phối hợp liên kết
+giữa bệnh nhân và bác sĩ, thiết lập các kịch bản đặc tả chức năng cốt lõi và đưa ra
+các tiêu chí về yêu cầu phi chức năng như hiệu năng, độ tin cậy và tính bảo mật của
+ứng dụng.
+Trong Chương 3, tác giả giới thiệu về cơ sở lý thuyết chuyên ngành và các nền
+tảng công nghệ chủ đạo được lựa chọn để thực thi dự án. Chương này sẽ phân
+tích sâu lý do lựa chọn ngôn ngữ JavaScript làm nền tảng đồng bộ cho toàn bộ hệ
+thống, năng lực xây dựng giao diện người dùng động của thư viện ReactJS kết hợp
+với kiến trúc quản lý trạng thái tập trung Redux ở phía máy trạm. Bên cạnh đó, các
+đặc tính xử lý bất đồng bộ dòng cao của môi trường máy chủ NodeJS, framework
+Express và cơ chế đảm bảo tính toàn vẹn dữ liệu của hệ quản trị cơ sở dữ liệu quan
+hệ MySQL phối hợp cùng công cụ ánh xạ đối tượng Sequelize ORM cũng sẽ được
+làm rõ trong mối liên kết với các yêu cầu đã xác lập ở chương trước.
+Chương 4 trình bày toàn bộ quá trình phân tích thiết kế hệ thống, triển khai
+mã nguồn và đánh giá thực nghiệm ứng dụng. Nội dung chương tập trung đặc tả
+thiết kế kiến trúc phân tách Client-Server sử dụng mô hình MVC cải tiến tại phía
+Backend, xây dựng biểu đồ gói UML nhằm phân tách các tầng nghiệp vụ rõ ràng
+và thiết kế chi tiết mối quan hệ giữa các lớp đối tượng. Thêm vào đó, quy trình
+thiết kế giao diện người dùng đa ngôn ngữ, thiết kế sơ đồ thực thể liên kết dữ liệu
+quan hệ (E-R Diagram), thống kê các công cụ triển khai cùng các kịch bản kiểm
+thử chức năng cho luồng nghiệp vụ cốt lõi cũng được mô tả chi tiết để minh chứng
+5
+
+
+===== PAGE 18 =====
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI
+cho tính đúng đắn của phần mềm.
+Chương 5 thảo luận chuyên sâu về các giải pháp kỹ thuật cốt lõi và các đóng
+góp nổi bật mang tính thực tiễn cao của đồ án. Trọng tâm của chương hướng vào
+việc phân tích cơ chế chống đặt trùng khung giờ khám dựa trên thuật toán đồng bộ
+trạng thái thời gian thực và quy trình xác thực Token tự động thông qua môi trường
+Email Service. Đồng thời, giải pháp tổ chức cơ sở dữ liệu danh mục tập trung linh
+hoạt (Allcode) nhằm tối ưu hóa việc phân loại các trạng thái, thời gian, học vị và
+luồng xử lý khép kín từ khâu tiếp nhận thông tin bệnh nhân đến khâu bác sĩ hoàn
+thành ca khám đính kèm đơn thuốc điện tử cũng sẽ được phân tích, phản biện khoa
+học nhằm làm nổi bật giá trị sáng tạo của đề tài.
+Chương 6 là chương kết luận và đề xuất hướng phát triển của đề tài trong tương
+lai. Chương này sẽ tổng kết lại toàn bộ các mục tiêu, nhiệm vụ đã hoàn thành và
+những điểm còn hạn chế của sản phẩm phần mềm sau quá trình thử nghiệm so với
+các hệ thống tương tự trên thị trường. Từ những bài học kinh nghiệm thu được trong
+suốt quá trình nghiên cứu, tác giả đề xuất các định hướng công việc tiếp theo nhằm
+tối ưu hóa hiệu năng hệ thống, nâng cấp kiến trúc mã nguồn và mở rộng thêm các
+module tính năng thông minh để hoàn thiện ứng dụng.
+6
+
+
+===== PAGE 19 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+Chương 1 đã thảo luận về bối cảnh cấp thiết, mục tiêu và định hướng giải pháp
+của đề tài. Chương 2 này tập trung khảo sát hiện trạng vận hành, từ đó phân tích các
+yêu cầu chức năng và phi chức năng của hệ thống đặt lịch khám bệnh trực tuyến.
+Nội dung chương gồm: (i) khảo sát hiện trạng và đánh giá các giải pháp tương tự,
+(ii) xác lập biểu đồ use case tổng quan, phân rã chức năng và thiết lập sơ đồ quy
+trình nghiệp vụ tổng thể, (iii) xây dựng tài liệu đặc tả chức năng cho các use case
+cốt lõi, và (iv) xác định các tiêu chí kỹ thuật về yêu cầu phi chức năng.
+2.1 Khảo sát hiện trạng
+Trong những năm gần đây, nhu cầu đặt lịch khám bệnh trực tuyến ngày càng
+tăng cao do số lượng bệnh nhân tại các cơ sở y tế lớn thường xuyên quá tải cục
+bộ, đặc biệt ở các chuyên khoa có lưu lượng người bệnh lớn như nội tổng quát,
+da liễu, nhi khoa, tai mũi họng hoặc sản phụ khoa. Với cách thức đăng ký truyền
+thống, bệnh nhân bắt buộc phải đến trực tiếp bệnh viện từ sớm, lấy số thứ tự, xếp
+hàng chờ đợi gọi tên và hoàn toàn bị động trong việc lựa chọn bác sĩ điều trị hoặc
+khung giờ khám phù hợp với lịch trình cá nhân. Quy trình thủ công này gây lãng
+phí thời gian, đồng thời làm gia tăng áp lực hành chính cho bộ phận tiếp nhận tại
+quầy cùng đội ngũ nhân viên y tế. Vì vậy, việc xây dựng một hệ thống ứng dụng
+web hỗ trợ đặt lịch khám bệnh trực tuyến, quản lý lịch làm việc động của bác sĩ và
+theo dõi trạng thái ca khám theo thời gian thực là vô cùng cấp thiết nhằm cải thiện
+trải nghiệm người dùng và nâng cao hiệu quả vận hành tổng thể.
+Việc khảo sát hiện trạng phục vụ thiết kế hệ thống được thực hiện dựa trên nhu
+cầu thực tế của các nhóm đối tượng tương tác trong hệ thống, phân tích các phương
+thức quản lý tại cơ sở y tế và nghiên cứu các nền tảng đặt lịch khám tương tự trên
+thị trường. Hệ thống hướng đến ba nhóm tác nhân chính gồm bệnh nhân, bác sĩ và
+quản trị viên với các nhu cầu nghiệp vụ xoay quanh quy trình đặt lịch, xác nhận
+lịch, quản lý lịch trực và cập nhật trạng thái khám bệnh. Để có một đánh giá trực
+quan về các giải pháp công nghệ hiện hành, đồ án tổng hợp và thiết lập bảng so
+sánh chi tiết các đặc tính kỹ thuật dựa trên kết quả khảo sát thực tế.
+7
+
+
+===== PAGE 20 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+Bảng 2.1:Bảng so sánh hệ thống đề xuất với các giải pháp hiện trạng
+Tiêu chí so sánh Các giải pháp hiện tại
+trên thị trường
+Hệ thống đề xuất trong
+đồ án
+Mô hình quản lý dữ
+liệu
+Lưu trữ thủ công bằng sổ
+sách, Excel phân tán hoặc
+đóng kín trong phần mềm
+nội bộ của từng viện.
+Quản lý tập trung trên
+nền tảng đám mây, phân
+tách rõ ràng kiến trúc
+Client-Server (ReactJS và
+NodeJS).
+Quy trình đặt lịch
+và chống trùng
+Phụ thuộc vào nhân viên
+tiếp nhận điều phối thủ
+công, dễ xảy ra lỗi trùng
+lịch trên cùng một khung
+giờ.
+Kiểm soát tự động thời
+gian thực thông qua trường
+sức chứa dữ liệu, chống
+đặt trùng lịch tuyệt đối.
+Xác thực và cập
+nhật trạng thái
+Thiếu cơ chế liên lạc tự
+động, tỷ lệ bỏ lịch cao do
+không có ràng buộc xác
+thực rõ ràng.
+Tự động gửi Email Ser-
+vice chứa chuỗi mã hóa
+định danh (Token) để bệnh
+nhân xác thực vòng đời
+lịch hẹn.
+Khả năng tùy biến
+và mở rộng
+Các nền tảng bên thứ ba
+giới hạn quyền cấu hình
+của admin, khó can thiệp
+vào quy trình riêng của
+phòng khám.
+Quyền quản trị tối cao cho
+phép cấu hình linh hoạt
+bài viết Markdown, giá
+khám, chuyên khoa và ảnh
+đơn thuốc điện tử.
+Từ kết quả khảo sát tại Bảng 2.1, vấn đề cốt lõi của bài toán là phải đảm bảo
+toàn bộ vòng đời của một lịch khám được kiểm soát chặt chẽ qua các trạng thái:
+chờ xác nhận, đã xác nhận, đã khám hoặc đã hủy, kết hợp cơ chế chống đặt trùng
+khung giờ thời gian thực. Phần mềm được định hướng xây dựng thành hệ thống
+web tập trung. Phía bệnh nhân hỗ trợ tra cứu, đặt lịch khám, xác thực qua email và
+quản lý lịch sử cá nhân. Phía bác sĩ cung cấp công cụ quản lý lịch khám, theo dõi
+danh sách ca hẹn theo ngày và gửi hóa đơn/đơn thuốc sau khám. Phía quản trị viên
+cung cấp các module quản lý dữ liệu nền tảng phục vụ vận hành ổn định.
+2.2 Tổng quan chức năng
+Hệ thống cung cấp các nhóm chức năng cốt lõi cho từng nhóm người dùng phù
+hợp với vai trò của mình trong quy trình khám bệnh, tích hợp cơ chế tương tác tự
+động qua thư điện tử nhằm kiểm soát chính xác số lượng đặt lịch trong từng khung
+giờ, tránh trường hợp một khung giờ bị vượt ngưỡng sức chứa cho phép.
+2.2.1 Biểu đồ use case tổng quát
+Biểu đồ use case tổng quát mô tả các tác nhân chính tham gia vào hệ thống và
+các nhóm chức năng mức cao tương ứng. Các tác nhân gồm: khách vãng lai (tra
+cứu thông tin), bệnh nhân (đặt và quản lý lịch), bác sĩ (xử lý ca khám và lịch làm
+việc), quản trị viên (quản lý dữ liệu nền tảng) và dịch vụ email (hỗ trợ gửi thông
+8
+
+
+===== PAGE 21 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+báo và link xác thực token tự động).
+Hình 2.1:Biểu đồ use case tổng quát của hệ thống
+2.2.2 Biểu đồ use case phân rã và mô tả chức năng
+Để làm rõ phạm vi nghiệp vụ, các use case mức cao trong biểu đồ tổng quát
+được tiến hành phân rã kỹ thuật thành các chức năng con chi tiết. Nhằm đảm bảo
+bố cục báo cáo súc tích, đồ án tập trung minh họa trực quan các biểu đồ phân rã
+của hai phân hệ chức năng trung tâm làTra cứu thông tinvàĐặt lịch khám trực
+tuyến.
+9
+
+
+===== PAGE 22 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+Hình 2.2:Biểu đồ use case phân rã Tra cứu thông tin khám bệnh
+Hình 2.3:Biểu đồ use case phân rã Đặt lịch khám
+Cấu trúc phân rã chi tiết của các phân hệ chức năng trên toàn bộ hệ thống đặt
+lịch khám bệnh trực tuyến được tổng hợp cụ thể như sau:
+•Phân hệ Bệnh nhân:Bao gồm chuỗi chức năng tra cứu danh sách và chi tiết
+bài giới thiệu Markdown của chuyên khoa, cơ sở y tế, bác sĩ; lọc bác sĩ theo
+tỉnh thành và khung giờ; gửi yêu cầu đặt lịch dựa trên các khung giờ khả dụng;
+xác nhận lịch hẹn bằng mã token qua email; quản lý lịch hẹn cá nhân (xem lịch
+sử, theo dõi trạng thái, thực hiện hủy lịch hoặc chủ động tái đặt lịch sau khi
+hủy).
+•Phân hệ Bác sĩ:Cung cấp công cụ theo dõi lịch trực theo ngày; xem danh
+sách bệnh nhân đã xác nhận lịch; cập nhật trạng thái lịch hẹn sau khám và gửi
+thông tin chẩn đoán kèm hình ảnh hóa đơn/đơn thuốc điện tử qua email; hỗ trợ
+10
+
+
+===== PAGE 23 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+chức năng hủy ca khám trong tình huống khẩn cấp để giải phóng khung giờ.
+•Phân hệ Quản trị viên:Gồm các module CRUD quản lý tài khoản người
+dùng và phân quyền (RBAC); quản lý danh mục chuyên khoa và cơ sở y tế;
+thiết lập hồ sơ bác sĩ và gán lịch làm việc động; chuẩn hóa hệ thống danh mục
+dùng chung (Allcode) như giới tính, chức danh, tỉnh thành, giá khám và các
+khung giờ.
+2.2.3 Quy trình nghiệp vụ
+Quy trình nghiệp vụ trong hệ thống là luồng hoạt động kết hợp liên chuỗi nhiều
+use case nhằm thực hiện các nghiệp vụ y tế khép kín, đảm bảo dữ liệu luôn đồng
+bộ và nhất quán theo thời gian thực giữa các tác nhân tham gia.
+a, Quy trình đặt lịch khám bệnh
+Quy trình đặt lịch khám bệnh bắt đầu từ việc quản trị viên thiết lập dữ liệu nền
+tảng cho hệ thống. Bệnh nhân thực hiện tra cứu bác sĩ, chuyên khoa hoặc cơ sở y
+tế, xem thông tin chi tiết và chọn một khung giờ làm việc còn trống của bác sĩ. Hệ
+thống tự động kiểm tra sức chứa thời gian thực, tạo lịch hẹn ở trạng thái chờ xác
+nhận và gửi email chứa liên kết token duy nhất. Sau khi bệnh nhân click xác nhận
+qua email, lịch hẹn chuyển sang trạng thái đã xác nhận và hiển thị trong danh sách
+của bác sĩ để phục vụ ca khám thực tế.
+11
+
+
+===== PAGE 24 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+Hình 2.4:Biểu đồ hoạt động quy trình đặt lịch khám bệnh
+b, Quy trình hủy và đặt lại lịch khám
+Quy trình hủy và đặt lại lịch khám được kích hoạt khi bệnh nhân hoặc bác sĩ
+không thể tiếp tục thực hiện lịch hẹn đã tạo. Khi một lịch hẹn bị hủy, hệ thống cập
+nhật trạng thái thành đã hủy, đồng thời tự động hoàn trả lại vị trí trống cho khung
+giờ đó. Nếu bệnh nhân muốn đặt lại, hệ thống tái sử dụng thông tin cá nhân đã lưu
+ở bộ nhớ đệm, bệnh nhân chỉ cần chọn khung giờ mới và thực hiện lại luồng xác
+thực qua email để tạo lịch hẹn mới.
+12
+
+
+===== PAGE 25 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+Hình 2.5:Biểu đồ hoạt động quy trình hủy và đặt lại lịch khám
+c, Quy trình quản trị dữ liệu khám bệnh
+Quy trình quản trị dữ liệu khám bệnh được thực hiện bởi quản trị viên nhằm duy
+trì tính chính xác của dữ liệu. Quản trị viên thực hiện đăng nhập và thao tác trên
+các phân hệ quản lý người dùng, chuyên khoa, cơ sở y tế và lịch làm việc. Toàn bộ
+thông tin cấu hình và phê duyệt của admin sẽ ngay lập tức được đồng bộ lên cơ sở
+dữ liệu quan hệ để phục vụ luồng tra cứu thời gian thực của bệnh nhân.
+13
+
+
+===== PAGE 26 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+Hình 2.6:Biểu đồ hoạt động quy trình quản trị dữ liệu khám bệnh
+2.3 Đặc tả chức năng
+Phần này trình bày đặc tả chi tiết các use case cốt lõi có vai trò trực tiếp trong
+quy trình vận hành trực tuyến của hệ thống thông qua các trường thông tin tiêu
+chuẩn.
+2.3.1 Đặc tả use case Đặt lịch khám
+•Tên use case:Đặt lịch khám (Tác nhân chính: Bệnh nhân; Tác nhân phụ: Dịch
+vụ email).
+•Tiền điều kiện:Bệnh nhân đã đăng nhập; Khung giờ chọn vẫn còn khả dụng
+dữ liệu sức chứa.
+•Luồng sự kiện chính:(1) Bệnh nhân chọn ngày và khung giờ khám còn trống
+trên trang chi tiết bác sĩ; (2) Hệ thống mở biểu mẫu đặt lịch, điền sẵn thông tin
+14
+
+
+===== PAGE 27 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+hồ sơ; (3) Bệnh nhân nhập lý do khám và gửi yêu cầu; (4) Hệ thống kiểm tra
+tính hợp lệ, tạo bản ghi lịch hẹn ở trạng thái chờ xác nhận, cập nhật số lượng
+khung giờ và gửi mail xác nhận chứa Token định danh.
+•Luồng sự kiện phát sinh:Nếu khung giờ đã hết số lượng tối đa cho phép, hệ
+thống báo lỗi và từ chối tạo lịch hẹn.
+•Hậu điều kiện:Lịch hẹn được tạo ở trạng thái chờ xác nhận; Bệnh nhân nhận
+được email chứa link xác thực.
+2.3.2 Đặc tả use case Xác nhận lịch khám
+•Tên use case:Xác nhận lịch khám (Tác nhân chính: Bệnh nhân; Tác nhân phụ:
+Dịch vụ email).
+•Tiền điều kiện:Lịch hẹn đang ở trạng thái chờ xác nhận; Email xác nhận
+chứa Token đã gửi thành công.
+•Luồng sự kiện chính:(1) Bệnh nhân click vào liên kết xác nhận trong email;
+(2) Hệ thống Backend đón nhận yêu cầu, trích xuất chuỗi Token; (3) Hệ thống
+kiểm tra tính hợp lệ và thời hạn Token trong database; (4) Hệ thống chuyển
+trạng thái lịch hẹn sang đã xác nhận và thông báo thành công lên giao diện
+Frontend.
+•Luồng sự kiện phát sinh:Nếu chuỗi Token sai hoặc hết hạn, hệ thống thông
+báo lỗi và giữ nguyên trạng thái chờ xác nhận.
+•Hậu điều kiện:Lịch hẹn chuyển sang trạng thái đã xác nhận, tự động hiển thị
+trong danh sách quản lý của bác sĩ.
+2.3.3 Đặc tả use case Quản lý lịch hẹn cá nhân
+•Tên use case:Quản lý lịch hẹn cá nhân (Tác nhân chính: Bệnh nhân).
+•Tiền điều kiện:Bệnh nhân đã xác thực tài khoản đăng nhập vào hệ thống.
+•Luồng sự kiện chính:(1) Bệnh nhân mở module lịch khám cá nhân; (2) Hệ
+thống hiển thị danh sách lịch hẹn kèm thông tin thời gian, bác sĩ và trạng thái;
+(3) Bệnh nhân chọn hủy lịch; (4) Hệ thống kiểm tra điều kiện, chuyển trạng
+thái sang đã hủy, giải phóng số lượng của khung giờ tương ứng; (5) Bệnh nhân
+thực hiện chọn khung giờ mới để đặt lại lịch nhanh.
+•Luồng sự kiện phát sinh:Nếu ca khám đã hoàn tất hoặc đã khám xong, hệ
+thống khóa tính năng hủy lịch của bệnh nhân.
+•Hậu điều kiện:Trạng thái lịch hẹn được cập nhật chính xác; Vị trí trống trong
+khung giờ được hoàn trả.
+15
+
+
+===== PAGE 28 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+2.3.4 Đặc tả use case Quản lý bệnh nhân đặt lịch
+•Tên use case:Quản lý bệnh nhân đặt lịch (Tác nhân chính: Bác sĩ; Tác nhân
+phụ: Dịch vụ email).
+•Tiền điều kiện:Bác sĩ đăng nhập thành công; Có danh sách bệnh nhân đã xác
+nhận lịch hẹn.
+•Luồng sự kiện chính:(1) Bác sĩ xem danh sách bệnh nhân theo ngày; (2) Hệ
+thống hiển thị thông tin và lý do khám; (3) Sau khi hoàn thành ca khám lâm
+sàng, bác sĩ chọn cập nhật trạng thái; (4) Bác sĩ nhập tóm tắt kết quả, đính
+kèm ảnh đơn thuốc/hóa đơn; (5) Hệ thống chuyển trạng thái sang đã khám và
+tự động gửi email thông tin sau khám cho bệnh nhân.
+•Luồng sự kiện phát sinh:Bác sĩ có thể thực hiện hủy ca trực của bệnh nhân
+nếu phát sinh sự cố đột xuất.
+•Hậu điều kiện:Lịch hẹn chuyển sang trạng thái đã khám hoặc đã hủy; Đơn
+thuốc điện tử được chuyển giao qua email.
+2.3.5 Đặc tả use case Quản lý dữ liệu hệ thống
+•Tên use case:Quản lý dữ liệu hệ thống (Tác nhân chính: Quản trị viên).
+•Tiền điều kiện:Tài khoản người dùng đã được cấp quyền quản trị viên tối cao
+(Admin role).
+•Luồng sự kiện chính:(1) Admin lựa chọn phân hệ quản lý (Người dùng, Bác
+sĩ, Chuyên khoa, Cơ sở y tế hoặc Lịch làm việc); (2) Hệ thống truy vấn và
+hiển thị dữ liệu có phân trang; (3) Admin thực hiện các thao tác thêm mới, sửa
+thông tin Markdown, hoặc xóa; (4) Hệ thống validate dữ liệu và lưu thay đổi
+vào MySQL database.
+•Luồng sự kiện phát sinh:Nếu dữ liệu nhập vào trống hoặc sai định dạng, hệ
+thống từ chối cập nhật và trả về thông báo lỗi.
+•Hậu điều kiện:Dữ liệu MySQL được cập nhật đồng bộ; Thông tin mới ngay
+lập tức hiển thị trên giao diện công cộng.
+2.4 Yêu cầu phi chức năng
+Hệ thống cần đáp ứng một số tiêu chí phi chức năng nghiêm ngặt nhằm đảm bảo
+tính ổn định và an toàn khi vận hành thực tế:
+•Hiệu năng (Performance):Tốc độ phản hồi các thao tác tra cứu danh sách
+bác sĩ, chuyên khoa, phòng khám phải dưới 1.5 giây. Hệ thống bắt buộc phải
+tích hợp phân trang tự động ở phía máy chủ nhằm giảm tải tài nguyên truyền
+16
+
+
+===== PAGE 29 =====
+CHƯƠNG 2. KHẢO SÁT V À PHÂN TÍCH YÊU CẦU
+tải. Luồng xử lý đặt lịch và khóa khung giờ phải diễn ra theo cơ chế bất đồng
+bộ nhằm tối ưu hiệu năng xử lý dòng cao.
+•Độ tin cậy và Nhất quán (Reliability):Đảm bảo tính toàn vẹn dữ liệu vòng
+đời ca khám. Trạng thái lịch hẹn phải đồng bộ tuyệt đối trên hệ thống MySQL
+database. Khi có lỗi gửi email, hệ thống phải kích hoạt luồng rollback dữ liệu
+để tránh hiện tượng chiếm dụng chỗ sai thực tế.
+•Tính dễ dùng (Usability):Giao diện hiển thị trực quan, phân tách rõ ràng
+màu sắc giữa khung giờ còn trống và khung giờ đã hết chỗ. Form đặt lịch đơn
+giản, hỗ trợ đa ngôn ngữ (Anh/Việt) mượt mà thông qua bộ công cụ ‘react-intl‘
+nạp dữ liệu từ tệp cấu hình JSON.
+•Bảo mật (Security):Hệ thống áp dụng cơ chế kiểm soát truy cập dựa trên vai
+trò (RBAC) chặt chẽ. Toàn bộ mật khẩu người dùng phải mã hóa một chiều
+trước khi lưu trữ. Các API quản trị nội bộ bắt buộc phải kiểm tra quyền hạn
+đăng nhập, ngăn chặn tuyệt đối các hành vi truy cập trái phép vào hồ sơ y tế
+của bệnh nhân.
+•Khả năng bảo trì và Mở rộng (Maintainability):Mã nguồn tổ chức phân
+tách module rõ ràng: Frontend bằng ReactJS, Backend bằng NodeJS/Express
+chia tách thành các tầng Router, Controller, Service và Model (Sequelize).
+Cấu trúc decoupled này cho phép dễ dàng bảo trì và mở rộng thêm các tính
+năng như tích hợp cổng thanh toán trực tuyến trong tương lai.
+2.4.1 Kết chương
+Chương 2 đã hoàn thành công tác khảo sát hiện trạng, xây dựng hệ thống biểu
+đồ use case tổng quát, làm rõ cấu trúc phân rã các phân hệ chức năng, đặc tả các
+quy trình hoạt động nghiệp vụ cốt lõi, đồng thời thiết lập các bộ tiêu chuẩn về yêu
+cầu chức năng và phi chức năng cho phần mềm. Trên cơ sở các yêu cầu kỹ thuật
+chi tiết đã được xác lập, Chương 3 tiếp theo sẽ trình bày chuyên sâu về nền tảng lý
+thuyết và các công nghệ cốt lõi được lựa chọn triển khai để hiện thực hóa các chức
+năng của đồ án tốt nghiệp.
+17
+
+
+===== PAGE 30 =====
+CHƯƠNG 3. NỀN TẢNG LÝ THUYẾT V À CÔNG NGHỆ SỬ DỤNG
+Chương 2 đã xác lập chi tiết các yêu cầu chức năng và ba chuỗi quy trình nghiệp
+vụ cốt lõi của hệ thống đặt lịch khám bệnh trực tuyến. Nhằm xây dựng cơ sở khoa
+học để hiện thực hóa các yêu cầu đó, Chương 3 này tập trung phân tích vai trò và lý
+do lựa chọn các công nghệ triển khai trong đồ án. Nội dung chương không đi sâu
+vào mô tả lý thuyết tổng quát, mà tập trung làm rõ: (i) cấu trúc tổng thể dựa trên
+kiến trúc Client-Server và RESTful API, (ii) các công nghệ phát triển giao diện
+động phía Client, (iii) nền tảng xử lý hiệu năng cao phía Server, (iv) giải pháp lưu
+trữ và đảm bảo tính nhất quán của tầng dữ liệu, và (v) cơ chế bảo mật, phân quyền
+phối hợp cùng hệ thống tương tác tự động qua thư điện tử.
+3.1 Kiến trúc tổng thể Client-Server và Cơ chế RESTful API
+Hệ thống được thiết kế theo kiến trúc phân tách độc lập Client-Server (Decou-
+pled Architecture). Phía Client (ReactJS) đảm nhiệm việc hiển thị giao diện và
+tiếp nhận tương tác, trong khi phía Server (NodeJS/Express) tập trung xử lý logic
+nghiệp vụ và quản trị cơ sở dữ liệu tập trung.
+Mô hình này là giải pháp tối ưu cho bài toán điều phối y tế đa phân quyền đã
+xác lập ở Chương 2. Bằng cách đặt Server làm trung tâm xử lý, mọi thao tác kiểm
+tra trạng thái lịch trống của bệnh nhân hay thiết lập khung giờ trực của bác sĩ đều
+đi qua một tầng kiểm soát logic duy nhất, loại bỏ hoàn toàn các sai sót về đồng bộ
+dữ liệu. Về mặt phi chức năng, kiến trúc này giúp tăng tính bảo trì và khả năng mở
+rộng; frontend có thể thay đổi thiết kế UI mà không ảnh hưởng đến logic backend,
+đồng thời một hệ thống API có thể phục vụ song song cho cả ứng dụng web và
+ứng dụng di động trong tương lai. Các hướng tiếp cận như Server-Side Rendering
+(SSR) truyền thống bị loại bỏ do không đáp ứng tốt các tương tác động dòng cao
+(mở modal, lọc thời gian thực), còn kiến trúc Microservices bị từ chối vì làm tăng
+độ phức tạp vận hành không cần thiết đối với quy mô đồ án.
+RESTful API được cấu hình làm giao thức giao tiếp chuẩn hóa giữa hai phân hệ
+thông qua các phương thức HTTP tiêu chuẩn (GET, POST, PUT, DELETE). Mỗi
+nghiệp vụ CRUD từ Chương 2 như tạo lịch hẹn, hủy lịch, hay cập nhật danh mục
+chuyên khoa đều được ánh xạ thành các endpoint độc lập. Cơ chế này giúp chuẩn
+hóa luồng dữ liệu dưới dạng JSON, cho phép kiểm thử độc lập tầng server bằng
+Postman, giảm phụ thuộc chéo và đảm bảo hệ thống dễ dàng tích hợp thêm các dịch
+vụ nâng cao (như cổng thanh toán) bằng cách bổ sung endpoint mới mà không phá
+vỡ cấu trúc hiện tại.
+18
+
+
+===== PAGE 31 =====
+CHƯƠNG 3. NỀN TẢNG L Ý THUYẾT V À CÔNG NGHỆ SỬ DỤNG
+3.2 Nền tảng phát triển giao diện Client: ReactJS và các thư viện hỗ trợ
+Để giải quyết yêu cầu về một giao diện tương tác trực quan, có bộ lọc thông
+minh và khả năng cập nhật tức thời trạng thái khung giờ khám mà không cần tải lại
+trang, thư viện ReactJS được lựa chọn làm nền tảng chính [1].
+ReactJS tối ưu hóa giao diện thông qua cơ chế cây đối tượng tài liệu ảo (Virtual
+DOM) và kiến trúc Component tái sử dụng. Khi bệnh nhân thay đổi ngày khám,
+chỉ có module lịch trình tương ứng thực hiện tính toán hiệu năng và tái hiển thị
+(Re-render), đảm bảo tốc độ phản hồi UI dưới 1 giây. Nhằm kiểm soát dòng dữ liệu
+phức tạp giữa ba phân hệ người dùng, bộ quản lý trạng thái tập trung Redux được
+tích hợp, đóng vai trò là một kho lưu trữ duy nhất (Store) [2]. Redux giúp đồng
+bộ hóa trạng thái đăng nhập, bộ đệm thông tin bệnh nhân và danh mục hằng số
+hệ thống (Allcode) xuyên suốt các component, triệt tiêu lỗi sai lệch hiển thị. Giao
+diện cũng tích hợp gói ‘react-intl‘ để dịch thông điệp qua các tệp JSON, cho phép
+chuyển đổi mượt mà giữa tiếng Anh và tiếng Việt [3].
+Hệ thống sử dụng thư viện Axios để chuẩn hóa các yêu cầu HTTP Client tới
+Server nhờ cú pháp ngắn gọn, hỗ trợ interceptor xử lý lỗi tập trung vượt trội hơn
+so với fetch API tích hợp sẵn [4]. Các thành phần giao diện động khác như bộ lọc
+tìm kiếm, bảng cấu hình, hiệu ứng slide trang chủ và định dạng ngày giờ lần lượt
+được tối ưu hóa thông qua các thư viện chuyên biệt bao gồm Bootstrap, Sass, React
+Select, React Toastify, React Slick và Moment. Các công nghệ này phối hợp chặt
+chẽ, đáp ứng toàn diện tiêu chí dễ sử dụng và tính nhất quán giao diện đã đề ra.
+3.3 Nền tảng máy chủ Server: NodeJS và Framework ExpressJS
+Tầng xử lý logic trung tâm đòi hỏi một môi trường máy chủ có tốc độ thực thi
+cao, xử lý mượt mà luồng bất đồng bộ khi kích hoạt Token và gửi thư điện tử. Đồ
+án lựa chọn môi trường NodeJS kết hợp cùng framework ExpressJS tối giản [5].
+Sức mạnh của NodeJS nằm ở kiến trúc hướng sự kiện (Event-Driven) và mô
+hình vào/ra không chặn (Non-blocking I/O). Đặc tính kỹ thuật này đảm bảo luồng
+xử lý chính (Single-thread) của máy chủ không bị đóng băng khi thực hiện các tác
+vụ tốn thời gian như gửi email xác nhận đặt lịch, từ đó giúp server tiếp tục tiếp
+nhận các yêu cầu tra cứu chuyên khoa từ người dùng khác một cách liên tục. Việc
+thống nhất ngôn ngữ JavaScript trên toàn hệ thống giúp đồng bộ định dạng dữ liệu,
+tăng tốc độ phát triển và tối ưu hóa hệ sinh thái quản lý qua npm.
+ExpressJS được cấu hình lớp trên NodeJS để quản trị hệ thống định tuyến (Rout-
+ing) và cơ chế phần mềm trung gian (Middleware) [6]. Mã nguồn Backend được
+phân tách rõ ràng thành các tầng: Route (định nghĩa endpoint), Controller (tiếp
+19
+
+
+===== PAGE 32 =====
+CHƯƠNG 3. NỀN TẢNG L Ý THUYẾT V À CÔNG NGHỆ SỬ DỤNG
+nhận request), Service (xử lý logic như chống đặt trùng lịch) và Model (ánh xạ dữ
+liệu). Cấu trúc phân tầng này đảm bảo tính bảo trì cao; khi cần sửa đổi thuật toán
+khóa khung giờ, lập trình viên chỉ cần can thiệp vào tầng Service mà không làm
+ảnh hưởng đến giao diện Frontend.
+3.4 Tầng dữ liệu: Hệ quản trị MySQL và công cụ Sequelize ORM
+Để đáp ứng tiêu chí về tính tin cậy, an toàn thông tin và tính ràng buộc chặt chẽ
+của dữ liệu y tế (lịch hẹn phải tham chiếu đến bác sĩ, bệnh nhân và một khung giờ
+Allcode cố định), hệ thống áp dụng giải pháp cơ sở dữ liệu quan hệ MySQL phối
+hợp cùng Sequelize ORM [7].
+MySQL cung cấp các ràng buộc toàn vẹn, cơ chế khóa ngoại vững chắc và các
+giao dịch ACID mạnh mẽ, đảm bảo dữ liệu không bị sai lệch khi xảy ra lỗi hệ
+thống. Để giải quyết bài toán giới hạn số lượng bệnh nhân theo khung giờ trực của
+bác sĩ, bảng lịch làm việc (‘Schedules‘) lưu trữ trường sức chứa tối đa và số lượng
+hiện tại. Khi xảy ra thao tác đặt lịch hoặc hủy lịch, database thực hiện kiểm tra và
+cập nhật trạng thái đồng bộ, ngăn chặn hoàn toàn lỗi quá tải trên thực tế. Phương
+án thay thế NoSQL (MongoDB) bị loại bỏ vì thiếu cơ chế ràng buộc khóa ngoại
+cứng ở cấp độ core, dễ gây ra hiện tượng xung đột tranh chấp dữ liệu thời gian thực
+(Race Condition).
+Sequelize ORM đóng vai trò ánh xạ các bảng quan hệ thành các đối tượng
+JavaScript chuẩn trong mã nguồn Backend [8]. Sequelize tự động hóa quy trình
+quản trị cấu trúc bảng thông qua ‘Migrations‘, tối ưu hóa các câu lệnh gộp bảng
+phức tạp bằng cơ chế ‘Include‘ (Eager Loading), đồng thời bảo vệ hệ thống khỏi
+các nguy cơ tấn công nguy hiểm bằng kỹ thuật chèn mã độc SQL Injection thông
+qua việc chuẩn hóa tự động dữ liệu đầu vào.
+3.5 Cơ chế bảo mật, phân quyền và dịch vụ tương tác Nodemailer
+Hệ thống thiết lập cơ chế kiểm soát truy cập dựa trên vai trò (RBAC) nghiêm
+ngặt để đáp ứng tiêu chí bảo mật ở Chương 2. Toàn bộ mật khẩu tài khoản người
+dùng bắt buộc phải đi qua thuật toán băm mã hóa một chiều ‘bcrypt‘ đính kèm
+chuỗi muối (salt) ngẫu nhiên trước khi lưu trữ vào database, triệt tiêu rủi ro lộ lọt
+thông tin. Các API nội bộ phía backend đều tích hợp tầng middleware kiểm tra
+quyền hạn, đảm bảo bệnh nhân chỉ truy cập được hồ sơ cá nhân, bác sĩ chỉ quản lý
+danh sách khám trực thuộc và quản trị viên giữ quyền cấu hình danh mục.
+Dịch vụ Email thông qua thư viện Nodemailer sử dụng giao thức SMTP đóng
+vai trò then chốt trong việc kiểm soát vòng đời của một lịch hẹn [9]. Để chống tình
+trạng đặt lịch ảo, luồng nghiệp vụ quy định khi bệnh nhân gửi form, hệ thống sẽ
+tạo một chuỗi mã hóa định danh duy nhất (Token) gắn với trạng thái chờ xác nhận
+20
+
+
+===== PAGE 33 =====
+CHƯƠNG 3. NỀN TẢNG L Ý THUYẾT V À CÔNG NGHỆ SỬ DỤNG
+và gửi tới hòm thư của người bệnh. Trạng thái đã xác nhận chỉ được kích hoạt khi
+người dùng click vào liên kết chứa Token hợp lệ. Sau khi ca khám kết thúc, bác sĩ
+cập nhật kết quả và hệ thống tiếp tục dùng Nodemailer chuyển giao hóa đơn, đơn
+thuốc điện tử dạng hình ảnh trực tiếp tới email bệnh nhân, khép kín quy trình y tế
+số.
+Quản trị viên sử dụng Markdown editor và renderer để soạn thảo thông tin giới
+thiệu chuyên khoa, phòng khám. Markdown giúp chuẩn hóa định dạng văn bản dài
+mà không cần viết mã HTML trực tiếp, đảm bảo giao diện hiển thị tường minh và
+dễ quản trị.
+3.6 Tổng hợp lựa chọn công nghệ
+Bảng 3.1 tổng hợp mối liên hệ trực tiếp giữa các yêu cầu nghiệp vụ tại Chương
+2 và các giải pháp công nghệ được lựa chọn triển khai trong Chương 3.
+21
+
+
+===== PAGE 34 =====
+CHƯƠNG 3. NỀN TẢNG L Ý THUYẾT V À CÔNG NGHỆ SỬ DỤNG
+Bảng 3.1:Tổng hợp công nghệ sử dụng trong hệ thống
+Vấn đề/yêu cầu Công nghệ lựa
+chọn
+Lựa chọn thay thế Lý do lựa chọn cốt lõi
+Giao diện tương
+tác và bộ lọc y tế
+ReactJS Angular, VueJS, Nex-
+tJS
+Mô hình SPA component
+động, tối ưu Virtual DOM,
+tốc độ phản hồi nhanh.
+Quản lý trạng thái
+toàn cục, ngôn
+ngữ
+Redux, React Intl Context API, Zus-
+tand, i18next
+Store tập trung dễ dự đoán,
+chuyển đổi Anh/Việt mượt
+mà không load lại trang.
+Giao tiếp hệ thống
+và gọi dữ liệu
+RESTful API, Ax-
+ios
+GraphQL, fetch API,
+gRPC
+Chuẩn hóa nghiệp vụ
+CRUD, dễ kiểm thử bằng
+Postman, interceptor lỗi
+tốt.
+Xử lý logic và vận
+hành Backend
+NodeJS, ExpressJS Spring Boot, Laravel,
+Django, NestJS
+Đồng bộ ngôn ngữ
+JavaScript, mô hình Non-
+blocking I/O chịu tải dòng
+cao tốt.
+Lưu trữ và ràng
+buộc thực thể y tế
+MySQL PostgreSQL, SQL
+Server, MongoDB
+Đảm bảo giao dịch ACID,
+khóa ngoại cứng vững
+chắc, kiểm soát tốt sức
+chứa lịch hẹn.
+Ánh xạ dữ liệu và
+transaction
+Sequelize ORM Prisma, T ypeORM,
+SQL thuần
+Hỗ trợ Eager Loading,
+quản lý di cư dữ liệu an
+toàn, chống SQL Injection
+tự động.
+Xác nhận trạng
+thái vòng đời lịch
+hẹn
+Nodemailer
+(SMTP)
+SMS OTP, SendGrid,
+Mailgun
+Đơn giản, dễ cấu hình, xử
+lý tốt luồng gửi link Token
+và đơn thuốc điện tử.
+Mã hóa bảo mật
+thông tin
+bcrypt SHA-256, PBKDF2,
+Argon2
+Thuật toán băm có salt
+mạnh mẽ, tối ưu hóa hiệu
+năng và bảo mật trong
+NodeJS.
+Quản trị nội dung
+bài viết mô tả dài
+Markdown Editor HTML editor, plain
+text
+Định dạng tiêu đề, ảnh trực
+quan cho admin mà không
+cần can thiệp mã HTML.
+3.7 Kết chương
+Chương 3 đã trình bày toàn diện các nền tảng lý thuyết và hệ sinh thái công nghệ
+được lựa chọn để giải quyết các bài toán đặt ra ở chương trước. Sự phối hợp đồng
+bộ giữa kiến trúc Client-Server, RESTful API, hệ sinh thái JavaScript (ReactJS,
+Redux, NodeJS, Express) cùng hệ quản trị dữ liệu quan hệ MySQL và Sequelize
+ORM tạo nên bộ khung kỹ thuật vững chắc cho hệ thống. Đây là tiền đề tiên quyết
+để đồ án bước vào giai đoạn thiết kế chi tiết ở chương tiếp theo, bao gồm việc xây
+dựng kiến trúc mã nguồn chi tiết, thiết kế sơ đồ thực thể liên kết dữ liệu quan hệ
+(E-R Diagram), hiện thực hóa giao diện chức năng và thực thi các kịch bản kiểm
+thử phần mềm.
+22
+
+
+===== PAGE 35 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Chương 3 đã trình bày các nền tảng lý thuyết và công nghệ được sử dụng trong
+đồ án. Trên cơ sở đó, chương này tập trung mô tả quá trình thiết kế và xây dựng
+hệ thống đặt lịch khám bệnh trực tuyến. Nội dung chương bao gồm thiết kế kiến
+trúc phần mềm, thiết kế giao diện, thiết kế lớp, thiết kế cơ sở dữ liệu, xây dựng ứng
+dụng, minh họa các chức năng chính, kiểm thử và triển khai thử nghiệm, bám sát
+các yêu cầu chức năng và phi chức năng đã xác định ở Chương 2.
+4.1 Thiết kế kiến trúc
+4.1.1 Lựa chọn kiến trúc phần mềm
+Hệ thống được xây dựng theo kiến trúc phân tách Client-Server phối hợp các
+tầng xử lý dựa trên mô hình MVC cải tiến. Trong đó, phía Client sử dụng thư viện
+ReactJS chịu trách nhiệm hiển thị giao diện động và tiếp nhận tương tác từ người
+dùng. Phía Server vận hành trên nền tảng NodeJS/ExpressJS đóng vai trò cung cấp
+hệ thống RESTful API, thực thi logic nghiệp vụ và quản trị cơ sở dữ liệu quan hệ
+MySQL tập trung thông qua Sequelize ORM, giúp kiểm soát toàn bộ luồng nghiệp
+vụ của các tác nhân (Bệnh nhân, Bác sĩ, Quản trị viên) tại một thực thể máy chủ
+duy nhất.
+Trong cấu trúc phân tầng, tầng giao diện (tương ứng phần View của mô hình
+MVC) được hiện thực bằng các component ReactJS linh hoạt như trang chủ, trang
+chi tiết bác sĩ, chuyên khoa, modal đặt lịch và các màn hình chức năng hệ thống.
+Tầng Controller bao gồm hệ thống các lớp điều hướng chuyên biệt (như userCon-
+troller, doctorController, patientController) đảm nhiệm vai trò tiếp nhận yêu cầu
+HTTP từ client, bóc tách tham số đầu vào và chuyển tiếp xử lý sang tầng logic
+sâu hơn trước khi trả phản hồi dữ liệu dạng JSON về máy trạm. Tầng Model được
+đặc tả thông qua các Sequelize model (User, Booking, Schedule, Specialty, Clinic,
+Allcode) ánh xạ trực tiếp với các bảng trong MySQL.
+Điểm cải tiến cốt lõi của đồ án so với mô hình MVC cơ bản là việc bổ sung
+tầng Service độc lập nhằm cô lập hoàn toàn logic nghiệp vụ khỏi tầng điều hướng
+Controller. Toàn bộ các thuật toán xử lý dữ liệu phức tạp bao gồm cơ chế chống
+đặt lịch trùng, kiểm tra giới hạn sức chứa khung giờ, tự động sinh chuỗi Token xác
+thực qua email, hủy lịch, hoàn trả vị trí trống hay chuyển giao đơn thuốc điện tử
+đều được đóng gói tại tầng Service. Cách tổ chức này giúp tối ưu hóa khả năng bảo
+trì, nâng cao tính bảo mật và đảm bảo backend luôn kiểm soát dữ liệu tập trung,
+ngăn chặn các hành vi giả mạo tham số từ giao diện Frontend client.
+23
+
+
+===== PAGE 36 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+4.1.2 Thiết kế tổng quan
+Hệ thống được tổ chức thành các package độc lập theo từng tầng chức năng,
+đảm bảo tuân thủ nghiêm ngặt nguyên tắc phụ thuộc một chiều từ trên xuống dưới
+nhằm triệt tiêu hoàn toàn các lỗi phụ thuộc vòng. Phía frontend bao gồm các gói
+UI component, Redux Store quản lý trạng thái tập trung và API Service (Sử dụng
+Axios). Phía backend phân tách thành các gói Route, Controller, Service, Model và
+cơ sở dữ liệu MySQL.
+Hình 4.1:Biểu đồ package tổng quan của hệ thống
+Như thể hiện tại Hình 4.1, Frontend UI tương tác với hệ thống thông qua API
+Service trung gian. Ở phía backend, Route tiếp nhận và phân phối các request tới
+gói Controller tương ứng để validate dữ liệu sơ bộ. Tiếp đó, Controller kích hoạt
+các phương thức nghiệp vụ chuyên sâu tại package Service, nơi trực tiếp điều phối
+các Sequelize Model để truy xuất dữ liệu từ Database MySQL. Cấu trúc đóng gói
+này giúp giới hạn tối đa phạm vi ảnh hưởng khi hệ thống cần cập nhật giao diện,
+thay đổi logic nghiệp vụ hoặc nâng cấp cơ sở dữ liệu.
+4.1.3 Thiết kế chi tiết gói
+Ở mức thiết kế chi tiết gói, hệ thống được cấu trúc thành ba nhóm package
+chính bao gồm nhóm package giao diện Frontend, nhóm package xử lý nghiệp vụ
+Backend và nhóm package dữ liệu quan hệ, giúp chuẩn hóa luồng gọi hàm tuần tự
+trong mã nguồn dự án.
+24
+
+
+===== PAGE 37 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Hình 4.2:Biểu đồ thiết kế chi tiết nhóm package backend
+Trong nhóm backend (Hình 4.2), tệp cấu hình định tuyến web.js quản lý toàn
+bộ các endpoint API công khai. Các yêu cầu từ người dùng được phân phối chính
+xác tới các lớp Controller tương ứng như userController, doctorController, hoặc
+patientController. Các controller này tiếp tục gọi sang tầng Service để thực thi
+nghiệp vụ thực tế; tiêu biểu như patientService chịu trách nhiệm thực hiện luồng
+đặt lịch, xác thực Token qua email, hủy lịch và tái đặt lịch, còn doctorService đảm
+nhiệm cấu hình lịch trực, gửi hóa đơn hoặc đơn thuốc sau khám cho người bệnh.
+25
+
+
+===== PAGE 38 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Hình 4.3:Biểu đồ thiết kế chi tiết nhóm package frontend
+Trong nhóm phân hệ frontend (Hình 4.3), mã nguồn được chia làm hai phân
+vùng chính: package Patient chứa toàn bộ các giao diện công cộng phục vụ bệnh
+nhân (tra cứu chi tiết bác sĩ, lịch trực, modal đặt lịch và lịch sử đặt khám) và package
+System chứa giao diện quản trị dành cho Admin và Bác sĩ. Các service frontend
+đóng vai trò chuyển giao request HTTP thông qua Axios, phối hợp cùng hệ thống
+component độc lập được tách riêng để tái sử dụng tối đa trên nhiều màn hình chức
+năng khác nhau của hệ thống.
+4.1.4 Thiết kế giao diện
+Giao diện hệ thống định hướng tối ưu hóa trải nghiệm y tế số trực tuyến, đảm
+bảo tính trực quan cho bệnh nhân tra cứu, đặt lịch và tính rõ ràng cho bác sĩ, quản
+trị viên xử lý bảng biểu. Phân hệ người dùng được phân bổ layout khoa học, hỗ trợ
+công cụ lọc dữ liệu nâng cao và giảm thiểu tối đa các bước thao tác trung gian.
+Hệ thống tương thích tốt trên các trình duyệt phổ biến như Chrome, Edge, Fire-
+fox với độ phân giải mục tiêu từ 1366x768 đến 1920x1080 pixel, tích hợp respon-
+sive linh hoạt cho thiết bị di động. Giao diện ứng dụng chuẩn màu 24-bit, thiết lập
+kích thước linh kiện lớn giúp người dùng phổ thông dễ dàng thao tác chọn khung
+giờ, xác nhận, hủy hoặc tái đặt lịch.
+26
+
+
+===== PAGE 39 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Bảng 4.1:Đặc tả màn hình mục tiêu của hệ thống
+Tiêu chí Đặc tả thiết kế
+Nền tảng sử dụng Ứng dụng web chạy trên trình duyệt, hỗ trợ chuột, bàn
+phím và màn hình cảm ứng.
+Độ phân giải chính 1366x768, 1440x900, 1920x1080 pixel.
+Thiết bị hỗ trợ Máy tính để bàn, máy tính xách tay, máy tính bảng và
+điện thoại thông minh (responsive).
+Trình duyệt mục tiêu Google Chrome, Microsoft Edge, Mozilla Firefox.
+Màu sắc hiển thị Chuẩn màu 24-bit, chủ đạo xanh y tế, trắng, xám nhạt
+và màu nhấn vàng/cam đặt lịch.
+Kiểu chữ Sử dụng font chữ sans-serif, ưu tiên khả năng đọc rõ
+trên giao diện web.
+Bố cục tổng thể thiết lập cấu trúc thống nhất với thanh điều hướng, ô tìm kiếm
+và các lối vào nhanh tại đầu trang. Trang chủ tập trung làm nổi bật dịch vụ trung
+tâm thông qua nút đặt lịch nổi cố định, kết hợp hiển thị các danh mục chuyên khoa,
+cơ sở y tế và bác sĩ nổi bật dưới dạng thẻ nội dung trực quan, tích hợp modal xem
+thêm khi dữ liệu lớn.
+Hệ thống ưu tiên bảng màu xanh y tế nhằm xây dựng sự tin cậy, dùng màu
+trắng/xám làm nền tăng độ thoáng và màu vàng/cam tạo điểm nhấn hành động.
+Trạng thái lịch hẹn được phân định tường minh qua sắc độ: khung giờ trống mang
+màu nổi bật cho phép tương tác, trong khi các khung giờ đã hết chỗ hoặc bị hủy sẽ
+tự động làm mờ và vô hiệu hóa.
+Các nút chức năng được chuẩn hóa phân cấp theo mức độ quan trọng bao gồm
+nút chính (đặt lịch, lưu, xác nhận), nút phụ (đóng, quay lại) và nút nguy hiểm (hủy
+lịch, xóa). Hệ thống bố trí nhãn trường rõ ràng cho các biểu mẫu nhập liệu, thực
+hiện kiểm tra ràng buộc bắt buộc trước khi gửi và thông báo phản hồi nhanh qua
+hệ thống toast notification ở góc màn hình.
+Các màn hình chức năng của bác sĩ và admin ưu tiên tối đa năng lực quản trị,
+quét thông tin và xử lý dữ liệu dòng cao. Danh sách thực thể được cấu trúc dạng
+bảng biểu gãy gọn, tinh giản các thành phần trang trí không cần thiết, tích hợp sẵn
+bộ lọc tìm kiếm và phân trang tự động nhằm tối ưu hóa hiệu năng hiển thị và giảm
+thiểu nhầm lẫn khi vận hành.
+27
+
+
+===== PAGE 40 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Bảng 4.2:Quy ước thiết kế giao diện
+Thành phần Quy ước thiết kế
+Nút chính Dùng màu nổi bật, đặt tại vị trí dễ nhìn, áp dụng cho
+đặt lịch, lưu thông tin, xác nhận thao tác.
+Nút phụ Dùng màu trung tính, áp dụng cho đóng modal, quay
+lại, xem thêm hoặc hủy thao tác nhập liệu.
+Nút nguy hiểm Dùng màu cảnh báo, áp dụng cho hủy lịch, xóa dữ liệu
+hoặc thao tác không thể hoàn tác trực tiếp.
+Thông báo phản hồi Hiển thị bằng toast hoặc thông báo trong modal, nội
+dung ngắn gọn, nêu rõ thao tác thành công hoặc thất
+bại.
+Modal Dùng cho các thao tác cần tập trung như đặt lịch, xem
+lịch sử đặt khám, xem thêm danh sách bác sĩ, chuyên
+khoa.
+Bảng dữ liệu Dùng trong màn hình quản trị và bác sĩ, có cột thông
+tin chính, hỗ trợ tìm kiếm hoặc phân trang khi dữ liệu
+lớn.
+Khung giờ khám Khung giờ khả dụng có màu nổi bật và cho phép nhấn;
+khung giờ đã đặt hoặc hết chỗ có màu xám và bị vô
+hiệu hóa.
+Màn hình trang chủ thiết kế tối ưu giúp bệnh nhân tiếp cận tính năng đặt lịch
+nhanh nhất thông qua thanh tìm kiếm đa tiêu chí và hệ thống thẻ danh mục. Nút
+đặt lịch nổi được cấu hình cố định tại góc giao diện hỗ trợ kích hoạt nhanh modal
+lựa chọn chuyên khoa hoặc cơ sở y tế mà không cần cuộn trang, đáp ứng trọn vẹn
+yêu cầu lõi tại Chương 2.
+Hình 4.4:Thiết kế giao diện trang chủ và nút đặt lịch nổi
+Modal đặt lịch áp dụng cấu trúc tinh giản giúp giảm thiểu tối đa số bước tương
+tác cho bệnh nhân. Các trường dữ liệu cơ bản như họ tên, email, số điện thoại, địa
+28
+
+
+===== PAGE 41 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+chỉ, giới tính và ngày sinh được tự động điền sẵn từ hồ sơ, người bệnh chỉ cần xác
+bóc thông tin và nhập lý do khám, giúp rút ngắn thời gian và hạn chế tối đa lỗi nhập
+liệu đầu vào.
+Hình 4.5:Thiết kế modal đặt lịch khám
+Thiết kế giao diện tập trung làm nổi bật luồng đặt lịch của bệnh nhân, hỗ trợ bác
+sĩ theo dõi ca khám và cung cấp màn hình quản trị nhất quán cho admin. Các hình
+vẽ đóng vai trò đặc tả khung xương wireframe định hướng phân tích hệ thống, các
+chi tiết triển khai thực tế trên mã nguồn sẽ được tinh chỉnh linh hoạt để đảm bảo
+tối ưu thẩm mỹ..
+4.1.5 Thiết kế lớp
+Do hệ thống được xây dựng bằng NodeJS, ExpressJS và Sequelize ORM, các
+lớp trong thiết kế được chia thành hai nhóm chính: nhóm lớp thực thể ánh xạ với
+cơ sở dữ liệu và nhóm lớp xử lý nghiệp vụ. Nhóm lớp thực thể gồm các model
+như User, Booking, Schedule, Doctor_Infor, Specialty, Clinic và Allcode. Nhóm
+xử lý nghiệp vụ gồm các service như patientService, doctorService, userService,
+specialtyService và clinicService. Trong phần này, đồ án tập trung trình bày bốn
+29
+
+
+===== PAGE 42 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+lớp quan trọng nhất liên quan trực tiếp đến nghiệp vụ đặt lịch khám bệnh, gồm
+User, Booking, Schedule và PatientService.
+Hình 4.6:Biểu đồ lớp thiết kế chính của hệ thống
+Lớp User đại diện cho người dùng trong hệ thống. Một người dùng có thể là
+bệnh nhân, bác sĩ hoặc quản trị viên tùy theo giá trị roleId. Lớp này lưu trữ các
+thông tin cơ bản như email, mật khẩu, họ tên, địa chỉ, số điện thoại, giới tính, ảnh
+đại diện, vai trò và chức danh. Trong nghiệp vụ đặt lịch, User được sử dụng để xác
+định bệnh nhân đặt lịch và bác sĩ được đặt lịch.
+Bảng 4.3:Thiết kế lớp User
+Thành phần Mô tả
+Thuộc tính id, email, password, firstName, lastName, address,
+phonenumber, gender, image, roleId, positionId
+Phương thức associate(models), getDisplayName(), isPatient(), is-
+Doctor(), isAdmin()
+Vai trò Lưu thông tin tài khoản, phân biệt vai trò người dùng
+và liên kết với các bảng Booking, Schedule, Mark-
+down, Doctor_Infor.
+Lớp Booking đại diện cho một lịch hẹn khám bệnh. Đây là lớp trung tâm trong
+quy trình đặt lịch, xác nhận lịch, hủy lịch và hoàn tất khám. Mỗi Booking liên kết
+với một bệnh nhân, một bác sĩ, một ngày khám, một khung giờ và một trạng thái.
+Trạng thái của Booking gồm chờ xác nhận, đã xác nhận, đã khám và đã hủy.
+30
+
+
+===== PAGE 43 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Bảng 4.4:Thiết kế lớp Booking
+Thành phần Mô tả
+Thuộc tính id, statusId, doctorId, patientId, date, timeT ype, token,
+reason
+Phương thức associate(models), confirm(), cancel(), complete(), is-
+Cancelable()
+Vai trò Quản lý vòng đời lịch hẹn khám bệnh, liên kết bệnh
+nhân với bác sĩ và lưu trạng thái xử lý của từng lịch
+khám.
+Lớp Schedule đại diện cho lịch làm việc của bác sĩ theo từng ngày và từng khung
+giờ. Lớp này lưu thông tin số lượng bệnh nhân hiện tại và số lượng tối đa cho phép
+trong một khung giờ. Đây là cơ sở để hệ thống kiểm tra một khung giờ còn có thể
+đặt lịch hay không.
+Bảng 4.5:Thiết kế lớp Schedule
+Thành phần Mô tả
+Thuộc tính id, currentNumber, maxNumber, date, timeT ype, doc-
+torId
+Phương thức associate(models), isAvailable(), increaseCurrent-
+Number(), decreaseCurrentNumber(), syncCurrent-
+Number()
+Vai trò Quản lý khung giờ khám của bác sĩ, kiểm soát số lượng
+đặt lịch và hỗ trợ chống đặt lịch trùng hoặc vượt quá
+số lượng.
+Lớp PatientService là lớp xử lý nghiệp vụ liên quan đến bệnh nhân và lịch hẹn.
+Trong mã nguồn, lớp này được hiện thực dưới dạng module service ở backend.
+PatientService không trực tiếp hiển thị giao diện mà nhận yêu cầu từ patientCon-
+troller, sau đó thao tác với các model User, Booking, Schedule và gọi EmailService
+khi cần gửi email xác nhận.
+Bảng 4.6:Thiết kế lớp PatientService
+Thành phần Mô tả
+Thuộc tính phụ thuộc User, Booking, Schedule, EmailService, Sequelize
+transaction
+Phương thức postBookAppointment(), postVerifyBookAppoint-
+ment(), getBookingHistoryForPatient(), cancel-
+BookingByPatient(), rebookCanceledAppointment(),
+syncScheduleCurrentNumber()
+Vai trò Xử lý các nghiệp vụ đặt lịch, xác nhận lịch, xem lịch
+sử đặt khám, hủy lịch và đặt lại lịch cho bệnh nhân.
+31
+
+
+===== PAGE 44 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Để minh họa cách các lớp và đối tượng trong hệ thống trao đổi thông điệp, đồ
+án lựa chọn ba use case quan trọng gồm đặt lịch khám, xác nhận lịch khám và gửi
+thông tin sau khám. Đây là các use case đại diện cho vòng đời chính của một lịch
+hẹn từ khi bệnh nhân đặt lịch đến khi bác sĩ hoàn tất quá trình khám.
+Hình 4.7:Biểu đồ trình tự use case Đặt lịch khám
+Trong use case Đặt lịch khám, bệnh nhân chọn khung giờ trên giao diện chi tiết
+bác sĩ và gửi thông tin đặt lịch. Frontend gọi API đến patientController, sau đó
+controller chuyển dữ liệu cho PatientService. PatientService mở transaction, kiểm
+tra Schedule, đếm số Booking đang hoạt động trong cùng khung giờ, tạo hoặc tìm
+User tương ứng với email bệnh nhân, tạo Booking ở trạng thái chờ xác nhận, cập
+nhật số lượng trong Schedule và gửi email xác nhận thông qua EmailService.
+32
+
+
+===== PAGE 45 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Hình 4.8:Biểu đồ trình tự use case Xác nhận lịch khám
+Trong use case Xác nhận lịch khám, bệnh nhân truy cập liên kết xác nhận trong
+email. Giao diện VerifyEmail gửi token và doctorId đến backend. PatientService
+tìm Booking có trạng thái chờ xác nhận tương ứng với token. Nếu dữ liệu hợp lệ,
+Booking được chuyển sang trạng thái đã xác nhận để bác sĩ có thể nhìn thấy trong
+danh sách bệnh nhân đặt lịch.
+4.1.6 Thiết kế cơ sở dữ liệu
+Hệ thống sử dụng hệ quản trị cơ sở dữ liệu quan hệ MySQL để lưu trữ dữ liệu.
+Việc lựa chọn cơ sở dữ liệu quan hệ phù hợp với bài toán đặt lịch khám bệnh vì các
+thực thể trong hệ thống có quan hệ rõ ràng với nhau, chẳng hạn người dùng, bác sĩ,
+chuyên khoa, cơ sở y tế, lịch làm việc và lịch hẹn. Dữ liệu cần đảm bảo tính nhất
+quán giữa lịch khám của bác sĩ, lịch hẹn của bệnh nhân và trạng thái xử lý của từng
+ca khám. Vì vậy, thiết kế cơ sở dữ liệu tập trung vào việc mô hình hóa đầy đủ các
+thực thể nghiệp vụ chính và ràng buộc quan hệ giữa chúng.
+Các thực thể chính trong hệ thống gồm User, Booking, Schedule, Doctor_Infor,
+Markdown, Specialty, Clinic, Allcode, History và Doctor_Clinic_Specialty. Trong
+đó, User lưu thông tin người dùng; Booking lưu thông tin lịch hẹn khám bệnh;
+Schedule lưu lịch làm việc theo từng khung giờ của bác sĩ; Doctor_Infor lưu thông
+tin mở rộng của bác sĩ; Markdown lưu nội dung giới thiệu chi tiết; Specialty lưu
+danh mục chuyên khoa; Clinic lưu danh mục cơ sở y tế; Allcode lưu các danh mục
+dùng chung như vai trò, giới tính, chức danh, giá khám, phương thức thanh toán,
+tỉnh thành và khung giờ; History lưu thông tin sau khám; Doctor_Clinic_Specialty
+lưu quan hệ giữa bác sĩ, cơ sở y tế và chuyên khoa trong trường hợp cần mở rộng
+liên kết nhiều chiều.
+33
+
+
+===== PAGE 46 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Hình 4.9:Biểu đồ thực thể liên kết cơ sở dữ liệu của hệ thống
+Như thể hiện trong Hình 4.9, bảng Users là bảng trung tâm để lưu trữ thông tin
+tài khoản. Một người dùng có thể là bệnh nhân, bác sĩ hoặc quản trị viên tùy theo giá
+trị roleId. Nếu người dùng là bác sĩ, bản ghi User có thể liên kết với Doctor_Infor
+để lưu thông tin chi tiết như giá khám, địa chỉ khám, cơ sở y tế, chuyên khoa, tỉnh
+thành và phương thức thanh toán. Bác sĩ cũng có thể có nhiều bản ghi Schedule,
+tương ứng với các ngày khám và khung giờ khám khác nhau. Nếu người dùng là
+bệnh nhân, người dùng có thể có nhiều Booking, mỗi Booking đại diện cho một
+lịch hẹn khám bệnh.
+Bảng Booking là bảng quan trọng nhất trong quy trình đặt lịch. Mỗi bản ghi
+Booking chứa doctorId, patientId, date, timeT ype, statusId, token và reason. Trường
+doctorId xác định bác sĩ được đặt lịch, patientId xác định bệnh nhân đặt lịch, date
+và timeT ype xác định ngày giờ khám, statusId xác định trạng thái của lịch hẹn,
+token phục vụ xác nhận lịch qua email và reason lưu lý do khám. Các trạng thái
+lịch hẹn được quản lý thông qua bảng Allcode, gồm chờ xác nhận, đã xác nhận, đã
+khám và đã hủy. Thiết kế này giúp hệ thống theo dõi được toàn bộ vòng đời của
+một lịch khám.
+Bảng Schedule lưu lịch làm việc của bác sĩ theo từng ngày và từng khung giờ.
+Mỗi bản ghi Schedule có doctorId, date, timeT ype, currentNumber và maxNumber.
+Trong đó, currentNumber biểu thị số lượng bệnh nhân hiện tại đã đặt vào khung
+giờ, còn maxNumber biểu thị số lượng tối đa cho phép. Khi bệnh nhân đặt lịch, hệ
+thống kiểm tra Schedule tương ứng, đếm số Booking đang hoạt động trong khung
+giờ và chỉ cho phép đặt nếu khung giờ còn khả dụng. Khi bệnh nhân hoặc bác sĩ
+34
+
+
+===== PAGE 47 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+hủy lịch, hệ thống cập nhật trạng thái Booking và đồng bộ lại currentNumber của
+Schedule. Cách thiết kế này hỗ trợ yêu cầu chống đặt trùng và chống vượt quá số
+lượng đặt lịch trong cùng khung giờ.
+Bảng Allcode được thiết kế để lưu các danh mục dùng chung thay vì cố định trực
+tiếp trong mã nguồn. Các giá trị như giới tính, chức danh bác sĩ, khung giờ khám,
+giá khám, phương thức thanh toán, tỉnh thành và trạng thái lịch hẹn đều có thể được
+chuẩn hóa trong bảng này. Việc sử dụng bảng Allcode giúp hệ thống dễ mở rộng và
+dễ chuyển đổi hiển thị song ngữ thông qua hai trường valueEn và valueVi. Ví dụ,
+một mã timeT ype có thể được liên kết với Schedule và Booking để hiển thị khung
+giờ bằng tiếng Việt hoặc tiếng Anh tùy theo ngôn ngữ giao diện.
+Bảng Specialty và Clinic lưu thông tin chuyên khoa và cơ sở y tế. Mỗi chuyên
+khoa hoặc cơ sở y tế có tên, mô tả dạng HTML, mô tả dạng Markdown và hình
+ảnh. Các dữ liệu này được hiển thị ở trang chủ, trang chi tiết chuyên khoa, trang chi
+tiết cơ sở y tế và phục vụ quá trình bệnh nhân lọc bác sĩ theo nhu cầu khám. Bảng
+Markdown được sử dụng để lưu nội dung mô tả dài cho bác sĩ, chuyên khoa hoặc
+cơ sở y tế, giúp quản trị viên có thể nhập nội dung định dạng mà không cần thay
+đổi mã nguồn.
+Bảng History được thiết kế để lưu thông tin sau khám, gồm patientId, doc-
+torId, description và files. Bảng này hỗ trợ việc lưu lại mô tả sau khám và tệp
+đính kèm như hóa đơn hoặc đơn thuốc. Trong quy trình hiện tại, thông tin sau
+khám được gửi qua email cho bệnh nhân, đồng thời cấu trúc History cho phép hệ
+thống mở rộng thêm chức năng xem lại lịch sử khám trong tương lai. Bảng Doc-
+tor_Clinic_Specialty đóng vai trò bảng liên kết mở rộng giữa bác sĩ, cơ sở y tế và
+chuyên khoa. Trong phạm vi triển khai hiện tại, thông tin liên kết chính được lưu ở
+Doctor_Infor, tuy nhiên bảng liên kết này vẫn hữu ích nếu hệ thống cần hỗ trợ một
+bác sĩ làm việc ở nhiều cơ sở hoặc nhiều chuyên khoa khác nhau.
+35
+
+
+===== PAGE 48 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Bảng 4.7:Thiết kế các bảng dữ liệu chính
+Bảng Trường dữ liệu chính Ý nghĩa
+Users id, email, password, firstName,
+lastName, address, phonenum-
+ber, gender, roleId, positionId,
+image
+Lưu thông tin tài khoản bệnh
+nhân, bác sĩ và quản trị viên.
+Bookings id, statusId, doctorId, patientId,
+date, timeT ype, token, reason
+Lưu thông tin lịch hẹn khám
+bệnh và trạng thái xử lý của
+lịch hẹn.
+Schedules id, currentNumber, maxNum-
+ber, date, timeT ype, doctorId
+Lưu lịch làm việc của bác sĩ
+theo ngày và khung giờ.
+Doctor_Infor id, doctorId, specialtyId, clin-
+icId, priceId, provinceId, pay-
+mentId, addressClinic, name-
+Clinic, note, count
+Lưu thông tin mở rộng của bác
+sĩ phục vụ hiển thị và đặt lịch.
+Markdowns id, contentHTML, content-
+Markdown, description,
+doctorId, specialtyId, clinicId
+Lưu nội dung mô tả chi tiết
+dạng Markdown và HTML.
+Specialties id, name, descriptionHTML,
+descriptionMarkdown, image
+Lưu danh mục chuyên khoa.
+Clinics id, name, address, description-
+HTML, descriptionMarkdown,
+image
+Lưu danh mục cơ sở y tế.
+Allcodes id, keyMap, type, valueEn, val-
+ueVi
+Lưu danh mục dùng chung như
+giới tính, vai trò, giá khám,
+tỉnh thành, khung giờ và trạng
+thái.
+Histories id, patientId, doctorId, descrip-
+tion, files
+Lưu thông tin sau khám và tệp
+đính kèm.
+Doctor_Clinic_Specialtiesid, doctorId, clinicId, special-
+tyId
+Lưu quan hệ mở rộng giữa bác
+sĩ, cơ sở y tế và chuyên khoa.
+Về quan hệ dữ liệu, một User có vai trò bác sĩ có thể có nhiều Schedule và
+nhiều Booking với vai trò doctorId. Một User có vai trò bệnh nhân có thể có nhiều
+Booking với vai trò patientId. Một Schedule thuộc về một bác sĩ và một khung giờ
+trong Allcode. Một Booking thuộc về một bệnh nhân, một bác sĩ và một khung giờ
+trong Allcode. Một Doctor_Infor thuộc về một bác sĩ và liên kết đến chuyên khoa,
+cơ sở y tế, giá khám, tỉnh thành và phương thức thanh toán. Specialty và Clinic
+được sử dụng để nhóm bác sĩ theo nhu cầu tra cứu của bệnh nhân.
+36
+
+
+===== PAGE 49 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Bảng 4.8:Mô tả quan hệ giữa các bảng dữ liệu
+Quan hệ Kiểu quan hệ Ý nghĩa
+Users – Bookings 1 – N Một bệnh nhân có thể có nhiều lịch
+hẹn khám bệnh.
+Users – Schedules 1 – N Một bác sĩ có thể có nhiều lịch làm
+việc theo ngày và khung giờ.
+Users – Doctor_Infor 1 – 1 Một bác sĩ có một bản ghi thông tin
+chi tiết.
+Users – Markdowns 1 – 1 Một bác sĩ có một nội dung giới thiệu
+chi tiết.
+Schedules – Allcodes N – 1 Một lịch làm việc thuộc một mã
+khung giờ dùng chung.
+Bookings – Allcodes N – 1 Một lịch hẹn thuộc một mã khung giờ
+và trạng thái tương ứng.
+Doctor_Infor – Special-
+ties
+N – 1 Nhiều bác sĩ có thể thuộc cùng một
+chuyên khoa.
+Doctor_Infor – Clinics N – 1 Nhiều bác sĩ có thể làm việc tại cùng
+một cơ sở y tế.
+Doctor_Infor – Allcodes N – 1 Thông tin bác sĩ liên kết đến danh
+mục giá khám, tỉnh thành và thanh
+toán.
+Histories – Users N – 1 Một bệnh nhân hoặc bác sĩ có thể liên
+quan đến nhiều bản ghi lịch sử khám.
+Từ thiết kế E-R, cơ sở dữ liệu quan hệ được hiện thực trên MySQL thông qua
+Sequelize ORM. Mỗi thực thể được ánh xạ thành một model tương ứng trong mã
+nguồn backend. Các bảng đều có khóa chính id tự tăng và các trường createdAt,
+updatedAt để lưu thời gian tạo và cập nhật bản ghi. Các khóa ngoại như doctorId,
+patientId, specialtyId, clinicId, timeT ype, gender, positionId, priceId, provinceId
+và paymentId được sử dụng để liên kết dữ liệu giữa các bảng. Trong quá trình xử
+lý nghiệp vụ, backend sử dụng các quan hệ này để truy xuất dữ liệu liên quan, ví
+dụ lấy thông tin bệnh nhân trong lịch hẹn, lấy tên khung giờ từ Allcode hoặc lấy
+thông tin giá khám và địa chỉ khám của bác sĩ từ Doctor_Infor.
+Thiết kế cơ sở dữ liệu trên đáp ứng được các yêu cầu chính của hệ thống. Đối
+với bệnh nhân, hệ thống có thể tra cứu bác sĩ theo chuyên khoa, cơ sở y tế, tỉnh
+thành và khung giờ. Đối với bác sĩ, hệ thống có thể lấy danh sách bệnh nhân đã xác
+nhận lịch theo ngày. Đối với quản trị viên, hệ thống có thể quản lý người dùng, bác
+sĩ, chuyên khoa, cơ sở y tế và lịch làm việc. Đặc biệt, việc tách riêng Booking và
+Schedule giúp hệ thống kiểm soát tốt số lượng đặt lịch trong từng khung giờ, đồng
+thời cho phép cập nhật trạng thái lịch hẹn mà không làm mất dữ liệu lịch làm việc
+ban đầu của bác sĩ.
+37
+
+
+===== PAGE 50 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+4.2 Xây dựng ứng dụng
+4.2.1 Thư viện và công cụ sử dụng
+Trong quá trình xây dựng hệ thống đặt lịch khám bệnh trực tuyến, đồ án sử dụng
+các công cụ và thư viện phục vụ phát triển giao diện, xây dựng máy chủ, thao tác
+cơ sở dữ liệu, gửi email, quản lý phiên bản và kiểm thử API. Danh sách các công cụ
+và thư viện chính được tổng hợp trong Bảng 4.9. Các phiên bản thư viện frontend
+và backend được lấy theo cấu hình trong tệp package.json của project.
+Bảng 4.9:Danh sách thư viện và công cụ sử dụng
+Mục đích Công cụ / Thư viện Phiên bản Vai trò trong hệ thống
+IDE lập trình Visual Studio Code 1.126.0 Soạn thảo mã nguồn frontend,
+backend và tài liệu báo cáo.
+Quản lý mã nguồn Git 2.52.0.windows.1Theo dõi thay đổi mã nguồn
+và hỗ trợ quản lý phiên bản
+project.
+Môi trường chạy
+backend
+Node.js v20.19.4 Chạy ứng dụng backend Node-
+JS/ExpressJS.
+Quản lý gói npm Đi kèm
+Node.js
+Cài đặt và quản lý các thư viện
+trong frontend và backend.
+Ngôn ngữ lập trình JavaScript / T ype-
+Script
+T ypeScript
+5.9.3
+Xây dựng giao diện ReactJS và
+một số file service/component
+có kiểu dữ liệu.
+Xây dựng giao diện ReactJS ^19.0.0 Xây dựng giao diện người dùng
+theo mô hình component.
+Render giao diện React DOM ^19.0.0 Kết nối React component với
+DOM của trình duyệt.
+Điều hướng fron-
+tend
+React Router DOM ^6.30.3 Quản lý điều hướng giữa trang
+chủ, trang chi tiết, trang bác sĩ
+và trang quản trị.
+Quản lý trạng thái Redux ^5.0.1 Quản lý trạng thái dùng chung
+trong ứng dụng.
+Kết nối Redux với
+React
+React Redux ^9.2.0 Cho phép các component React
+đọc và cập nhật Redux store.
+Xử lý bất đồng bộ
+Redux
+Redux Thunk ^3.1.0 Hỗ trợ dispatch các action bất
+đồng bộ khi gọi API.
+Gọi API frontend Axios ^1.13.6 Gửi HTTP request từ frontend
+đến backend REST API.
+Đa ngôn ngữ React Intl ^8.1.3 Hỗ trợ hiển thị giao diện tiếng
+Việt và tiếng Anh.
+38
+
+
+===== PAGE 51 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Mục đích Công cụ / Thư viện Phiên bản Vai trò trong hệ thống
+Thiết kế giao diện Bootstrap ^5.3.8 Hỗ trợ bố cục, button, form và
+responsive UI.
+Component Boot-
+strap cho React
+Reactstrap ^9.2.3 Sử dụng một số thành phần
+Bootstrap trong React.
+Viết style Sass ^1.97.3 Tổ chức mã SCSS cho các màn
+hình và component.
+Select box nâng
+cao
+React Select ^5.10.2 Tạo ô chọn bác sĩ, chuyên khoa,
+tỉnh thành, khung giờ.
+Hiển thị thông báo React Toastify ^11.0.5 Hiển thị thông báo thành công
+hoặc lỗi trên giao diện.
+Xử lý ngày giờ
+frontend
+Moment ^2.30.1 Định dạng ngày khám, lịch làm
+việc và thời gian hiển thị.
+Markdown editor React Markdown Edi-
+tor Lite
+^1.4.2 Nhập nội dung mô tả bác sĩ,
+chuyên khoa và cơ sở y tế.
+Render Markdown Markdown-it ^14.1.1 Chuyển nội dung Markdown
+sang HTML để hiển thị.
+Carousel giao diện React Slick ^0.31.0 Hiển thị danh sách chuyên
+khoa, cơ sở y tế và bác sĩ nổi
+bật ở trang chủ.
+Build frontend React Scripts ^5.0.1 Chạy, build và kiểm thử ứng
+dụng ReactJS.
+Framework back-
+end
+ExpressJS ^5.2.1 Xây dựng RESTful API và định
+tuyến request phía server.
+Kết nối CSDL MySQL2 ^3.18.2 Kết nối backend NodeJS với hệ
+quản trị cơ sở dữ liệu MySQL.
+ORM Sequelize ^6.37.7 Định nghĩa model, association
+và thao tác dữ liệu MySQL.
+Migration CSDL Sequelize CLI ^6.6.5 Tạo và quản lý migration cho
+các bảng dữ liệu.
+Gửi email Nodemailer ^8.0.1 Gửi email xác nhận lịch khám,
+hủy lịch và thông tin sau khám.
+Mã hóa mật khẩu bcrypt / bcryptjs ^6.0.0 / ^3.0.3 Băm mật khẩu người dùng
+trước khi lưu trữ.
+Biến môi trường dotenv ^17.3.1 Quản lý cấu hình môi trường
+như URL frontend, thông tin
+email và cấu hình hệ thống.
+Middleware re-
+quest
+body-parser ^2.2.2 Phân tích dữ liệu request gửi
+lên backend.
+39
+
+
+===== PAGE 52 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Mục đích Công cụ / Thư viện Phiên bản Vai trò trong hệ thống
+Cho phép CORS cors ^2.8.6 Cho phép frontend và backend
+giao tiếp khi chạy khác cổng.
+Tạo mã định danh uuid ^13.0.0 Sinh token xác nhận lịch khám
+gửi qua email.
+Tự động reload
+backend
+nodemon ^3.1.14 Tự động khởi động lại server
+khi mã nguồn backend thay đổi.
+Chạy T ypeScript
+backend
+ts-node ^10.9.2 Hỗ trợ chạy mã nguồn backend
+trong môi trường phát triển.
+Cơ sở dữ liệu MySQL 8.x Lưu trữ dữ liệu người dùng,
+bác sĩ, lịch làm việc, lịch hẹn,
+chuyên khoa và cơ sở y tế.
+Kiểm thử API Postman / Thunder
+Client
+Phiên bản
+theo môi
+trường cài đặt
+Gửi request kiểm thử các API
+đăng nhập, đặt lịch, xác nhận
+lịch, hủy lịch và quản trị dữ
+liệu.
+Trình duyệt kiểm
+thử
+Google Chrome / Mi-
+crosoft Edge
+Phiên bản
+theo môi
+trường cài đặt
+Kiểm thử giao diện, luồng đặt
+lịch và khả năng responsive của
+ứng dụng.
+Các công cụ và thư viện trong Bảng 4.9 được chia thành ba nhóm chính. Nhóm
+thứ nhất phục vụ phát triển giao diện người dùng, bao gồm ReactJS, Redux, React
+Router, Axios, React Intl, Bootstrap, Sass và các thư viện hỗ trợ component. Nhóm
+thứ hai phục vụ backend và xử lý nghiệp vụ, bao gồm Node.js, ExpressJS, Se-
+quelize, MySQL2, Nodemailer, bcrypt, dotenv và uuid. Nhóm thứ ba phục vụ phát
+triển, quản lý mã nguồn và kiểm thử, bao gồm Visual Studio Code, Git, nodemon,
+Sequelize CLI, Postman hoặc Thunder Client và trình duyệt web.
+Việc lựa chọn các công cụ trên phù hợp với kiến trúc đã trình bày ở các phần
+trước. Frontend ReactJS đảm nhiệm giao diện tương tác cho bệnh nhân, bác sĩ và
+quản trị viên. Backend ExpressJS cung cấp REST API và xử lý nghiệp vụ. MySQL
+cùng Sequelize đảm nhiệm lưu trữ và truy xuất dữ liệu quan hệ. Nodemailer và
+uuid hỗ trợ quy trình xác nhận lịch khám qua email. Các công cụ kiểm thử API và
+trình duyệt giúp kiểm tra luồng nghiệp vụ chính trong quá trình phát triển.
+4.2.2 Kết quả đạt được
+Sau quá trình phân tích, thiết kế và xây dựng, đồ án đã hoàn thành hệ thống
+web đặt lịch khám bệnh trực tuyến với các chức năng chính đáp ứng yêu cầu đã
+xác định ở Chương 2. Sản phẩm gồm ba thành phần chính: ứng dụng frontend, ứng
+dụng backend và cơ sở dữ liệu MySQL. Trong đó, frontend được xây dựng bằng
+40
+
+
+===== PAGE 53 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+ReactJS, đóng vai trò cung cấp giao diện cho bệnh nhân, bác sĩ và quản trị viên.
+Backend được xây dựng bằng NodeJS/ExpressJS, đóng vai trò cung cấp RESTful
+API, xử lý nghiệp vụ đặt lịch, xác nhận lịch, hủy lịch, gửi email và quản lý dữ liệu.
+Cơ sở dữ liệu MySQL lưu trữ toàn bộ thông tin người dùng, bác sĩ, chuyên khoa,
+cơ sở y tế, lịch làm việc và lịch hẹn khám bệnh.
+Về mặt chức năng, hệ thống đã xây dựng được luồng nghiệp vụ tương đối đầy đủ
+cho bài toán đặt lịch khám bệnh trực tuyến. Bệnh nhân có thể tra cứu thông tin bác
+sĩ, chuyên khoa, cơ sở y tế, xem lịch khám, đặt lịch, xác nhận lịch qua email, xem
+lịch hẹn cá nhân, hủy lịch và đặt lại lịch. Bác sĩ có thể xem danh sách bệnh nhân
+đã xác nhận lịch theo ngày, hủy lịch khi cần và gửi thông tin sau khám qua email.
+Quản trị viên có thể quản lý người dùng, bác sĩ, chuyên khoa, cơ sở y tế, thông tin
+chi tiết bác sĩ và lịch làm việc.
+Sản phẩm frontend nằm trong thư mụcreactjs. Đây là ứng dụng giao diện
+chạy trên trình duyệt, bao gồm các màn hình trang chủ, trang chi tiết bác sĩ, trang
+chi tiết chuyên khoa, trang chi tiết cơ sở y tế, modal đặt lịch, modal lịch hẹn cá
+nhân, màn hình quản trị và màn hình bác sĩ quản lý bệnh nhân. Sản phẩm backend
+nằm trong thư mụcnodejs. Đây là ứng dụng máy chủ cung cấp các API cho
+frontend, đồng thời kết nối tới cơ sở dữ liệu và dịch vụ email. Phần cơ sở dữ liệu
+được mô tả thông qua các model Sequelize và các file migration, giúp tạo cấu trúc
+bảng dữ liệu cần thiết cho hệ thống.
+Bảng 4.10 trình bày thống kê tổng quan mã nguồn của ứng dụng. Các số liệu
+được thống kê trên mã nguồn của đồ án, loại trừ các thư mục thư viện hoặc kết quả
+sinh tự động nhưnode_modules,.git,build,distvàcoverage.
+Bảng 4.10:Thống kê tổng quan mã nguồn hệ thống
+Thành phần Số file Số file code Số dòng code Dung lượng
+Frontend ReactJS 145 126 16.889 2,03 MB
+Backend NodeJS 57 51 4.643 0,39 MB
+Toàn bộ hệ thống 204 177 21.532 2,42 MB
+Bảng 4.11 trình bày thống kê chi tiết hơn theo các nhóm thư mục chính. Phần
+frontend có số lượng dòng mã lớn hơn do bao gồm nhiều màn hình giao diện,
+component, style SCSS và logic xử lý tương tác người dùng. Phần backend có
+dung lượng nhỏ hơn nhưng chứa các xử lý nghiệp vụ quan trọng như đặt lịch, xác
+nhận lịch, quản lý bệnh nhân và gửi email.
+41
+
+
+===== PAGE 54 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Bảng 4.11:Thống kê theo nhóm thư mục chính
+Nhóm thư mục Số file Số dòng code
+reactjs/src 121 16.738
+nodejs/src 21 3.293
+nodejs/models 11 400
+nodejs/migrations 12 459
+Bảng 4.12 thống kê một số package và module nghiệp vụ chính trong mã nguồn.
+Do hệ thống sử dụng ReactJS ở frontend và NodeJS ở backend, khái niệm lớp
+truyền thống không phản ánh đầy đủ cấu trúc chương trình. Vì vậy, đồ án thống
+kê theo các module chính như container, component, controller, service, model và
+route.
+Bảng 4.12:Thống kê module và package chính
+Package / Module Số file Vai trò
+reactjs/src/containers 59 Chứa các màn hình chính của
+hệ thống.
+reactjs/src/components 21 Chứa các component dùng
+chung.
+reactjs/src/services 3 Chứa các hàm gọi API từ
+frontend.
+reactjs/src/store 9 Quản lý Redux store, reducer
+và action.
+reactjs/src/routes 5 Cấu hình điều hướng fron-
+tend.
+reactjs/src/utils 7 Chứa các hàm tiện ích dùng
+chung.
+nodejs/src/controllers 6 Tiếp nhận request và trả re-
+sponse API.
+nodejs/src/services 7 Xử lý nghiệp vụ chính của hệ
+thống.
+nodejs/models 11 Định nghĩa model Sequelize
+ánh xạ database.
+nodejs/src/route 2 Khai báo các endpoint API.
+Về mặt dữ liệu, hệ thống đã thiết kế và hiện thực các bảng chính nhưUsers,
+Bookings,Schedules,Doctor_Infor,Markdowns,Specialties,Clin-
+ics,Allcodes,HistoriesvàDoctor_Clinic_Specialties. Các bảng
+này đáp ứng nhu cầu lưu trữ thông tin tài khoản, thông tin bác sĩ, lịch làm việc, lịch
+hẹn, trạng thái lịch khám, chuyên khoa, cơ sở y tế và thông tin sau khám.
+Nhìn chung, kết quả đạt được của đồ án là một hệ thống web có khả năng hỗ trợ
+quy trình đặt lịch khám bệnh trực tuyến từ phía bệnh nhân đến phía bác sĩ và quản
+trị viên. Hệ thống không chỉ dừng ở chức năng tạo lịch hẹn mà còn quản lý được
+42
+
+
+===== PAGE 55 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+vòng đời của lịch hẹn thông qua các trạng thái chờ xác nhận, đã xác nhận, đã khám
+và đã hủy. Đây là nền tảng quan trọng để hệ thống có thể tiếp tục mở rộng thêm
+các chức năng như thanh toán trực tuyến, thống kê báo cáo, quản lý hồ sơ bệnh án
+hoặc tích hợp thông báo qua SMS trong tương lai.
+4.2.3 Minh họa các chức năng chính
+Phần này trình bày một số giao diện tiêu biểu của hệ thống sau khi xây dựng.
+Các giao diện được lựa chọn là những màn hình thể hiện rõ nhất quy trình nghiệp
+vụ cốt lõi của hệ thống, bao gồm bắt đầu đặt lịch, xem lịch khám của bác sĩ, gửi
+yêu cầu đặt lịch, quản lý lịch hẹn của bệnh nhân và bác sĩ quản lý bệnh nhân đã đặt
+lịch.
+a, Trang chủ và chức năng đặt lịch nhanh
+Trang chủ là điểm bắt đầu chính của bệnh nhân khi truy cập hệ thống. Giao diện
+hiển thị các nhóm thông tin như chuyên khoa phổ biến, cơ sở y tế nổi bật và bác sĩ
+nổi bật. Nút đặt lịch nhanh được bố trí nổi bật trên màn hình, giúp bệnh nhân dễ
+dàng bắt đầu quy trình đặt lịch mà không cần đi qua nhiều bước tìm kiếm phức tạp.
+(a)Giao diện trang chủ
+ (b)Modal đặt lịch nhanh
+Hình 4.10:Giao diện trang chủ và chức năng đặt lịch nhanh
+b, Trang chi tiết bác sĩ và lịch khám
+Trang chi tiết bác sĩ là màn hình trung tâm của quy trình đặt lịch. Tại đây, bệnh
+nhân có thể xem thông tin bác sĩ, địa chỉ khám, giá khám, phương thức thanh toán
+và các khung giờ khám theo ngày. Các khung giờ còn trống được hiển thị rõ ràng
+để bệnh nhân lựa chọn, trong khi các khung giờ đã được đặt hoặc hết chỗ bị vô hiệu
+hóa để hạn chế đặt lịch trùng.
+43
+
+
+===== PAGE 56 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Hình 4.11:Giao diện chi tiết bác sĩ và lịch khám
+c, Modal đặt lịch khám
+Sau khi chọn một khung giờ còn trống, hệ thống hiển thị modal đặt lịch khám.
+Modal này cho phép bệnh nhân kiểm tra thông tin cá nhân, xem lại thời gian khám,
+bác sĩ được chọn và nhập lý do khám. Việc hiển thị thông tin trong modal giúp
+bệnh nhân hoàn tất thao tác đặt lịch ngay trên trang hiện tại mà không cần chuyển
+sang màn hình khác.
+Hình 4.12:Modal đặt lịch khám
+d, Lịch hẹn cá nhân của bệnh nhân
+Chức năng lịch hẹn cá nhân cho phép bệnh nhân theo dõi các lịch khám đã đặt.
+Mỗi lịch hẹn hiển thị thông tin bác sĩ, ngày khám, khung giờ và trạng thái xử lý
+như chờ xác nhận, đã xác nhận, đã khám hoặc đã hủy. Trong các trường hợp phù
+hợp, bệnh nhân có thể hủy lịch hoặc đặt lại lịch ở khung giờ khác.
+44
+
+
+===== PAGE 57 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Hình 4.13:Giao diện lịch hẹn cá nhân của bệnh nhân
+e, Quản lý bệnh nhân đặt lịch của bác sĩ
+Màn hình quản lý bệnh nhân đặt lịch hỗ trợ bác sĩ xem danh sách bệnh nhân
+đã xác nhận lịch khám theo từng ngày. Bác sĩ có thể theo dõi thông tin bệnh nhân,
+khung giờ khám, lý do khám và thực hiện các thao tác sau khám như gửi hóa đơn
+hoặc đơn thuốc qua email. Đây là màn hình thể hiện vai trò xử lý nghiệp vụ của
+bác sĩ sau khi bệnh nhân hoàn tất đặt lịch và xác nhận qua email.
+Hình 4.14:Giao diện bác sĩ quản lý bệnh nhân đặt lịch
+4.3 Kiểm thử
+Kiểm thử được thực hiện nhằm đánh giá mức độ đáp ứng của hệ thống đối với
+các yêu cầu chức năng quan trọng đã trình bày ở Chương 2. Trong phạm vi đồ án,
+quá trình kiểm thử tập trung vào các luồng nghiệp vụ cốt lõi gồm đặt lịch khám,
+quản lý lịch hẹn của bệnh nhân và bác sĩ quản lý bệnh nhân đặt lịch. Đây là các
+chức năng ảnh hưởng trực tiếp đến tính đúng đắn của hệ thống, đặc biệt là yêu cầu
+chống đặt lịch trùng, cập nhật trạng thái lịch hẹn và đồng bộ số lượng bệnh nhân
+45
+
+
+===== PAGE 58 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+trong từng khung giờ.
+Các kỹ thuật kiểm thử được sử dụng gồm kiểm thử hộp đen, phân vùng tương
+đương, kiểm thử giá trị biên, kiểm thử chuyển trạng thái và kiểm thử tích hợp. Kiểm
+thử hộp đen được dùng để đánh giá chức năng từ góc nhìn người dùng mà không
+phụ thuộc vào cài đặt bên trong. Phân vùng tương đương được áp dụng để chia dữ
+liệu đầu vào thành các nhóm hợp lệ và không hợp lệ. Kiểm thử giá trị biên được
+dùng cho các trường hợp liên quan đến sức chứa khung giờ. Kiểm thử chuyển trạng
+thái được áp dụng cho vòng đời lịch hẹn gồm chờ xác nhận, đã xác nhận, đã khám
+và đã hủy. Kiểm thử tích hợp được dùng để kiểm tra sự phối hợp giữa frontend,
+backend, cơ sở dữ liệu và dịch vụ email.
+4.3.1 Kiểm thử chức năng đặt lịch khám
+Chức năng đặt lịch khám là chức năng quan trọng nhất của hệ thống. Mục tiêu
+kiểm thử là đảm bảo bệnh nhân có thể đặt lịch thành công khi dữ liệu hợp lệ, đồng
+thời hệ thống phải từ chối các trường hợp thiếu thông tin, khung giờ không tồn tại,
+khung giờ đã có người đặt hoặc vượt quá số lượng cho phép.
+Bảng 4.13:Các trường hợp kiểm thử chức năng đặt lịch khám
+Mã Mục tiêu Dữ liệu/Điều kiện kiểm
+thử
+Kết quả mong đợi KQ
+TC01 Đặt lịch thành công Bệnh nhân đăng nhập,
+chọn bác sĩ có lịch trống,
+nhập đủ thông tin và lý
+do khám
+Tạo Booking trạng thái
+chờ xác nhận, tăng cur-
+rentNumber, gửi email
+xác nhận
+Đạt
+TC02 Thiếu thông tin bắt
+buộc
+Bỏ trống email, họ tên,
+giới tính hoặc địa chỉ
+Hệ thống thông báo thiếu
+thông tin và không tạo
+Booking
+Đạt
+TC03 Chọn khung giờ
+không tồn tại
+Gửi yêu cầu đặt lịch với
+date/timeT ype không có
+trong Schedule
+Hệ thống từ chối đặt lịch
+và thông báo khung giờ
+không khả dụng
+Đạt
+TC04 Chống đặt lịch
+trùng khung giờ
+Hai bệnh nhân cùng đặt
+vào một doctorId, date và
+timeT ype đã có người đặt
+Hệ thống chỉ cho phép
+một lịch hợp lệ, lịch sau
+bị từ chối
+Đạt
+TC05 Kiểm tra giới hạn
+số lượng
+currentNumber đạt
+maxNumber của khung
+giờ
+Hệ thống hiển thị khung
+giờ đã hết chỗ và không
+cho đặt tiếp
+Đạt
+Kết quả kiểm thử cho thấy chức năng đặt lịch đáp ứng đúng các yêu cầu chính.
+Hệ thống chỉ tạo lịch khi dữ liệu hợp lệ và khung giờ còn khả dụng. Các trường
+hợp không hợp lệ đều được xử lý bằng thông báo lỗi phù hợp, đồng thời không làm
+thay đổi sai dữ liệu lịch hẹn hoặc số lượng bệnh nhân trong khung giờ.
+46
+
+
+===== PAGE 59 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+4.3.2 Kiểm thử chức năng quản lý lịch hẹn của bệnh nhân
+Chức năng quản lý lịch hẹn cá nhân cho phép bệnh nhân xem lịch sử đặt khám,
+theo dõi trạng thái, hủy lịch và đặt lại lịch. Mục tiêu kiểm thử là đảm bảo trạng thái
+lịch hẹn được cập nhật đúng, giao diện phản hồi kịp thời sau thao tác và khung giờ
+được giải phóng khi lịch bị hủy.
+Bảng 4.14:Các trường hợp kiểm thử chức năng quản lý lịch hẹn cá nhân
+Mã Mục tiêu Dữ liệu/Điều kiện kiểm
+thử
+Kết quả mong đợi KQ
+TC06 Xem lịch hẹn cá
+nhân
+Bệnh nhân đã có nhiều
+lịch hẹn với các trạng thái
+khác nhau
+Hiển thị đúng danh sách
+lịch hẹn, bác sĩ, ngày
+khám, khung giờ và trạng
+thái
+Đạt
+TC07 Hủy lịch hợp lệ Lịch hẹn đang ở trạng
+thái chờ xác nhận hoặc đã
+xác nhận
+Trạng thái chuyển sang
+đã hủy, currentNumber
+được đồng bộ lại
+Đạt
+TC08 Không cho hủy
+lịch đã khám
+Lịch hẹn đang ở trạng
+thái đã khám
+Hệ thống khóa hoặc từ
+chối thao tác hủy lịch
+Đạt
+TC09 Đặt lại lịch sau khi
+hủy
+Bệnh nhân chọn một lịch
+đã hủy và chọn khung giờ
+mới còn trống
+Hệ thống tạo Booking
+mới ở trạng thái chờ xác
+nhận và gửi email xác
+nhận mới
+Đạt
+TC10 Cập nhật giao diện
+sau khi hủy
+Bệnh nhân hủy lịch trong
+modal lịch hẹn cá nhân
+Danh sách lịch hẹn và
+trạng thái khung giờ được
+cập nhật lại mà không
+cần tải lại trang
+Đạt
+Kết quả kiểm thử cho thấy chức năng quản lý lịch hẹn cá nhân hoạt động ổn
+định. Các thao tác hủy lịch và đặt lại lịch cập nhật đúng trạng thái Booking. Khi
+lịch hẹn bị hủy, hệ thống giải phóng lại khung giờ tương ứng, giúp bệnh nhân khác
+có thể đặt lịch vào khung giờ đó nếu còn phù hợp.
+4.3.3 Kiểm thử chức năng bác sĩ quản lý bệnh nhân đặt lịch
+Chức năng quản lý bệnh nhân đặt lịch hỗ trợ bác sĩ theo dõi danh sách bệnh
+nhân đã xác nhận lịch khám theo ngày, hủy lịch khi cần thiết và gửi thông tin sau
+khám cho bệnh nhân. Mục tiêu kiểm thử là đảm bảo bác sĩ chỉ nhìn thấy các lịch
+đã xác nhận, thông tin bệnh nhân hiển thị đúng và trạng thái lịch hẹn được cập nhật
+sau khi bác sĩ xử lý.
+47
+
+
+===== PAGE 60 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Bảng 4.15:Các trường hợp kiểm thử chức năng bác sĩ quản lý bệnh nhân
+Mã Mục tiêu Dữ liệu/Điều kiện kiểm
+thử
+Kết quả mong đợi KQ
+TC11 Xem danh sách
+bệnh nhân theo
+ngày
+Bác sĩ chọn ngày có bệnh
+nhân đã xác nhận lịch
+Hiển thị danh sách bệnh
+nhân trạng thái đã xác
+nhận, đúng khung giờ và
+lý do khám
+Đạt
+TC12 Ngày không có
+bệnh nhân
+Bác sĩ chọn ngày không
+có lịch hẹn xác nhận
+Hệ thống hiển thị danh
+sách rỗng hoặc thông báo
+không có dữ liệu
+Đạt
+TC13 Gửi thông tin sau
+khám
+Bác sĩ chọn bệnh nhân,
+nhập thông tin và đính
+kèm đơn thuốc/hóa đơn
+Hệ thống gửi email cho
+bệnh nhân và chuyển
+trạng thái lịch hẹn sang
+đã khám
+Đạt
+TC14 Hủy lịch của bệnh
+nhân
+Bác sĩ hủy lịch đang ở
+trạng thái đã xác nhận
+Hệ thống chuyển lịch
+sang đã hủy, cập nhật số
+lượng khung giờ và gửi
+thông báo hủy
+Đạt
+TC15 Thiếu dữ liệu khi
+gửi sau khám
+Không có email, patien-
+tId, doctorId hoặc file
+đính kèm
+Hệ thống thông báo lỗi
+và không cập nhật trạng
+thái lịch hẹn
+Đạt
+Kết quả kiểm thử cho thấy màn hình quản lý bệnh nhân của bác sĩ đáp ứng đúng
+nghiệp vụ. Danh sách bệnh nhân được lọc theo bác sĩ và ngày khám. Chỉ các lịch
+hẹn đã xác nhận mới được hiển thị để bác sĩ xử lý. Khi gửi thông tin sau khám
+thành công, trạng thái lịch hẹn được cập nhật sang đã khám, giúp hệ thống phản
+ánh đúng vòng đời của lịch hẹn.
+4.3.4 Tổng kết kiểm thử
+Tổng cộng, đồ án đã thiết kế và thực hiện 15 trường hợp kiểm thử cho 3 nhóm
+chức năng quan trọng nhất của hệ thống. Kết quả tổng hợp được trình bày trong
+Bảng 4.16.
+Bảng 4.16:Tổng hợp kết quả kiểm thử
+Nhóm chức năng Số ca kiểm thử Đạt Không đạt
+Đặt lịch khám 5 5 0
+Quản lý lịch hẹn cá nhân 5 5 0
+Bác sĩ quản lý bệnh nhân 5 5 0
+Tổng cộng 15 15 0
+Qua kết quả kiểm thử, các chức năng cốt lõi của hệ thống đều đạt yêu cầu trong
+phạm vi kiểm thử thủ công và kiểm thử tích hợp ở môi trường phát triển. Các trường
+hợp kiểm thử không ghi nhận lỗi không đạt. Tuy nhiên, phạm vi kiểm thử hiện tại
+chủ yếu tập trung vào nghiệp vụ chính và chưa thực hiện kiểm thử tải với số lượng
+48
+
+
+===== PAGE 61 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+người dùng lớn đồng thời. Đây là hướng có thể tiếp tục bổ sung trong tương lai nếu
+hệ thống được triển khai trong môi trường thực tế với lưu lượng truy cập cao..
+4.4 Triển khai
+Trong phạm vi đồ án, hệ thống được triển khai thử nghiệm theo mô hình cục bộ
+trên máy cá nhân. Mô hình triển khai gồm ba thành phần chính: ứng dụng frontend
+ReactJS, ứng dụng backend NodeJS/ExpressJS và cơ sở dữ liệu MySQL. Frontend
+chạy trên trình duyệt và giao tiếp với backend thông qua RESTful API. Backend
+tiếp nhận request từ frontend, xử lý nghiệp vụ, truy xuất cơ sở dữ liệu và gửi email
+xác nhận thông qua dịch vụ SMTP/Gmail. Cơ sở dữ liệu MySQL lưu trữ toàn bộ
+dữ liệu người dùng, bác sĩ, chuyên khoa, cơ sở y tế, lịch làm việc và lịch hẹn khám
+bệnh.
+Hình 4.15:Mô hình triển khai thử nghiệm hệ thống
+49
+
+
+===== PAGE 62 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+Trong môi trường thử nghiệm, frontend được khởi chạy bằng React Scripts trên
+cổng mặc định3000. Backend được khởi chạy bằng NodeJS/ExpressJS trên cổng
+8080. Trong mã nguồn frontend, địa chỉ API được cấu hình làhttp://localhost :8080/.
+Backend sử dụng biến môi trường để cấu hình cổng chạy, kết nối cơ sở dữ liệu, địa
+chỉ frontend và thông tin dịch vụ email. Nếu biến môi trườngPORTkhông được
+thiết lập, backend mặc định chạy trên cổng8080.
+Bảng 4.17:Cấu hình triển khai thử nghiệm
+Thành phần Cấu hình Vai trò
+Frontend ReactJS, cổng3000 Hiển thị giao diện cho bệnh nhân,
+bác sĩ và quản trị viên.
+Backend NodeJS/ExpressJS,
+cổng8080
+Cung cấp RESTful API và xử lý
+nghiệp vụ hệ thống.
+Cơ sở dữ liệu MySQL Lưu trữ dữ liệu người dùng, bác sĩ,
+lịch khám, lịch hẹn, chuyên khoa và
+cơ sở y tế.
+Email Service SMTP/Gmail Gửi email xác nhận đặt lịch, hủy lịch
+và thông tin sau khám.
+Trình duyệt kiểm thử Google Chrome/Mi-
+crosoft Edge
+Truy cập giao diện và kiểm thử các
+luồng chức năng chính.
+Quy trình triển khai thử nghiệm được thực hiện theo các bước chính. Trước tiên,
+sinh viên cài đặt NodeJS, MySQL và các công cụ cần thiết. Sau đó, tạo cơ sở dữ
+liệu MySQL và cấu hình thông tin kết nối trong tệp môi trường của backend. Tiếp
+theo, cài đặt thư viện cho backend và frontend bằng npm. Backend được chạy bằng
+lệnhnpm run devhoặcnpm starttrong thư mụcnodejs. Frontend được
+chạy bằng lệnhnpm starttrong thư mụcreactjs. Sau khi cả hai thành phần
+khởi động thành công, người dùng truy cập địa chỉhttp://localhost :3000
+để sử dụng hệ thống.
+Bảng 4.18:Các bước triển khai thử nghiệm
+Bước Mô tả
+1 Cài đặt NodeJS, npm, MySQL và công cụ phát triển.
+2 Tạo cơ sở dữ liệu MySQL và cấu hình kết nối trong backend.
+3 Cài đặt thư viện backend trong thư mụcnodejs.
+4 Cài đặt thư viện frontend trong thư mụcreactjs.
+5 Khởi chạy backend trên cổng8080.
+6 Khởi chạy frontend trên cổng3000.
+7 Truy cập hệ thống qua trình duyệt và kiểm thử các chức năng chính.
+Kết quả triển khai thử nghiệm cho thấy hệ thống có thể vận hành đầy đủ trong
+môi trường cục bộ. Người dùng có thể truy cập trang chủ, xem danh sách chuyên
+50
+
+
+===== PAGE 63 =====
+CHƯƠNG 4. PHÂN TÍCH THIẾT KẾ, TRIỂN KHAI V À ĐÁNH GIÁ HỆ
+THỐNG
+khoa, cơ sở y tế, bác sĩ nổi bật, mở chức năng đặt lịch nhanh, xem chi tiết bác sĩ,
+chọn khung giờ khám và gửi yêu cầu đặt lịch. Backend xử lý được các yêu cầu đặt
+lịch, xác nhận lịch qua email, hủy lịch, đặt lại lịch, gửi thông tin sau khám và quản
+lý dữ liệu hệ thống. Các chức năng dành cho bác sĩ và quản trị viên cũng hoạt động
+theo đúng vai trò đã thiết kế.
+Bảng 4.19:Kết quả triển khai thử nghiệm
+Tiêu chí Kết quả
+Truy cập frontend Giao diện truy cập được qua
+http://localhost :3000.
+Truy cập backend API API hoạt động quahttp://localhost :8080.
+Kết nối cơ sở dữ liệu Backend kết nối và truy vấn dữ liệu MySQL thành
+công.
+Đặt lịch khám Tạo lịch hẹn, cập nhật số lượng khung giờ và gửi email
+xác nhận thành công.
+Xác nhận lịch khám Link xác nhận email chuyển trạng thái lịch hẹn từ chờ
+xác nhận sang đã xác nhận.
+Quản lý lịch hẹn Bệnh nhân xem được lịch hẹn, hủy lịch và đặt lại lịch.
+Quản lý bệnh nhân Bác sĩ xem được danh sách bệnh nhân đã xác nhận lịch
+theo ngày.
+Quản trị dữ liệu Quản trị viên quản lý được người dùng, bác sĩ, chuyên
+khoa, cơ sở y tế và lịch làm việc.
+Trong quá trình thử nghiệm, hệ thống được kiểm tra với dữ liệu mẫu gồm nhiều
+bác sĩ, chuyên khoa và cơ sở y tế để đánh giá khả năng hiển thị danh sách, tìm
+kiếm, lọc dữ liệu và mở rộng dữ liệu trên trang chủ. Các danh sách có số lượng lớn
+được xử lý bằng cơ chế giới hạn hiển thị ban đầu, xem thêm, tìm kiếm hoặc phân
+trang tùy theo từng màn hình. Điều này giúp giao diện không bị quá tải khi dữ liệu
+tăng lên.
+Do hệ thống mới được triển khai trong môi trường thử nghiệm cục bộ, đồ án
+chưa thực hiện kiểm thử tải chính thức với số lượng lớn người dùng đồng thời. Tuy
+nhiên, các thao tác nghiệp vụ chính trong quá trình kiểm thử thủ công như tra cứu
+bác sĩ, tải lịch khám, đặt lịch, xác nhận lịch và hủy lịch đều phản hồi ổn định trong
+phạm vi dữ liệu mẫu. Trong tương lai, nếu triển khai thực tế, hệ thống có thể được
+đưa lên máy chủ cloud, sử dụng cơ sở dữ liệu MySQL riêng, cấu hình domain,
+HTTPS, cơ chế sao lưu dữ liệu định kỳ và công cụ giám sát hiệu năng để đảm bảo
+khả năng vận hành lâu dài.
+51
+
+
+===== PAGE 64 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+Các chương trước đã trình bày bối cảnh, yêu cầu, nền tảng công nghệ và quá
+trình thiết kế, xây dựng hệ thống. Chương này tập trung phân tích các đóng góp kỹ
+thuật quan trọng nhất của đồ án. Nội dung chương không lặp lại phần thiết kế tổng
+quan, mà đi sâu vào các vấn đề khó trong quá trình phát triển hệ thống đặt lịch
+khám bệnh trực tuyến, bao gồm kiểm soát đặt lịch trùng, xác thực lịch hẹn, quản lý
+vòng đời trạng thái, hỗ trợ đặt lại lịch và tổ chức dữ liệu danh mục dùng chung.
+5.1 Cơ chế chống đặt lịch trùng và kiểm soát sức chứa khung giờ
+5.1.1 Bài toán đặt ra
+Trong hệ thống đặt lịch khám bệnh, vấn đề quan trọng nhất là đảm bảo một
+khung giờ của bác sĩ không bị đặt vượt quá số lượng cho phép. Nếu hệ thống chỉ
+kiểm tra trạng thái lịch ở phía giao diện, người dùng vẫn có thể gửi nhiều yêu cầu
+đặt lịch gần như đồng thời hoặc can thiệp trực tiếp vào API. Điều này có thể dẫn
+đến tình trạng hai bệnh nhân cùng được ghi nhận vào một khung giờ vốn chỉ còn
+một vị trí trống.
+Bài toán trở nên phức tạp hơn khi lịch hẹn có nhiều trạng thái khác nhau. Một
+lịch đã hủy không nên tiếp tục chiếm chỗ trong khung giờ, trong khi lịch đang chờ
+xác nhận hoặc đã xác nhận vẫn cần được tính là lịch đang hoạt động. Vì vậy, hệ
+thống cần có cơ chế kiểm soát ở phía backend, nơi trực tiếp thao tác với cơ sở dữ
+liệu, thay vì chỉ dựa vào trạng thái hiển thị trên frontend.
+5.1.2 Giải pháp
+Giải pháp của đồ án là đặt toàn bộ logic kiểm soát sức chứa khung giờ trong
+tầng Service của backend. Khi bệnh nhân gửi yêu cầu đặt lịch, hệ thống không tạo
+Booking ngay lập tức mà thực hiện một chuỗi kiểm tra gồm: xác định Schedule
+tương ứng với bác sĩ, ngày khám và khung giờ; khóa bản ghi Schedule trong trans-
+action; đếm số Booking đang hoạt động của khung giờ; so sánh với maxNumber;
+sau đó mới cho phép tạo Booking nếu khung giờ còn khả dụng.
+Các Booking được xem là đang hoạt động là các lịch có trạng thái khác đã
+hủy. Nhờ đó, những lịch đã hủy không còn chiếm chỗ trong Schedule. Sau khi tạo
+Booking thành công, hệ thống cập nhật currentNumber của Schedule. Trong trường
+hợp có lỗi trước khi commit transaction, toàn bộ thao tác được rollback để không
+tạo dữ liệu dang dở.
+Về mặt thuật toán, luồng xử lý có thể khái quát như sau:
+1. Nhận yêu cầu đặt lịch gồm doctorId, date, timeT ype và thông tin bệnh nhân.
+52
+
+
+===== PAGE 65 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+2. Mở transaction tại tầng backend.
+3. Tìm Schedule tương ứng và khóa bản ghi để tránh cập nhật đồng thời.
+4. Đếm số Booking đang hoạt động trong cùng doctorId, date và timeT ype.
+5. Nếu số lượng đã đạt giới hạn, rollback transaction và trả lỗi.
+6. Nếu còn chỗ, tạo Booking ở trạng thái chờ xác nhận.
+7. Cập nhật currentNumber của Schedule.
+8. Commit transaction và gửi email xác nhận cho bệnh nhân.
+5.1.3 Kết quả đạt được
+Cơ chế này giúp hệ thống hạn chế tình trạng đặt trùng lịch ở tầng dữ liệu, kể
+cả khi nhiều yêu cầu đặt lịch được gửi trong thời gian ngắn. Các khung giờ đã có
+người đặt hoặc đã hết số lượng được trả về frontend với trạng thái không khả dụng,
+từ đó giao diện có thể hiển thị màu xám và vô hiệu hóa nút đặt lịch. Nhờ vậy, hệ
+thống không chỉ kiểm soát đúng ở backend mà còn phản ánh trực quan cho bệnh
+nhân ở frontend.
+5.2 Cơ chế xác thực lịch hẹn bằng Token qua Email
+5.2.1 Bài toán đặt ra
+Nếu hệ thống chuyển lịch hẹn sang trạng thái đã xác nhận ngay khi bệnh nhân
+bấm nút đặt lịch, hệ thống sẽ dễ gặp tình trạng lịch ảo. Người dùng có thể nhập
+nhầm email, đặt thử hoặc không thực sự có nhu cầu khám. Khi đó, khung giờ của
+bác sĩ bị chiếm dụng nhưng bệnh nhân không đến khám, làm giảm hiệu quả điều
+phối lịch làm việc.
+Vì vậy, lịch hẹn cần có một bước xác thực trung gian. Bệnh nhân phải chứng
+minh rằng email là hợp lệ và họ thật sự muốn xác nhận lịch khám. Đồng thời, bước
+xác thực này phải đủ đơn giản để không gây khó khăn cho người dùng phổ thông.
+5.2.2 Giải pháp
+Đồ án sử dụng cơ chế token xác nhận qua email. Khi bệnh nhân đặt lịch thành
+công, hệ thống tạo Booking với trạng thái chờ xác nhận và sinh một chuỗi token
+duy nhất bằng thư viện uuid. Token này được gắn với Booking và được đưa vào
+đường dẫn xác nhận gửi tới email của bệnh nhân.
+Khi bệnh nhân bấm vào liên kết xác nhận, frontend gửi token và doctorId về
+backend. Backend tìm Booking tương ứng với token, doctorId và trạng thái chờ xác
+nhận. Nếu tìm thấy bản ghi hợp lệ, hệ thống cập nhật trạng thái lịch hẹn sang đã
+xác nhận. Nếu token sai, lịch đã bị hủy hoặc lịch đã được xác nhận trước đó, hệ
+53
+
+
+===== PAGE 66 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+thống từ chối thao tác và trả về thông báo phù hợp.
+Một điểm đáng chú ý là trong luồng đặt lịch, email được gửi sau khi dữ liệu đặt
+lịch đã được ghi nhận. Nếu phát sinh lỗi gửi email, hệ thống có cơ chế xử lý lại
+Booking đã tạo bằng cách chuyển lịch về trạng thái đã hủy và đồng bộ lại số lượng
+của Schedule. Điều này giúp hạn chế tình trạng khung giờ bị giữ chỗ nhưng bệnh
+nhân không nhận được email xác nhận.
+5.2.3 Kết quả đạt được
+Cơ chế token qua email giúp hệ thống kiểm soát tốt hơn vòng đời của lịch hẹn.
+Một lịch hẹn chỉ được bác sĩ nhìn thấy trong danh sách bệnh nhân sau khi bệnh
+nhân xác nhận qua email. Điều này làm giảm khả năng xuất hiện lịch ảo và giúp
+bác sĩ chỉ tiếp nhận các lịch hẹn có mức độ tin cậy cao hơn. Ngoài ra, việc sử dụng
+email cũng tạo ra một kênh thông báo rõ ràng cho bệnh nhân về thời gian khám,
+bác sĩ và trạng thái lịch hẹn.
+5.3 Mô hình quản lý vòng đời trạng thái lịch hẹn
+5.3.1 Bài toán đặt ra
+Một lịch khám không chỉ có hai trạng thái là tồn tại hoặc không tồn tại. Trong
+thực tế, lịch khám có thể trải qua nhiều giai đoạn: bệnh nhân vừa gửi yêu cầu, bệnh
+nhân đã xác nhận, bác sĩ đã khám xong hoặc lịch bị hủy. Nếu không mô hình hóa
+rõ các trạng thái này, hệ thống sẽ khó xác định lịch nào được hiển thị cho bác sĩ,
+lịch nào bệnh nhân còn được hủy, lịch nào đã hoàn tất và lịch nào không còn chiếm
+chỗ trong khung giờ.
+Bài toán này liên quan trực tiếp đến cả ba phân hệ. Bệnh nhân cần xem lịch sử
+đặt khám và trạng thái hiện tại. Bác sĩ chỉ cần xem các lịch đã xác nhận để chuẩn
+bị khám. Quản trị viên cần dữ liệu nhất quán để quản lý hệ thống. Do đó, trạng thái
+lịch hẹn phải được quản lý thống nhất ở backend và phản ánh chính xác trên giao
+diện.
+5.3.2 Giải pháp
+Đồ án thiết kế vòng đời Booking theo bốn trạng thái chính: chờ xác nhận, đã xác
+nhận, đã khám và đã hủy. Trạng thái chờ xác nhận được tạo ra sau khi bệnh nhân
+gửi yêu cầu đặt lịch. Trạng thái đã xác nhận được thiết lập sau khi bệnh nhân bấm
+liên kết xác nhận email. Trạng thái đã khám được cập nhật khi bác sĩ gửi thông tin
+sau khám. Trạng thái đã hủy được dùng khi bệnh nhân hoặc bác sĩ hủy lịch.
+Mỗi thao tác nghiệp vụ chỉ được phép chuyển trạng thái theo một số hướng hợp
+lệ. Ví dụ, Booking ở trạng thái chờ xác nhận có thể chuyển sang đã xác nhận hoặc
+đã hủy. Booking ở trạng thái đã xác nhận có thể chuyển sang đã khám hoặc đã
+54
+
+
+===== PAGE 67 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+hủy. Booking đã khám không được bệnh nhân hủy nữa. Booking đã hủy không còn
+được tính là lịch đang hoạt động trong khung giờ.
+Việc quản lý trạng thái được triển khai thống nhất trong các service backend.
+Các API lấy lịch khám, lấy danh sách bệnh nhân, hủy lịch, gửi thông tin sau khám
+đều dựa trên statusId của Booking. Nhờ đó, cùng một dữ liệu Booking có thể phục
+vụ nhiều màn hình khác nhau mà không cần tạo các bảng trạng thái riêng biệt.
+5.3.3 Kết quả đạt được
+Mô hình trạng thái giúp hệ thống quản lý được toàn bộ vòng đời lịch khám một
+cách rõ ràng. Bệnh nhân có thể xem lịch sử với các trạng thái cụ thể. Bác sĩ chỉ
+nhìn thấy các lịch đã xác nhận theo ngày khám. Khi bác sĩ gửi thông tin sau khám,
+lịch được chuyển sang đã khám. Khi lịch bị hủy, khung giờ được giải phóng và giao
+diện có thể cập nhật lại. Đây là cơ sở quan trọng để hệ thống vận hành ổn định và
+giảm sai lệch dữ liệu giữa các vai trò người dùng.
+5.4 Cơ chế đặt lại lịch sau khi hủy
+5.4.1 Bài toán đặt ra
+Trong thực tế, bệnh nhân có thể không đến khám đúng lịch đã đặt vì thay đổi
+thời gian cá nhân hoặc do bác sĩ hủy lịch. Nếu hệ thống chỉ cho phép hủy lịch mà
+không hỗ trợ đặt lại, bệnh nhân phải thực hiện lại toàn bộ quy trình từ đầu, bao
+gồm nhập lại họ tên, email, địa chỉ, giới tính và lý do khám. Điều này làm tăng số
+thao tác và giảm trải nghiệm người dùng.
+Bên cạnh đó, việc đặt lại lịch không thể chỉ là tạo một Booking mới tùy ý. Hệ
+thống cần đảm bảo lịch cũ đã bị hủy, bệnh nhân đặt lại đúng lịch của mình, khung
+giờ mới còn khả dụng và lịch mới vẫn phải đi qua bước xác nhận email.
+5.4.2 Giải pháp
+Đồ án xây dựng cơ chế đặt lại lịch dựa trên Booking đã hủy. Khi bệnh nhân chọn
+đặt lại, frontend lưu ngữ cảnh lịch hẹn cũ và điều hướng người dùng đến luồng chọn
+khung giờ mới. Khi bệnh nhân chọn khung giờ khác, backend tiếp nhận bookingId
+cũ, doctorId, date và timeT ype mới.
+Ở backend, hệ thống kiểm tra Booking cũ phải tồn tại và có trạng thái đã hủy.
+Tiếp đó, hệ thống kiểm tra bệnh nhân hiện tại có khớp với bệnh nhân của Booking
+cũ hay không. Sau đó, hệ thống khóa Schedule của khung giờ mới, đếm số Booking
+đang hoạt động và chỉ tạo Booking mới nếu khung giờ còn trống. Booking mới sử
+dụng lại patientId và lý do khám từ lịch cũ, nhưng sinh token xác nhận mới và
+chuyển về trạng thái chờ xác nhận.
+Luồng này vẫn tuân thủ nguyên tắc xác thực email. Sau khi đặt lại, bệnh nhân
+55
+
+
+===== PAGE 68 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+tiếp tục nhận email xác nhận mới. Chỉ khi bệnh nhân xác nhận, lịch mới được
+chuyển sang trạng thái đã xác nhận và hiển thị cho bác sĩ.
+5.4.3 Kết quả đạt được
+Cơ chế đặt lại lịch giúp giảm đáng kể thao tác lặp lại cho bệnh nhân. Người dùng
+không cần nhập lại toàn bộ thông tin cá nhân như lần đặt đầu tiên, nhưng hệ thống
+vẫn đảm bảo kiểm tra quyền sở hữu lịch cũ, kiểm soát sức chứa khung giờ mới và
+xác nhận lại qua email. Đây là một cải tiến quan trọng về trải nghiệm người dùng,
+đồng thời vẫn giữ được tính an toàn của dữ liệu lịch hẹn.
+5.5 Tổ chức dữ liệu danh mục dùng chung bằng Allcode
+5.5.1 Bài toán đặt ra
+Hệ thống đặt lịch khám bệnh sử dụng nhiều nhóm dữ liệu danh mục như giới
+tính, chức danh bác sĩ, vai trò người dùng, khung giờ khám, giá khám, tỉnh thành,
+phương thức thanh toán và trạng thái lịch hẹn. Nếu mỗi nhóm dữ liệu được lưu
+bằng một bảng riêng hoặc viết cứng trực tiếp trong mã nguồn, hệ thống sẽ khó mở
+rộng và dễ phát sinh sai lệch giữa frontend và backend.
+Ngoài ra, hệ thống có hỗ trợ giao diện tiếng Việt và tiếng Anh, vì vậy các danh
+mục cần có khả năng hiển thị theo nhiều ngôn ngữ. Ví dụ, cùng một mã khung giờ
+hoặc giới tính cần có giá trị hiển thị tiếng Việt và tiếng Anh tùy theo ngôn ngữ giao
+diện.
+5.5.2 Giải pháp
+Đồ án sử dụng bảng Allcode làm nơi lưu trữ tập trung các danh mục dùng chung.
+Mỗi bản ghi Allcode gồm keyMap, type, valueEn và valueVi. Trong đó, keyMap
+là mã định danh dùng để liên kết với các bảng khác, type cho biết nhóm danh mục,
+còn valueEn và valueVi phục vụ hiển thị song ngữ.
+Các bảng như Users, Schedules, Bookings và Doctor_Infor liên kết đến Allcode
+thông qua các trường như gender, positionId, timeT ype, statusId, priceId, provin-
+ceId và paymentId. Nhờ đó, hệ thống chỉ cần lưu mã trong bảng nghiệp vụ, còn nội
+dung hiển thị được lấy từ Allcode. Khi cần bổ sung danh mục mới, hệ thống có thể
+thêm bản ghi vào Allcode thay vì sửa nhiều đoạn mã nguồn.
+5.5.3 Kết quả đạt được
+Cách tổ chức Allcode giúp dữ liệu danh mục của hệ thống nhất quán và dễ mở
+rộng. Các màn hình frontend có thể hiển thị đúng ngôn ngữ dựa trên valueEn hoặc
+valueVi. Backend có thể truy vấn dữ liệu liên quan thông qua Sequelize association
+để trả về đầy đủ thông tin hiển thị cho frontend. Giải pháp này đặc biệt hữu ích với
+các thành phần thường xuyên được dùng lại như khung giờ khám, giới tính, tỉnh
+56
+
+
+===== PAGE 69 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+thành và trạng thái lịch hẹn.
+5.6 Tối ưu trải nghiệm đặt lịch cho bệnh nhân
+5.6.1 Bài toán đặt ra
+Một hệ thống đặt lịch khám bệnh không chỉ cần xử lý đúng nghiệp vụ mà còn
+phải giúp người dùng dễ thao tác. Nếu chức năng đặt lịch bị ẩn sâu trong giao diện,
+bệnh nhân có thể mất nhiều bước để bắt đầu. Nếu form đặt lịch yêu cầu nhập lại
+quá nhiều thông tin, người dùng dễ bỏ dở. Nếu khung giờ đã đặt không được phân
+biệt rõ với khung giờ trống, người dùng dễ nhầm lẫn khi chọn lịch.
+Vì vậy, đồ án cần giải quyết đồng thời hai vấn đề: làm nổi bật chức năng đặt lịch
+và giảm số thao tác cần thiết để hoàn tất một lịch hẹn.
+5.6.2 Giải pháp
+Ở trang chủ, hệ thống bổ sung nút đặt lịch nhanh dạng cố định để bệnh nhân
+có thể bắt đầu đặt lịch từ bất kỳ vị trí nào. Khi bấm vào nút này, bệnh nhân được
+chọn hướng đặt lịch theo chuyên khoa hoặc cơ sở y tế. Trên các trang danh sách,
+hệ thống hỗ trợ lọc bác sĩ theo tỉnh thành và khung giờ, giúp người dùng tìm nhanh
+bác sĩ có lịch phù hợp.
+Ở trang chi tiết bác sĩ, khung giờ khám được hiển thị trực quan theo trạng thái.
+Khung giờ còn trống có thể nhấn để mở modal đặt lịch. Khung giờ đã được đặt
+hoặc hết chỗ được làm mờ và vô hiệu hóa. Trong modal đặt lịch, các thông tin cá
+nhân đã có trong hồ sơ người dùng được điền sẵn, bệnh nhân chủ yếu chỉ cần nhập
+lý do khám.
+Ngoài ra, hệ thống cung cấp modal lịch hẹn cá nhân ở giao diện bệnh nhân.
+Người dùng có thể xem trạng thái lịch hẹn, hủy lịch hoặc đặt lại lịch mà không cần
+truy cập một trang quản trị phức tạp.
+5.6.3 Kết quả đạt được
+Các cải tiến giao diện giúp quy trình đặt lịch trở nên ngắn gọn và rõ ràng hơn.
+Bệnh nhân có thể bắt đầu từ trang chủ, lọc bác sĩ theo nhu cầu, chọn khung giờ khả
+dụng, đặt lịch và theo dõi trạng thái lịch hẹn trên cùng một hệ thống. Việc tự động
+điền thông tin cá nhân giúp giảm lỗi nhập liệu, còn việc vô hiệu hóa khung giờ đã
+được đặt giúp người dùng nhận biết trực quan trạng thái lịch khám.
+5.7 Đảm bảo an toàn dữ liệu trong môi trường triển khai cục bộ
+5.7.1 Bài toán đặt ra
+Trong phạm vi đồ án, hệ thống được triển khai thử nghiệm trên môi trường cục
+bộ với MySQL thông qua XAMPP hoặc một dịch vụ MySQL tương đương. Cách
+57
+
+
+===== PAGE 70 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+triển khai này thuận tiện cho quá trình phát triển và kiểm thử, tuy nhiên tồn tại một
+số rủi ro về độ bền dữ liệu. Khi máy tính bị tắt đột ngột, mất điện hoặc MySQL
+bị dừng không đúng quy trình, dữ liệu có thể gặp các vấn đề như transaction chưa
+kịp ghi hoàn tất, bảng bị lỗi, dữ liệu chưa được flush xuống đĩa hoặc file dữ liệu bị
+hỏng trong trường hợp nghiêm trọng.
+Với hệ thống đặt lịch khám bệnh, dữ liệu có tính liên kết chặt chẽ giữa lịch làm
+việc, lịch hẹn, bệnh nhân và trạng thái xử lý. Vì vậy, nếu xảy ra mất dữ liệu hoặc
+sai lệch dữ liệu sau sự cố, hệ thống có thể hiển thị sai khung giờ trống, mất lịch hẹn
+đã tạo hoặc không đồng bộ được số lượng bệnh nhân trong từng khung giờ. Đây là
+vấn đề quan trọng vì dữ liệu lịch hẹn ảnh hưởng trực tiếp đến quá trình vận hành
+thực tế.
+5.7.2 Giải pháp
+Trong phạm vi hiện tại, đồ án đã sử dụng cơ sở dữ liệu quan hệ MySQL và
+Sequelize migration để quản lý cấu trúc dữ liệu. Các file migration giúp tái tạo lại
+cấu trúc bảng như Users, Bookings, Schedules, Specialties, Clinics và Allcodes khi
+cần khởi tạo lại môi trường. Đối với các thao tác nhạy cảm như đặt lịch và đặt lại
+lịch, hệ thống sử dụng transaction ở tầng backend nhằm hạn chế tình trạng chỉ cập
+nhật được một phần dữ liệu.
+Tuy nhiên, migration chỉ giúp khôi phục cấu trúc bảng, không thay thế được cơ
+chế sao lưu dữ liệu nghiệp vụ. Vì vậy, khi triển khai thực tế, hệ thống cần bổ sung
+chiến lược backup định kỳ cho MySQL. Cách tiếp cận phù hợp là thực hiện sao
+lưu bằng công cụ như mysqldump, lưu trữ bản backup theo ngày và kiểm tra khả
+năng phục hồi dữ liệu. Ngoài ra, nên sử dụng engine InnoDB để tận dụng khả năng
+transaction và crash recovery của MySQL. Trong môi trường vận hành thật, hệ
+thống nên được triển khai trên máy chủ ổn định hoặc dịch vụ cơ sở dữ liệu chuyên
+dụng thay vì phụ thuộc hoàn toàn vào môi trường XAMPP cục bộ.
+5.7.3 Kết quả đạt được
+Ở mức đồ án, hệ thống đã có cấu trúc cơ sở dữ liệu rõ ràng, có migration và có
+transaction cho các luồng nghiệp vụ quan trọng. Điều này giúp giảm rủi ro sai lệch
+dữ liệu khi xảy ra lỗi trong quá trình xử lý đặt lịch. Tuy nhiên, việc chống mất dữ
+liệu do sự cố phần cứng, mất điện hoặc hỏng môi trường MySQL cần được xem là
+hướng mở rộng khi triển khai thực tế. Bài toán này cho thấy hệ thống đặt lịch khám
+bệnh không chỉ cần đúng về mặt nghiệp vụ, mà còn cần có chiến lược bảo vệ dữ
+liệu lâu dài.
+58
+
+
+===== PAGE 71 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+5.8 Bài toán tích hợp chatbot hỗ trợ hỏi đáp theo dữ liệu nạp
+5.8.1 Bài toán đặt ra
+Ngoài các chức năng đặt lịch và quản lý lịch khám, hệ thống còn tích hợp chatbot
+hỗ trợ người dùng hỏi đáp dựa trên dữ liệu được nạp vào hệ thống. Chatbot có thể
+giúp người dùng tra cứu nhanh các thông tin dạng văn bản như hướng dẫn sử dụng,
+thông tin dịch vụ hoặc nội dung liên quan đến hệ thống. Tuy nhiên, việc tích hợp
+chatbot phát sinh một số vấn đề kỹ thuật riêng.
+Thứ nhất, chatbot không nên trả lời tùy tiện ngoài phạm vi dữ liệu của hệ thống,
+vì trong lĩnh vực y tế, câu trả lời sai có thể gây hiểu nhầm cho người dùng. Thứ hai,
+dữ liệu cung cấp cho chatbot cần được nạp và quản lý rõ ràng, tránh trường hợp
+chatbot không có dữ liệu nhưng vẫn cố tạo câu trả lời. Thứ ba, hệ thống chatbot phụ
+thuộc vào dịch vụ mô hình ngôn ngữ cục bộ Ollama, nên nếu Ollama chưa chạy
+hoặc model chưa được tải, chức năng chat có thể không hoạt động. Thứ tư, việc sử
+dụng vector store trong bộ nhớ có thể gây mất dữ liệu đã index khi backend khởi
+động lại nếu không có cơ chế lưu trữ bổ trợ.
+5.8.2 Giải pháp
+Đồ án triển khai chatbot theo hướng Retrieval-Augmented Generation. Dữ liệu
+được nạp vào hệ thống thông qua hai dạng là văn bản thường và JSON. Sau khi ad-
+min upload dữ liệu, backend tách văn bản thành các đoạn nhỏ bằng RecursiveChar-
+acterTextSplitter, chuyển các đoạn này thành vector embedding bằng mô hình em-
+bedding của Ollama và lưu vào MemoryVectorStore. Khi người dùng đặt câu hỏi,
+hệ thống truy xuất các đoạn dữ liệu gần nhất trong vector store và đưa vào prompt
+để mô hình sinh câu trả lời.
+Để hạn chế việc chatbot trả lời ngoài phạm vi dữ liệu, prompt được thiết kế theo
+nguyên tắc chỉ trả lời dựa trên phần CONTEXT được cung cấp. Nếu không đủ dữ
+liệu trong CONTEXT, chatbot cần thông báo rằng cần thêm dữ liệu thay vì tự suy
+diễn. Đây là cách tiếp cận phù hợp với hệ thống y tế vì giúp giảm rủi ro trả lời sai
+hoặc bịa thông tin.
+Về phân quyền, chức năng upload dữ liệu chỉ hiển thị cho tài khoản quản trị
+viên. Người dùng thông thường chỉ có thể sử dụng chức năng chat. Điều này giúp
+kiểm soát nguồn dữ liệu đầu vào của chatbot, tránh việc người dùng bất kỳ nạp dữ
+liệu sai hoặc dữ liệu không phù hợp vào hệ thống. Backend cũng cung cấp API
+kiểm tra trạng thái chatbot để frontend biết được vector store hiện có bao nhiêu
+chunk dữ liệu và dịch vụ Ollama có phản hồi hay không.
+Để giảm rủi ro mất dữ liệu chatbot sau khi backend khởi động lại, hệ thống có
+59
+
+
+===== PAGE 72 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+cơ chế lưu dữ liệu upload vào file persisted dạng JSON. Khi server khởi động, dữ
+liệu này được đọc lại và tái tạo vector store. Cách làm này phù hợp với phạm vi đồ
+án vì đơn giản và dễ triển khai. Tuy nhiên, nếu triển khai thực tế, hệ thống nên thay
+MemoryVectorStore bằng một vector database bền vững hơn như Chroma, FAISS,
+Qdrant hoặc pgvector để tránh phải tái tạo toàn bộ vector store mỗi lần khởi động.
+5.8.3 Kết quả đạt được
+Chức năng chatbot đã bổ sung thêm một kênh hỗ trợ tương tác cho hệ thống.
+Admin có thể nạp dữ liệu dạng text hoặc JSON, còn người dùng có thể đặt câu hỏi
+và nhận phản hồi dựa trên dữ liệu đã nạp. Việc sử dụng RAG giúp chatbot có cơ
+sở dữ liệu tham chiếu thay vì chỉ dựa vào khả năng sinh văn bản của mô hình ngôn
+ngữ.
+Tuy nhiên, chatbot hiện vẫn còn một số giới hạn cần lưu ý. Chất lượng câu trả
+lời phụ thuộc nhiều vào dữ liệu admin upload và khả năng truy xuất đúng ngữ cảnh
+của vector store. Nếu dữ liệu nạp thiếu, chatbot không thể trả lời chính xác. Nếu
+Ollama chưa chạy hoặc model chưa được tải, chức năng chatbot sẽ báo lỗi kết nối.
+Ngoài ra, do vector store hiện tại nằm trong bộ nhớ, hệ thống cần cơ chế lưu trữ
+bền vững hơn nếu mở rộng chatbot cho môi trường thực tế.
+5.9 Kiểm soát dữ liệu nhạy cảm khi tích hợp chatbot
+5.9.1 Bài toán đặt ra
+Dữ liệu trong hệ thống y tế có thể chứa thông tin cá nhân của bệnh nhân như họ
+tên, email, số điện thoại, địa chỉ, ngày sinh, giới tính, lý do khám hoặc thông tin
+sau khám. Khi tích hợp chatbot, nếu dữ liệu nhạy cảm được upload trực tiếp vào
+kho tri thức của chatbot mà không kiểm soát, hệ thống có thể vô tình làm lộ thông
+tin cá nhân trong câu trả lời. Đây là một rủi ro quan trọng vì chatbot có khả năng
+truy xuất và diễn giải lại nội dung đã được nạp.
+5.9.2 Giải pháp
+Trong phạm vi đồ án, chatbot được thiết kế theo hướng chỉ admin mới được
+upload dữ liệu. Đây là lớp kiểm soát đầu tiên nhằm tránh việc người dùng thông
+thường tự ý đưa dữ liệu không phù hợp vào hệ thống. Ngoài ra, prompt của chatbot
+được giới hạn để chỉ trả lời dựa trên dữ liệu ngữ cảnh, không tự suy diễn thông tin
+ngoài dữ liệu được cung cấp.
+Khi triển khai thực tế, hệ thống cần bổ sung quy trình làm sạch dữ liệu trước khi
+upload vào chatbot. Các thông tin nhận diện cá nhân như email, số điện thoại, địa
+chỉ hoặc mã lịch hẹn cần được ẩn danh hoặc loại bỏ nếu không phục vụ trực tiếp
+cho mục đích hỏi đáp. Ngoài ra, dữ liệu đưa vào chatbot nên là dữ liệu hướng dẫn,
+60
+
+
+===== PAGE 73 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+mô tả dịch vụ, quy trình đặt lịch hoặc câu hỏi thường gặp, không nên là dữ liệu hồ
+sơ bệnh nhân cụ thể.
+5.9.3 Kết quả đạt được
+Việc phân quyền upload dữ liệu cho admin giúp giảm rủi ro dữ liệu đầu vào bị
+mất kiểm soát. Thiết kế chatbot dựa trên dữ liệu nạp cũng giúp hệ thống có thể
+chủ động giới hạn phạm vi trả lời. Tuy nhiên, vấn đề bảo vệ dữ liệu nhạy cảm vẫn
+cần được xem là yêu cầu quan trọng nếu hệ thống phát triển chatbot sâu hơn trong
+tương lai. Đây là cơ sở để mở rộng thêm các cơ chế ẩn danh hóa dữ liệu, kiểm duyệt
+dữ liệu upload và ghi log các lượt truy vấn chatbot.
+5.10 Đánh giá chung các đóng góp
+Các giải pháp được trình bày trong chương này tạo thành phần lõi của hệ thống
+đặt lịch khám bệnh trực tuyến. Trong đó, cơ chế chống đặt lịch trùng giải quyết vấn
+đề quan trọng nhất của bài toán điều phối lịch khám. Cơ chế token email giúp lịch
+hẹn có bước xác nhận rõ ràng. Mô hình trạng thái Booking giúp hệ thống quản lý
+đầy đủ vòng đời lịch hẹn. Cơ chế đặt lại lịch cải thiện trải nghiệm bệnh nhân mà
+vẫn đảm bảo kiểm soát dữ liệu. Bảng Allcode giúp chuẩn hóa danh mục và hỗ trợ
+mở rộng song ngữ.
+So với cách tiếp cận đặt lịch đơn giản chỉ lưu thông tin bệnh nhân và thời gian
+khám, hệ thống trong đồ án đã xử lý được nhiều tình huống thực tế hơn, bao gồm
+lịch chờ xác nhận, lịch bị hủy, lịch đã khám, khung giờ đã hết chỗ và đặt lại lịch
+sau khi hủy. Đây là các tình huống thường gặp trong vận hành y tế nhưng dễ bị bỏ
+sót nếu chỉ thiết kế hệ thống ở mức CRUD cơ bản.
+Tuy nhiên, hệ thống vẫn còn một số điểm có thể tiếp tục cải thiện. Cơ chế kiểm
+soát đặt lịch hiện được triển khai phù hợp với phạm vi dữ liệu thử nghiệm, nhưng
+nếu triển khai thực tế với số lượng người dùng đồng thời lớn, hệ thống cần được
+kiểm thử tải và tối ưu thêm ở tầng cơ sở dữ liệu. Ngoài ra, hệ thống hiện sử dụng
+email làm kênh xác nhận chính, trong khi thực tế có thể cần bổ sung SMS OTP
+hoặc thông báo qua ứng dụng di động để tăng tỷ lệ xác nhận lịch hẹn.
+5.11 Kết chương
+Chương 5 đã trình bày các đóng góp kỹ thuật quan trọng nhất của đồ án, tập
+trung vào những vấn đề khó trong quá trình xây dựng hệ thống đặt lịch khám bệnh
+trực tuyến. Các giải pháp như chống đặt lịch trùng, xác thực lịch hẹn bằng token
+email, quản lý vòng đời trạng thái Booking, đặt lại lịch sau khi hủy và tổ chức dữ
+liệu dùng chung bằng Allcode đã giúp hệ thống vượt ra khỏi phạm vi một ứng dụng
+CRUD thông thường. Những giải pháp này góp phần đảm bảo tính đúng đắn của
+61
+
+
+===== PAGE 74 =====
+CHƯƠNG 5. CÁC GIẢI PHÁP V À ĐÓNG GÓP NỔI BẬT
+dữ liệu, nâng cao trải nghiệm người dùng và tạo nền tảng để hệ thống tiếp tục mở
+rộng trong tương lai.
+62
+
+
+===== PAGE 75 =====
+CHƯƠNG 6. KẾT LUẬN V À HƯỚNG PHÁT TRIỂN
+Chương này tổng kết lại kết quả đạt được của đồ án, so sánh hệ thống đã xây
+dựng với một số hướng giải pháp tương tự, phân tích các đóng góp nổi bật, các hạn
+chế còn tồn tại và những bài học kinh nghiệm rút ra trong quá trình thực hiện. Trên
+cơ sở đó, chương cũng đề xuất các hướng phát triển tiếp theo nhằm hoàn thiện hệ
+thống và nâng cao khả năng ứng dụng thực tế trong tương lai.
+6.1 Kết luận
+Đồ án đã hoàn thành việc xây dựng một hệ thống web đặt lịch khám bệnh trực
+tuyến, tập trung vào quy trình tra cứu thông tin khám bệnh, đặt lịch, xác nhận lịch
+qua email, quản lý lịch hẹn của bệnh nhân, quản lý bệnh nhân đặt lịch của bác sĩ và
+quản trị dữ liệu nền tảng. Sản phẩm được triển khai theo kiến trúc Client-Server,
+sử dụng ReactJS cho phía giao diện, NodeJS/ExpressJS cho phía máy chủ, MySQL
+làm hệ quản trị cơ sở dữ liệu và Sequelize ORM để thao tác dữ liệu quan hệ.
+So với các phương thức đặt lịch truyền thống như gọi điện, ghi sổ, sử dụng bảng
+tính hoặc đăng ký trực tiếp tại quầy, hệ thống trong đồ án đã cải thiện rõ rệt khả
+năng tự động hóa quy trình. Bệnh nhân có thể chủ động tra cứu bác sĩ, chuyên
+khoa, cơ sở y tế, chọn khung giờ còn trống và đặt lịch trực tuyến. Bác sĩ có thể theo
+dõi danh sách bệnh nhân đã xác nhận theo ngày, còn quản trị viên có thể quản lý dữ
+liệu hệ thống một cách tập trung. Đặc biệt, hệ thống đã xử lý được các trạng thái
+chính của một lịch hẹn gồm chờ xác nhận, đã xác nhận, đã khám và đã hủy.
+So với các nền tảng đặt lịch khám trực tuyến quy mô lớn trên thị trường, sản
+phẩm của đồ án còn hạn chế về phạm vi dữ liệu, khả năng triển khai thực tế, thanh
+toán trực tuyến, nhắc lịch tự động qua SMS và kiểm thử tải. Tuy nhiên, hệ thống có
+ưu điểm là được thiết kế phù hợp với mô hình phòng khám hoặc cơ sở y tế quy mô
+vừa và nhỏ, có khả năng tùy biến dữ liệu chuyên khoa, cơ sở y tế, bác sĩ, lịch làm
+việc và nội dung mô tả. Ngoài ra, toàn bộ luồng nghiệp vụ đặt lịch được xây dựng
+rõ ràng, dễ mở rộng và dễ điều chỉnh theo yêu cầu vận hành cụ thể.
+Trong quá trình thực hiện đồ án, sinh viên đã hoàn thành các nhiệm vụ chính
+gồm khảo sát hiện trạng, phân tích yêu cầu, thiết kế use case, thiết kế kiến trúc,
+thiết kế cơ sở dữ liệu, xây dựng giao diện, phát triển backend API, tích hợp gửi
+email, kiểm thử chức năng và triển khai thử nghiệm cục bộ. Các chức năng trọng
+tâm đã được hiện thực gồm quản lý người dùng, quản lý bác sĩ, quản lý chuyên
+khoa, quản lý cơ sở y tế, thiết lập lịch làm việc, đặt lịch khám, xác nhận lịch qua
+email, hủy lịch, đặt lại lịch, xem lịch hẹn cá nhân và bác sĩ quản lý bệnh nhân đặt
+63
+
+
+===== PAGE 76 =====
+CHƯƠNG 6. KẾT LUẬN V À HƯỚNG PHÁT TRIỂN
+lịch.
+Đóng góp nổi bật nhất của đồ án là cơ chế kiểm soát đặt lịch theo khung giờ.
+Thay vì chỉ lưu thông tin đặt lịch đơn giản, hệ thống sử dụng bảng lịch làm việc
+để quản lý số lượng tối đa và số lượng hiện tại của từng khung giờ. Khi đặt lịch,
+backend kiểm tra trạng thái khung giờ, đếm các lịch hẹn đang hoạt động và cập
+nhật dữ liệu trong transaction. Cách tiếp cận này giúp hạn chế tình trạng đặt trùng
+hoặc vượt quá số lượng bệnh nhân trong cùng một khung giờ.
+Đóng góp thứ hai là cơ chế xác nhận lịch hẹn bằng token qua email. Lịch hẹn
+sau khi tạo không được chuyển ngay sang trạng thái đã xác nhận, mà cần bệnh nhân
+xác nhận thông qua liên kết gửi về email. Cơ chế này giúp giảm tình trạng lịch ảo
+và làm rõ vòng đời của lịch hẹn. Bên cạnh đó, hệ thống còn hỗ trợ gửi thông tin sau
+khám, hóa đơn hoặc đơn thuốc điện tử qua email cho bệnh nhân.
+Đóng góp thứ ba là mô hình quản lý trạng thái lịch hẹn tương đối đầy đủ. Hệ
+thống không chỉ hỗ trợ tạo lịch, mà còn cho phép hủy lịch, đặt lại lịch sau khi hủy
+và cập nhật trạng thái sau khi bác sĩ hoàn tất ca khám. Đây là điểm quan trọng giúp
+hệ thống gần hơn với quy trình vận hành thực tế, trong đó lịch khám có thể thay
+đổi theo nhiều tình huống khác nhau.
+Bên cạnh các kết quả đạt được, hệ thống vẫn còn một số hạn chế. Thứ nhất, hệ
+thống mới được triển khai thử nghiệm trong môi trường cục bộ, chưa triển khai
+chính thức trên máy chủ cloud với domain, HTTPS, cơ chế giám sát và sao lưu dữ
+liệu định kỳ. Thứ hai, hệ thống chưa có chức năng thanh toán trực tuyến, nhắc lịch
+tự động qua SMS hoặc thông báo đẩy. Thứ ba, chatbot mới dừng ở mức hỗ trợ hỏi
+đáp dựa trên dữ liệu được nạp, chưa có cơ chế đánh giá chất lượng câu trả lời, kiểm
+duyệt dữ liệu nhạy cảm hoặc lưu trữ vector bền vững bằng vector database chuyên
+dụng. Thứ tư, hệ thống chưa thực hiện kiểm thử tải với số lượng lớn người dùng
+đồng thời.
+Qua quá trình thực hiện đồ án, sinh viên rút ra một số bài học kinh nghiệm quan
+trọng. Trước hết, với các hệ thống có dữ liệu trạng thái như đặt lịch khám, việc
+thiết kế vòng đời dữ liệu cần được thực hiện ngay từ giai đoạn đầu, vì trạng thái
+ảnh hưởng trực tiếp đến giao diện, API và cơ sở dữ liệu. Tiếp theo, các thao tác có
+nguy cơ sai lệch dữ liệu như đặt lịch, hủy lịch hoặc đặt lại lịch cần được xử lý ở
+backend và có cơ chế transaction để đảm bảo tính nhất quán. Ngoài ra, trải nghiệm
+người dùng cũng là yếu tố quan trọng; một chức năng đúng về mặt kỹ thuật nhưng
+khó tìm hoặc khó thao tác vẫn có thể làm giảm hiệu quả sử dụng. Cuối cùng, việc
+tách mã nguồn theo các tầng route, controller, service và model giúp quá trình phát
+triển, sửa lỗi và mở rộng hệ thống thuận lợi hơn.
+64
+
+
+===== PAGE 77 =====
+CHƯƠNG 6. KẾT LUẬN V À HƯỚNG PHÁT TRIỂN
+Nhìn chung, đồ án đã đạt được mục tiêu xây dựng một hệ thống web đặt lịch
+khám bệnh trực tuyến có quy trình nghiệp vụ tương đối hoàn chỉnh. Hệ thống đã
+giải quyết được các vấn đề chính như tra cứu thông tin khám bệnh, đặt lịch, chống
+đặt trùng khung giờ, xác nhận qua email, quản lý lịch hẹn và hỗ trợ bác sĩ xử lý
+bệnh nhân sau khám. Đây là nền tảng phù hợp để tiếp tục hoàn thiện thành một sản
+phẩm có khả năng triển khai thực tế.
+6.2 Hướng phát triển
+Trong tương lai, hệ thống cần được hoàn thiện theo hai hướng chính. Hướng thứ
+nhất là hoàn thiện các chức năng đã có để tăng độ ổn định, bảo mật và khả năng
+vận hành thực tế. Hướng thứ hai là mở rộng thêm các chức năng mới nhằm nâng
+cao giá trị sử dụng của hệ thống đối với bệnh nhân, bác sĩ và cơ sở y tế.
+Trước hết, hệ thống cần được triển khai trên môi trường máy chủ thực tế thay vì
+chỉ chạy cục bộ. Backend có thể được triển khai trên cloud server hoặc nền tảng
+PaaS, frontend có thể được build và phục vụ qua web server, còn cơ sở dữ liệu
+MySQL nên được đặt trên dịch vụ cơ sở dữ liệu riêng. Khi triển khai thực tế, hệ
+thống cần cấu hình domain, HTTPS, biến môi trường an toàn, cơ chế ghi log, giám
+sát lỗi và cảnh báo khi server gặp sự cố.
+Tiếp theo, cơ sở dữ liệu cần được bổ sung cơ chế sao lưu và phục hồi. Trong
+môi trường thử nghiệm như XAMPP hoặc MySQL cục bộ, dữ liệu có thể gặp rủi
+ro khi máy bị tắt đột ngột hoặc mất điện. Vì vậy, khi vận hành thực tế, hệ thống
+cần có lịch backup tự động, lưu nhiều phiên bản backup theo ngày và kiểm thử khả
+năng phục hồi định kỳ. Ngoài ra, các bảng quan trọng như Bookings, Schedules và
+Users cần được tối ưu chỉ mục để tăng tốc truy vấn khi dữ liệu lớn.
+Về bảo mật, hệ thống cần tiếp tục hoàn thiện cơ chế xác thực và phân quyền.
+Các API quản trị nên được bảo vệ bằng token xác thực như JWT hoặc session bảo
+mật. Hệ thống cần bổ sung kiểm tra quyền ở backend cho từng nhóm vai trò, giới
+hạn số lần đăng nhập sai, mã hóa thông tin nhạy cảm và ghi log các thao tác quan
+trọng như tạo lịch, hủy lịch, sửa thông tin bác sĩ hoặc xóa dữ liệu. Với các file đính
+kèm như hóa đơn hoặc đơn thuốc, hệ thống cần kiểm tra định dạng, kích thước và
+quyền truy cập để hạn chế rủi ro bảo mật.
+Về chức năng đặt lịch, hệ thống có thể mở rộng thêm cơ chế nhắc lịch tự động.
+Ngoài email xác nhận, bệnh nhân có thể nhận thông báo trước giờ khám qua email,
+SMS hoặc thông báo đẩy trên trình duyệt. Hệ thống cũng có thể bổ sung chính sách
+hủy lịch, ví dụ chỉ cho phép hủy trước giờ khám một khoảng thời gian nhất định.
+Bên cạnh đó, có thể phát triển chức năng danh sách chờ, cho phép bệnh nhân đăng
+ký nhận thông báo khi một khung giờ đã đầy được mở lại do có người hủy lịch.
+65
+
+
+===== PAGE 78 =====
+CHƯƠNG 6. KẾT LUẬN V À HƯỚNG PHÁT TRIỂN
+Về phía bệnh nhân, hệ thống có thể mở rộng chức năng hồ sơ cá nhân và lịch sử
+khám. Bệnh nhân có thể lưu thông tin ngày sinh, tiền sử bệnh, các lần khám trước,
+đơn thuốc, hóa đơn và ghi chú của bác sĩ. Khi quay lại đặt lịch, bệnh nhân có thể
+xem lại toàn bộ lịch sử khám của mình, giúp quá trình theo dõi sức khỏe thuận tiện
+hơn. Tuy nhiên, chức năng này cần đi kèm các yêu cầu bảo mật chặt chẽ vì dữ liệu
+y tế là dữ liệu nhạy cảm.
+Về phía bác sĩ, hệ thống có thể bổ sung màn hình thống kê lịch khám, số lượng
+bệnh nhân theo ngày, tỷ lệ bệnh nhân hủy lịch và lịch sử các ca đã khám. Bác sĩ
+cũng có thể được hỗ trợ xuất danh sách bệnh nhân theo ngày dưới dạng PDF hoặc
+Excel. Ngoài ra, có thể phát triển chức năng ghi chú sau khám chi tiết hơn, quản lý
+đơn thuốc dạng cấu trúc thay vì chỉ gửi ảnh đính kèm qua email.
+Về phía quản trị viên, hệ thống có thể bổ sung dashboard thống kê tổng quan.
+Các chỉ số quan trọng gồm số lượng lịch hẹn theo ngày, số lịch đã xác nhận, số lịch
+đã hủy, số bệnh nhân theo chuyên khoa, bác sĩ có nhiều lượt đặt và cơ sở y tế có
+nhiều lịch khám. Các thống kê này giúp cơ sở y tế đánh giá nhu cầu khám bệnh và
+điều phối nguồn lực hợp lý hơn.
+Một hướng phát triển quan trọng khác là tích hợp thanh toán trực tuyến. Khi
+bệnh nhân đặt lịch, hệ thống có thể cho phép thanh toán trước phí khám hoặc phí
+đặt cọc qua các cổng thanh toán phổ biến. Chức năng này giúp giảm tỷ lệ bỏ lịch
+và hỗ trợ cơ sở y tế quản lý tài chính tốt hơn. Tuy nhiên, khi tích hợp thanh toán, hệ
+thống cần bổ sung cơ chế quản lý giao dịch, hoàn tiền, đối soát và bảo mật thông
+tin thanh toán.
+Đối với chatbot, hệ thống có thể tiếp tục phát triển theo hướng trợ lý hỏi đáp
+thông minh có kiểm soát. Thay vì sử dụng MemoryVectorStore trong bộ nhớ, hệ
+thống nên chuyển sang vector database bền vững như Qdrant, Chroma, FAISS hoặc
+pgvector. Dữ liệu đưa vào chatbot cần được kiểm duyệt và ẩn danh hóa để tránh lộ
+thông tin cá nhân của bệnh nhân. Ngoài ra, chatbot nên được giới hạn phạm vi trả
+lời ở các nội dung như hướng dẫn đặt lịch, thông tin chuyên khoa, quy trình khám
+và câu hỏi thường gặp, không đưa ra chẩn đoán y khoa thay cho bác sĩ.
+Về trải nghiệm người dùng, hệ thống có thể tiếp tục tối ưu giao diện trên thiết bị
+di động. Trong thực tế, nhiều bệnh nhân có xu hướng đặt lịch bằng điện thoại, do
+đó các màn hình như trang chủ, trang chi tiết bác sĩ, modal đặt lịch và lịch hẹn cá
+nhân cần được tối ưu tốt hơn cho màn hình nhỏ. Hệ thống cũng có thể phát triển
+ứng dụng di động riêng sử dụng chung backend API hiện có.
+Về kiểm thử và chất lượng phần mềm, hệ thống cần bổ sung kiểm thử tự động
+cho backend API và các luồng nghiệp vụ quan trọng. Các test case như đặt lịch khi
+66
+
+
+===== PAGE 79 =====
+CHƯƠNG 6. KẾT LUẬN V À HƯỚNG PHÁT TRIỂN
+khung giờ còn trống, đặt lịch khi khung giờ đã đầy, xác nhận token, hủy lịch và đặt
+lại lịch nên được tự động hóa. Bên cạnh đó, cần thực hiện kiểm thử tải để đánh giá
+khả năng xử lý khi nhiều người dùng cùng truy cập hoặc cùng đặt lịch vào một thời
+điểm.
+Tổng kết lại, hướng phát triển của đồ án tập trung vào việc đưa hệ thống từ môi
+trường thử nghiệm lên môi trường vận hành thực tế, tăng cường bảo mật và độ
+tin cậy dữ liệu, mở rộng các chức năng chăm sóc bệnh nhân, hỗ trợ bác sĩ, thống
+kê quản trị, thanh toán trực tuyến và chatbot thông minh. Những định hướng này
+không chỉ giúp hoàn thiện sản phẩm hiện tại mà còn tạo nền tảng để hệ thống phát
+triển thành một giải pháp quản lý đặt lịch khám bệnh có khả năng ứng dụng thực
+tế trong tương lai.
+67
+
+
+===== PAGE 80 =====
+TÀI LIỆU THAM KHẢO
+[1] Meta Open Source,React documentation, Accessed: 2026-06-24, 2026. [On-
+line]. Available:https://react.dev/learn.
+[2] Redux Team,Redux documentation, Accessed: 2026-06-24, 2026. [Online].
+Available:https : / / redux . js . org / introduction / getting -
+started.
+[3] FormatJS,React intl documentation, Accessed: 2026-06-24, 2026. [Online].
+Available:https://formatjs.github.io/docs/react-intl/.
+[4] Axios Contributors,Axios documentation, Accessed: 2026-06-24, 2026. [On-
+line]. Available:https://axios-http.com/docs/intro.
+[5] OpenJS Foundation,Introduction to node.js, Accessed: 2026-06-24, 2026.
+[Online]. Available:https://nodejs.org/learn/getting-started/
+introduction-to-nodejs.
+[6] Express.js Contributors,Express routing, Accessed: 2026-06-24, 2026. [On-
+line]. Available:https://expressjs.com/en/guide/routing/.
+[7] Oracle Corporation,Mysql 8.4 reference manual: What is mysql?Accessed:
+2026-06-24, 2026. [Online]. Available:https : / / dev. mysql . com /
+doc/refman/8.4/en/what-is-mysql.html.
+[8] Sequelize Contributors,Sequelize v6 documentation, Accessed: 2026-06-24,
+2026. [Online]. Available:https://sequelize.org/docs/v6/.
+[9] Nodemailer Contributors,Nodemailer documentation, Accessed: 2026-06-24,
+2026. [Online]. Available:https://nodemailer .com/about/.
+68
+
+
+===== PAGE 81 =====
+PHỤ LỤC
+69
